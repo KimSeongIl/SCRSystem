@@ -20,15 +20,13 @@
 	#nav{
 		height:60px;
 		border:1px solid black;
-		
-		
 	}
 	#headline{
 		background-color:#BF0000;
 		height:8px;
 	}
 	#category{
-		min-height:150px;
+		min-height:180px;
 		border:1px solid black;
 	}
 	#article{
@@ -36,7 +34,7 @@
 		border:1px solid black;
 	}
 	#picture{
-		height:300px;
+		height:400px;
 		border:1px solid black;
 		
 	}
