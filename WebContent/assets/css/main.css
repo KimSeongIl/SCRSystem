@@ -1,0 +1,59 @@
+	body{
+		margin: 0;
+        padding: 0;
+		overflow-x:hidden;
+	}
+	#wrap{
+		width:100%;
+		
+	}
+	#header,#category,#article,#link,#copyright,#nav{
+		margin:auto;
+		
+		width:60%;
+		
+	}
+	#header{
+		min-height:45px;
+		border:1px solid black;
+	}
+	#nav{
+		height:60px;
+		border:1px solid black;
+		
+		
+	}
+	#headline{
+		background-color:#BF0000;
+		height:8px;
+	}
+	#category{
+		min-height:150px;
+		border:1px solid black;
+	}
+	#article{
+		margin-bottom:100px;
+		border:1px solid black;
+	}
+	#picture{
+		height:300px;
+		border:1px solid black;
+		
+	}
+	#link{
+		
+		height:30px;
+		
+	}
+	#footer{
+		height:100px;
+	}
+	
+	
+	#headline,#picture,#footer,#headline{
+		width:100%;
+		
+		
+	}
+	
+	

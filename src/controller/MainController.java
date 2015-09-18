@@ -102,7 +102,7 @@ public class MainController extends HttpServlet {
 			}
 			com=(CommandAction)commandMap.get(command);
 			if(com==null){
-				view="Main.jsp";
+				view="main.jsp";
 			}
 			else{
 				view=com.requestPro(request,response);

@@ -4,9 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>성공회대학교 상담 관리 시스템</title>
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 </head>
 <body>
-	hello
+<% String article=(String)request.getAttribute("article"); %>
+	<jsp:include page="header.jsp" flush="false" />
+	<jsp:include page="nav.jsp" flush="false" />
+	<jsp:include page="<%=article %>" flush="false" />
+	<jsp:include page="footer.jsp" flush="false" />
 </body>
 </html>
