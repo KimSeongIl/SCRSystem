@@ -1,4 +1,4 @@
-package action;
+package scr.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

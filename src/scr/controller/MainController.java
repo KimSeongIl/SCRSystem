@@ -1,4 +1,4 @@
-package controller;
+package scr.controller;
 
 import java.io.IOException;
 
@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import scr.action.CommandAction;
+
 import java.util.*;
 import java.io.*;
-
-import action.CommandAction;
 
 /**
  * Servlet implementation class MainTemplate
