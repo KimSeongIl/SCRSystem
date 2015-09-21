@@ -1,7 +1,8 @@
 	body{
 		margin: 0;
         padding: 0;
-		overflow-x:hidden;
+		
+ 		font-family: 'Hanna', serif;
 	}
 	#wrap{
 		width:100%;
@@ -16,33 +17,83 @@
 	#header{
 		min-height:45px;
 		border:1px solid black;
+		padding:13px;
+		text-align:right;
+		font-size:0.8em;
+	}
+	#header li{
+		
+		display:inline-block;
 	}
 	#nav{
-		height:60px;
-		border:1px solid black;
+		word-spacing:-2px;
+		height:65px;		
+		color:#7A7A7A;
+		
+	}
+	#nav div{
+		display:inline-block;
+		text-align:center;
+	}
+	#logo{
+		
+		width:26%;
+		height:90%;
+		
+	}
+	#logo img{
+		
+		vertical-align:baseline;
+	}
+	#navContent{
+		font-size:1.1em;
+		padding:20px;
+		width:73%;
+		height:100%;
+	}
+	
+	#navContent li{
+		float:left;
+		width:19%;
+		height:100%;
+		list-style:none;
 	}
 	#headline{
 		background-color:#BF0000;
 		height:8px;
 	}
 	#category{
-		min-height:180px;
+		height:175px;
 		border:1px solid black;
+	}
+	#category div{
+		border:1px solid black;
+		height:100%;
+		display:inline-block;
+	}
+	#notice{
+		width:30%;	
+	}
+	#noticeMore{
+		width:100%;
+		text-align:right;
+	}
+	#online{
+		width:28%;
+	}
+	#link{
+		width:41%;
 	}
 	#article{
 		margin-bottom:100px;
 		border:1px solid black;
 	}
 	#picture{
-		height:400px;
+		height:380px;
 		border:1px solid black;
 		
 	}
-	#link{
-		
-		height:30px;
-		
-	}
+	
 	#footer{
 		height:100px;
 	}
