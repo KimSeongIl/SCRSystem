@@ -1,12 +1,12 @@
 ﻿<div id="nav">
 	<div id="logo">
 		
-		<img src="assets/img/logo.jpg" width="85%" alt="logo">	
+		<img src="assets/img/logo.jpg" alt="logo" onclick="location.href='main.do'">	
 		
 		
 	</div>
 	<div id="navContent">
-		<li>Home</li>
+		<li onclick="location.href='main.do'">Home</li>
 		<li>공지사항</li>
 		<li>이용안내</li>
 		<li>상담신청</li>
