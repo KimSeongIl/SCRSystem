@@ -5,4 +5,4 @@
 	<div id="online">온라인 상담</div>
 	<div id="link">링크</div>
 </div>
-<div id="picture">picture</div>
+<div id="picture"></div>

@@ -12,10 +12,10 @@
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 </head>
 <body>
-<% String article=(String)request.getAttribute("article"); %>
+<% //String article=(String)request.getAttribute("article"); %>
 	<jsp:include page="header.jsp" flush="false" />
 	<jsp:include page="nav.jsp" flush="false" />
-	<jsp:include page="<%=article %>" flush="false" />
+	<jsp:include page="<%//=article %>" flush="false" />
 	<jsp:include page="footer.jsp" flush="false" />
 </body>
 </html>
