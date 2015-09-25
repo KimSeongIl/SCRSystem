@@ -3,7 +3,6 @@
 	<li id="signUp">회원가입</li>
 </div>
 
-
 <div class="modal fade" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
