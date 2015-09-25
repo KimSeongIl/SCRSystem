@@ -26,23 +26,28 @@
 		<div id="linkImgContainer">
   			<div class="linkImg">
   				<a href="http://www.skhu.ac.kr" target="_blank">
-  					<img src="assets/img/skhuicon.jpg" width="70%" height="100%"  alt="skhu">
+  					<img src="assets/img/skhuicon.jpg" width="100%" height="100%"  alt="skhu">
   				</a>
   				
   			</div>
   			<div class="linkImg">
   				<a href="http://ecareer.skhu.ac.kr" target="_blank">
-  					<img src="assets/img/ecareericon.jpg" width="70%" height="100%" alt="ecareer">
+  					<img src="assets/img/ecareericon.jpg" width="100%" height="100%" alt="ecareer">
   				</a>
   			</div>
   			<div class="linkImg">
   				<a href="http://forest.skhu.ac.kr" target="_blank">
-  					<img src="assets/img/foresticon.jpg" width="70%" height="100%" alt="forest">
+  					<img src="assets/img/foresticon.jpg" width="100%" height="100%" alt="forest">
   				</a>
   			</div>
   			<div class="linkImg">
   				<a href="http://library.skhu.ac.kr" target="_blank">
-  					<img src="assets/img/libraryicon.jpg" width="70%" height="100%" alt="library">
+  					<img src="assets/img/libraryicon.jpg" width="100%" height="100%" alt="library">
+  				</a>
+  			</div>
+  			<div class="linkImg">
+  				<a href="http://" target="_blank">
+  					<img src="assets/img/asicon.jpg" width="100%" height="100%" alt="as">
   				</a>
   			</div>
   		</div>
