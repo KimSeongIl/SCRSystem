@@ -30,12 +30,14 @@
 	<input type="number" class="form-control" placeholder="-없이 입력하시오" name="phone"><br><br>
 	&nbsp;&nbsp;&nbsp;이메일
     <input type="text" class="form-control" placeholder="이메일" name="email"><br>
+    &nbsp;&nbsp;&nbsp;상태
+    <input type="text" class="form-control" placeholder="학생상태" name="ustatus"><br>
 
 	
 	<hr>
 	
 
-<input type="submit" class="btn btn-primary" id="join" onclick="" value="가입하기"/>
+<input type="submit" class="btn btn-primary" id="join" onclick="if(!signUp(this.form)){return false;}" value="가입하기"/>
 	<br><br>
 	</form>
 	</div>
