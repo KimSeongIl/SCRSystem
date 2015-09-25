@@ -1,6 +1,6 @@
 ﻿<div id="header">
 	<li id="login" data-toggle="modal" data-target="#myModal">로그인</li>
-	<li id="signUp">회원가입</li>
+	<li id="signUp" onclick="location.href='signUp.do'">회원가입</li>
 </div>
 
 <div class="modal fade" id="myModal">
