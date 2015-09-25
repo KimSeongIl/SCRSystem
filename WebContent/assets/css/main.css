@@ -70,14 +70,23 @@
 		width:48%;
 		height:100%;
 		
+		
 	}
 	#onlineText{
 		height:60%;
+		background-image:url(../img/onlineContent.jpg);
+		background-repeat:no-repeat;
+		background-size:100%;
 		
 	}
 	#onlineBtn{
 		height:38%;
+		padding-left:10px;
 		
+		
+	}
+	#onlineBtn input{
+		color:#7D7D7D;
 	}
 	
 	#onlineImg{

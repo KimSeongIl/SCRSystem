@@ -14,6 +14,7 @@
 				<div id="onlineText">
 				</div>
 				<div id="onlineBtn">
+					<input type="button" class="btn btn-default" value="온라인상담 바로가기 >">
 				</div>
 			</div>
 			<div id="onlineImg">
