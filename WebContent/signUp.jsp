@@ -1,4 +1,4 @@
-
+﻿
 	<script src=""></script>
 
 	
@@ -23,9 +23,11 @@
 	<input type="text" class="form-control" placeholder="학과" name=""><br><br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;부전공
 	<input type="text" class="form-control" placeholder="부전공" name=""><br><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;복수전공
+	<input type="text" class="form-control" placeholder="부전공" name=""><br><br>
 	&nbsp;&nbsp;&nbsp;후대폰번호
 	<input type="number" class="form-control" placeholder="-없이 입력하시오" name=""><br><br>
-	&nbsp;&nbsp;&nbsp;이메일
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이메일
     <input type="text" class="form-control" placeholder="이메일" name=""><br>
 	
 	<hr>
