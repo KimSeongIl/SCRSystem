@@ -93,7 +93,6 @@
 		float:left;
 		width:48%;
 		height:100%;
-		
 		background-image:url(../img/onlineImg.jpg);
 		background-repeat:no-repeat;
 		background-size:100%;
@@ -115,26 +114,5 @@
 		background-repeat:no-repeat;
 		background-size:100%;
 	}
-	@media(min-width:1068px){
 	
-	}
-	@media(max-width:1067px){
-		#notice,#online,#link{
-			clear:both;
-			display:block;
-			width:100%;
-		}
-		#picture{
-			display:none;
-		}
-		#notice{
-			border-bottom:1px solid black;
-		}
-		#online{
-			border-bottom:1px solid black;
-		}
-		#link{
-			border-bottom:1px solid black;
-		}
-		
-	}
+	
