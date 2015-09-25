@@ -47,7 +47,7 @@
   				</a>
   			</div>
   			<div class="linkImg">
-  				<a href="http://" target="_blank">
+  				<a href="http://com.skhu.ac.kr" target="_blank">
   					<img src="assets/img/asicon.jpg" width="100%" height="100%" alt="as">
   				</a>
   			</div>
