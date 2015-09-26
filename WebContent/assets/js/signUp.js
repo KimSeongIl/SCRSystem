@@ -90,13 +90,29 @@ function signUp(check){
 
 	
 	//학과
-	alert(check.department.value)
 	//부전공
 	//복수전공
 	
+	//휴대폰번호 입력여부 검사 - 포함
+	var phoneCheck =/^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/;
+	
+	if(!check.phone.value) {
+        alert("전화번호를 입력하세요.");
+        check.phone.focus();
+        return false;
+    }
+    else if (!phoneCheck.test(check.phone.value)) {
+        alert("숫자, - 를 포함한 숫자만 입력하세요.");
+        check.phone.focus();
+        check.phone.select();
+        return false
+    }
+   
 	
 	
-	//휴대폰번호 입력여부 검사 
+	
+	
+	/*휴대폰번호 입력여부 검사 - 없이 
 	if(check.phone.value=="")
 	{
 		alert("휴대폰 번호를 입력하지 않았습니다.")
@@ -106,7 +122,8 @@ function signUp(check){
 
 	//휴대폰 번호 유효성 검사 
 
-	var phoneCheck = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
+	var phoneCheck = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+	
 
 	if(!phoneCheck.test(check.phone.value))
 	{
@@ -114,6 +131,7 @@ function signUp(check){
 		check.phone.focus()
 		return false;
 	}
+	*/
 	
 //	이메일 입력 여부 검사
 	if(check.email.value=="")
@@ -154,5 +172,3 @@ function signUp(check){
 	
 	
 	
-
-
