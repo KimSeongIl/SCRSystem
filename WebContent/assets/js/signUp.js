@@ -1,6 +1,10 @@
 //회원가입  유효성검사
+
+
 function signUp(check){
 
+	
+	alert(check.uname.value);
 //	이름 입력여부 검사 
 	if(check.uname.value=="")
 	{
@@ -83,15 +87,10 @@ function signUp(check){
 				check.password.focus()
 				return false;
 	}
-	
 
-	///여기까지  
-	
-
-	
-	
 	
 	//학과
+	alert(check.department.value)
 	//부전공
 	//복수전공
 	

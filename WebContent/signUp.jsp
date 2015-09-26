@@ -1,5 +1,5 @@
 ﻿
-	<script src=""></script>
+	<script src="assets/js/signUp.js"></script>
 
 	
 
@@ -7,14 +7,9 @@
 	<br>
 	<b>회원가입</b><br>
 	<hr>
-     <table>
-     
-     
-     
-     
-     </table>
+
 	<form action="" name="signupForm" id="signupForm" method="post" class="form-inline">
-         이름
+         &nbsp;&nbsp;&nbsp;이름
     
 	<input type="text" class="form-control" placeholder="이름" name="uname"><br><br>
           학번
@@ -26,7 +21,7 @@
 	
 	
 	학과
-	 <select class="form-control">
+	 <select class="form-control" name="department">
                 <option>소프트웨어공학과</option>
                 <option>컴퓨터공학과</option>
                 <option>디지털컨텐츠공학과</option>
@@ -34,7 +29,7 @@
             </select>
             <br><br>
           부전공
-	 <select class="form-control">
+	 <select class="form-control" name="minor">
                 <option>소프트웨어공학과</option>
                 <option>컴퓨터공학과</option>
                 <option>디지털컨텐츠공학과</option>
@@ -42,7 +37,7 @@
             </select>
             <br><br>
             복수전공
-	 <select class="form-control">
+	 <select class="form-control" name="doubleMajor">
                 <option>소프트웨어공학과</option>
                 <option>컴퓨터공학과</option>
                 <option>디지털컨텐츠공학과</option>
@@ -50,13 +45,16 @@
             </select>
             <br><br>
 	
-	휴대폰번호
-
+	&nbsp;&nbsp;&nbsp;휴대폰번호
 	<input type="number" class="form-control" placeholder="-없이 입력하시오" name="phone"><br><br>
-	이메일
-    <input type="text" class="form-control" placeholder="이메일" name="email"><br>
-          상태
-    <input type="text" class="form-control" placeholder="학생상태" name="ustatus"><br>
+	&nbsp;&nbsp;&nbsp;이메일
+    <input type="text" class="form-control" placeholder="이메일" name="email"><br><br>
+            상태
+	 <select class="form-control" name="doubleMajor">
+                <option>재학생</option>
+                <option>휴학생</option>
+            </select>
+            <br><br>
 
 	
 	<hr>
