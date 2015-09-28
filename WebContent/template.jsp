@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,11 +14,11 @@
 <script src="assets/js/common.js"></script>
 </head>
 <body>
-<% String article=(String)request.getAttribute("article"); %>
+
 
 	<jsp:include page="header.jsp" flush="false" />
 	<jsp:include page="nav.jsp" flush="false" />
-	<jsp:include page="<%=article %>" flush="false" />
+	<jsp:include page="${article}" flush="false" />
 	<jsp:include page="footer.jsp" flush="false" />
 	<div id="loading"><img src="assets/img/ajax-loader.gif"></div>
 

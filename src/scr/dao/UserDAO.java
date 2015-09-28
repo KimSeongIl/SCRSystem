@@ -68,7 +68,6 @@ public class UserDAO {
 		try(
 			Connection conn=Conn.getConnection();
 			PreparedStatement pstmt=conn.prepareStatement("select user_id,name,auth from user where user_id=? and password=?");){
-			
 			pstmt.setInt(1, user.getUid());
 			pstmt.setString(2, Sha256.encrypt(user.getPassword()));
 			ResultSet rs=pstmt.executeQuery();
