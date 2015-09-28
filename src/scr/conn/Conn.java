@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 
 public class Conn {
 
+	
 	public static Connection getConnection() throws Exception{
 		Context initCtx=new InitialContext();
 		Context envCtx=(Context)initCtx.lookup("java:comp/env");

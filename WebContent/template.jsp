@@ -14,12 +14,13 @@
 </head>
 <body>
 <% String article=(String)request.getAttribute("article"); %>
+
 	<jsp:include page="header.jsp" flush="false" />
 	<jsp:include page="nav.jsp" flush="false" />
 	<jsp:include page="<%=article %>" flush="false" />
 	<jsp:include page="footer.jsp" flush="false" />
 	<div id="loading"><img src="assets/img/ajax-loader.gif"></div>
-	
+
 	
 </body>
 </html>

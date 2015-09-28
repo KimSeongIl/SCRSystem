@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import scr.action.CommandAction;
+import scr.conn.Conn;
 
 import java.util.*;
 import java.io.*;
@@ -32,6 +33,7 @@ public class MainController extends HttpServlet {
     private Map commandMap=new HashMap();
     
     public void init(ServletConfig config)throws ServletException{
+    	
     	
     	String props=config.getInitParameter("propertyConfig");
     	

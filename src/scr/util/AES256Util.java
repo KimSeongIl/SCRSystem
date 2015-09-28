@@ -1,9 +1,14 @@
 package scr.util;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.util.Properties;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -18,12 +23,26 @@ public class AES256Util {
 	private String iv;
     private Key keySpec;
 
+    private String getKey(){
+    	String key=null;
+    	try{
+    		Properties props=new Properties();
+    		
+    		InputStream fis=getClass().getResourceAsStream("key.properties");
+    		props.load(new BufferedInputStream(fis));
+    		key=props.getProperty("value").trim();
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    	return key;
+    }
     /**
      * 16자리의 키값을 입력하여 객체를 생성한다.
      * @param key 암/복호화를 위한 키값
      * @throws UnsupportedEncodingException 키값의 길이가 16이하일 경우 발생
      */
-    public AES256Util(String key) throws UnsupportedEncodingException {
+    public AES256Util() throws UnsupportedEncodingException {
+    	String key=getKey();
         this.iv = key.substring(0, 16);
         byte[] keyBytes = new byte[16];
         byte[] b = key.getBytes("UTF-8");
