@@ -1,5 +1,5 @@
-﻿<script src="assets/js/common.js"></script>
-	<script src="assets/js/signUp.js"></script>
+﻿
+	
 
 	
 
@@ -91,5 +91,7 @@
   
 	</div>
 	
+	
+	<script src="assets/js/signUp.js"></script>
 	
 
