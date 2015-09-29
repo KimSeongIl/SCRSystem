@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:set var="user" value="${user }" />
+<c:set var="user" value="${requestScope.user }" />
 <c:choose>
 	<c:when test="${empty user }">
 		<script>
