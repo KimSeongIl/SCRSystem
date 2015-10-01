@@ -7,8 +7,9 @@
 	<br>
 	<b>회원가입</b><br>
 	<hr>
-  <table id="signUp">  
 	<form action="" name="signupForm" id="signupForm" method="post" class="form-inline">
+  <table id="signUp">  
+	
    <tr>
            <td>이름</td>
 	<td><input type="text" class="form-control" placeholder="이름" name="uname"></td>

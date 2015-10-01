@@ -9,9 +9,11 @@
 		<div id="loginSubDiv">
 			<h2>메 뉴</h2>
 			<hr>
-			<li>로그인</li>
-			<li>회원가입</li>
-			<li>비밀번호 찾기</li>
+			<ul>
+				<li>로그인</li>
+				<li>회원가입</li>
+				<li>비밀번호 찾기</li>
+			</ul>
 		</div>
 	</div>
 	<div id="loginContent">

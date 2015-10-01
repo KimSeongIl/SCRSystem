@@ -14,13 +14,13 @@
 <script src="assets/js/common.js"></script>
 </head>
 <body>
-
+	<div id="wrap">
 	<c:import url="header.jsp"/> 
 	<c:import url="nav.jsp"/> 
 	<c:import url="${article }"/> 
 	<c:import url="footer.jsp"/> 
 	<div id="loading"><img src="assets/img/ajax-loader.gif"></div>
-
+	</div>
 	
 </body>
 </html>
