@@ -1,7 +1,7 @@
 ﻿
 	
 
-	
+	<link rel="stylesheet" type="text/css" href="assets/css/signUp.css">
 
 	<div id="article" style="padding-left:50px;">
 	<br>
@@ -73,8 +73,8 @@
     <tr>
             <td>상태</td>
 	 <td><select class="form-control" name="ustatus">
-                <option>휴학생</option>
                 <option>재학생</option>
+                <option>휴학생</option>
                
             </select></td> 
      </tr>
