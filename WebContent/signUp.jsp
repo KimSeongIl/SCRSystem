@@ -17,9 +17,10 @@
 
 	<div id="article" style="padding-left:50px;">
 	<br>
-	<b>회원가입</b><br>
+	
+	<form action="studentAdd.do" name="signupForm" id="signupForm" method="post" class="form-inline">
+	<div id="signUpTitle"><b>회원가입</b><br></div>
 	<hr>
-	<form action="" name="signupForm" id="signupForm" method="post" class="form-inline">
   <table id="signUp">  
 	
    <tr>
@@ -73,8 +74,8 @@
             
             
 	<tr>
-           <td>휴대폰번호</td>
-    <td><input type="number" class="form-control" placeholder="-포함하여 입력하시오" name="phone"></td>
+           <td>핸드폰번호</td>
+    <td><input type="text" class="form-control" placeholder="-포함하여 입력하시오" name="phone"></td>
     </tr>
     
     <tr>
@@ -97,7 +98,7 @@
 <hr>
 	
 
-<input type="submit" class="btn btn-primary" id="join" onclick="if(!signUp(this.form)){return false;}" value="가입하기"/>
+<div id="joinBtn"><input type="submit" class="btn btn-primary" id="join" onclick="if(!signUp(this.form)){return false;}" value="가입하기"/></div>
 	
 	</form>
   
