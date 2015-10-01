@@ -1,7 +1,19 @@
 ﻿
-	
+	<%@ page import="scr.dto.DepartmentDTO" %>
 
-	<link rel="stylesheet" type="text/css" href="assets/css/signUp.css">
+	<%@ page import="java.util.*" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <link rel="stylesheet" type="text/css" href="assets/css/signUp.css">
+    
+    <c:set var="department" value="${requestScope.department }"/>
+    
+    
+    
+    
+    
+    
+    
+
 
 	<div id="article" style="padding-left:50px;">
 	<br>
@@ -33,32 +45,31 @@
 	<tr>
 	<td>학과</td>
 	 <td><select class="form-control" name="department">
-                <option>소프트웨어공학과</option>
-                <option>컴퓨터공학과</option>
-                <option>디지털컨텐츠공학과</option>
-                <option>글로커IT학과</option>
-            </select></td>
+             <c:forEach var="i" items="${ department }">
+		<option value="${i.departmentId }">${ i.departmentName }</option>
+	          </c:forEach>
+                
+         </select></td>
     </tr>
     
     <tr>
           <td>부전공</td>
 	 <td><select class="form-control" name="minor">
-                <option>소프트웨어공학과</option>
-                <option>컴퓨터공학과</option>
-                <option>디지털컨텐츠공학과</option>
-                <option>글로커IT학과</option>
-            </select></td>
-            </tr>
+                  <c:forEach var="i" items="${ department }">
+		<option value="${i.departmentId }">${ i.departmentName }</option>
+	              </c:forEach>
+	          
+         </select></td>
+    </tr>
             
-            <tr>
+     <tr>
             <td>복수전공</td>
 	 <td><select class="form-control" name="doubleMajor">
-                <option>소프트웨어공학과</option>
-                <option>컴퓨터공학과</option>
-                <option>디지털컨텐츠공학과</option>
-                <option>글로커IT학과</option>
-             </select></td>
-            </tr>
+                 <c:forEach var="i" items="${ department }">
+		<option value="${i.departmentId }">${ i.departmentName }</option>
+	             </c:forEach>
+         </select></td>
+     </tr>
             
             
 	<tr>
