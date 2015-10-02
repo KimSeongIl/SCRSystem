@@ -3,6 +3,7 @@ package scr.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import scr.dto.*;
 import scr.conn.Conn;
 import scr.util.*;
@@ -59,6 +60,25 @@ public class UserDAO {
 		}
 		
 	}
+	public UserDTO check(UserDTO user) {
+		UserDTO dto=null;
+		try(Connection conn=Conn.getConnection();
+			PreparedStatement pstmt=conn.prepareStatement("select * from user where user_id=?");) {
+			pstmt.setInt(1, user.getUid());
+			ResultSet rs= pstmt.executeQuery();
+			if(rs.next()) {
+				dto=new UserDTO();
+				dto.setUid(rs.getInt("user_id"));
+				dto.setPassword(rs.getString("password"));
+				dto.setName(rs.getString("name"));
+				dto.setAuth(rs.getString("auth"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
 	public UserDTO login(UserDTO user){
 		UserDTO dto=null;
 		try(
@@ -79,6 +99,9 @@ public class UserDAO {
 		}
 		return dto;
 	}
+
+
+	
 	
 	
 	
