@@ -8,15 +8,29 @@ import scr.dao.UserDAO;
 import scr.dto.*;
 
 public class StudentAddAction implements CommandAction{
-
+	
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		request.setCharacterEncoding("UTF-8");
 		int uid=Integer.parseInt(request.getParameter("uid"));
 		String name=request.getParameter("uname");
 		String password=request.getParameter("password");
-		int department=Integer.parseInt(request.getParameter("department"));
-		int minor=Integer.parseInt(request.getParameter("minor"));
-		int doubleMajor=Integer.parseInt(request.getParameter("doubleMajor"));
+		StudentDTO student=new StudentDTO();
+		
+		if(request.getParameter("department")!=null){
+			int department=Integer.parseInt(request.getParameter("department"));
+			student.setDepartmentId(department);
+		}
+		
+		
+		if(!"없음".equals(request.getParameter("minor"))){
+			int minor=Integer.parseInt(request.getParameter("minor"));
+			student.setMinorId(minor);
+		}
+		
+		if(!"없음".equals(request.getParameter("doubleMajor"))){
+			int doubleMajor=Integer.parseInt(request.getParameter("doubleMajor"));
+			student.setDoubleMajorId(doubleMajor);
+		}
 		String phone=request.getParameter("phone");
 		String email=request.getParameter("email");
 		String status=request.getParameter("status");
@@ -27,19 +41,19 @@ public class StudentAddAction implements CommandAction{
 		user.setPassword(password);
 		user.setAuth("학생");
 		
-		StudentDTO student=new StudentDTO();
+		
 		student.setStudentId(uid);
 		student.setName(name);
 		student.setPhone(phone);
 		student.setEmail(email);
-		student.setDepartmentId(department);
-		student.setMinorId(minor);
-		student.setDoubleMajorId(doubleMajor);
+		
+		
+		
 		student.setStatus(status);
 		
 		UserDAO dao=UserDAO.getInstance();
 		dao.studentAdd(user);
-		dao.studentInfoAdd(student);
+		//dao.studentInfoAdd(student);
 		return "main.jsp";
 	}
 }
