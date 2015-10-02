@@ -44,6 +44,7 @@ public class UserDAO {
 	public void studentInfoAdd(StudentDTO student) {
 		String column="student_id,name,email,phone,department_id";
 		String param="?,?,?,?,?,?";
+		String query;
 		int num1=0;
 		int num2=0;
 		if(student.getMinorId()!=0){
@@ -59,22 +60,14 @@ public class UserDAO {
 			num2++;
 		}
 		column+=",status";
-		System.out.println("param"+param);
-		System.out.println(num1+" "+num2);
-		AES256Util util1;
-		try {
-			util1 = new AES256Util();
-			System.out.println(util1.encrypt(student.getPhone()));
-			System.out.println(util1.encrypt(student.getEmail()));
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		query="insert into student("+column+") values("+param+")";
+		
+	
 		
 		try(
 			Connection conn=Conn.getConnection();
 			
-			PreparedStatement pstmt=conn.prepareStatement("insert into ("+column+") student values("+param+")");){
+			PreparedStatement pstmt=conn.prepareStatement(query);){
 			AES256Util util=new AES256Util();
 			pstmt.setInt(1, student.getStudentId());
 			pstmt.setString(2,student.getName());
