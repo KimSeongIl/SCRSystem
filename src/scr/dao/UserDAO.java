@@ -1,5 +1,6 @@
 package scr.dao;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,19 +41,54 @@ public class UserDAO {
 	    
 	    
 	}
+	@SuppressWarnings("null")
 	public void studentInfoAdd(StudentDTO student) {
+		String column="student_id,name,email,phone,department_id";
+		String param="?,?,?,?,?,?";
+		int num1=0;
+		int num2=0;
+		if(student.getMinorId()!=0){
+			param+=",?";
+			column+=",minor_id";
+			num1++;
+			
+		}
+			
+		if(student.getDoubleMajorId()!=0){
+			param+=",?";
+			column+=",double_major_id";
+			num2++;
+		}
+		column+=",status";
+		System.out.println("param"+param);
+		System.out.println(num1+" "+num2);
+		AES256Util util1;
+		try {
+			util1 = new AES256Util();
+			System.out.println(util1.encrypt(student.getPhone()));
+			System.out.println(util1.encrypt(student.getEmail()));
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		try(
 			Connection conn=Conn.getConnection();
-			PreparedStatement pstmt=conn.prepareStatement("insert into student values(?,?,?,?,?,?,?,?)");){
+			
+			PreparedStatement pstmt=conn.prepareStatement("insert into ("+column+") student values("+param+")");){
 			AES256Util util=new AES256Util();
 			pstmt.setInt(1, student.getStudentId());
 			pstmt.setString(2,student.getName());
 			pstmt.setString(3, util.encrypt(student.getEmail()));
 			pstmt.setString(4,util.encrypt(student.getPhone()));
 			pstmt.setInt(5,student.getDepartmentId());
-			pstmt.setInt(6, student.getMinorId());
-			pstmt.setInt(7, student.getDoubleMajorId());
-			pstmt.setString(8, student.getStatus());
+			if(student.getMinorId()!=0)
+				pstmt.setInt(6, student.getMinorId());
+			
+			if(student.getDoubleMajorId()!=0)
+				pstmt.setInt(6+num1, student.getDoubleMajorId());
+			
+			pstmt.setString(6+num1+num2, student.getStatus());
 			pstmt.executeUpdate();
 			
 		}catch(Exception e){
