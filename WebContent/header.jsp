@@ -1,7 +1,6 @@
 ﻿<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div id="header">
 
-
 <c:choose>
 	<c:when test="${empty sessionScope.name}">
 		<li id="login" data-toggle="modal" data-target="#myModal">로그인</li>
