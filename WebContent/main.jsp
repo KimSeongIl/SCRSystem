@@ -14,11 +14,16 @@
 				<div id="onlineText">
 				</div>
 				<div id="onlineBtn">
-					<input type="button" class="btn btn-default" value="온라인상담 바로가기 >">
+					<input type="button" class="btn btn-default" value="온라인상담  >">
 				</div>
 			</div>
-			<div id="onlineImg">
+			<div id="onlineImgContainer">
+				<div id="onlineImgMargin">
+				</div>
+				<div id="onlineImg">
+				</div>
 			</div>
+			
 		</div>
 	</div>
 	<div id="link">

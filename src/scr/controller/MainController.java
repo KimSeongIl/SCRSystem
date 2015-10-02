@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import scr.action.CommandAction;
-import scr.conn.Conn;
-
 import java.util.*;
 import java.io.*;
 
@@ -30,7 +28,7 @@ public class MainController extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    private Map commandMap=new HashMap();
+    private Map<String, Object> commandMap=new HashMap<String, Object>();
     
     public void init(ServletConfig config)throws ServletException{
     	
@@ -55,14 +53,14 @@ public class MainController extends HttpServlet {
     		}
     	}
     	
-    	Iterator keyIter=pr.keySet().iterator();
+    	Iterator<?> keyIter=pr.keySet().iterator();
     	
     	while(keyIter.hasNext()){
     		
     		String command=(String)keyIter.next();
     		String className=pr.getProperty(command);
     		try{
-    			Class commandClass=Class.forName(className);
+    			Class<?> commandClass=Class.forName(className);
     			
     			Object commandInstance=commandClass.newInstance();
     			

@@ -67,7 +67,7 @@
 	}
 	#onlineContent{
 		float:left;
-		width:48%;
+		width:53%;
 		height:100%;
 		
 		
@@ -81,18 +81,30 @@
 	}
 	#onlineBtn{
 		height:38%;
-		padding-left:10px;
+		
 		
 		
 	}
 	#onlineBtn input{
 		color:#7D7D7D;
+		margin-left:20px;
+		
 	}
 	
-	#onlineImg{
+	#onlineImgContainer{
 		float:left;
-		width:48%;
+		width:43%;
 		height:100%;
+	}
+	#onlineImgMargin{
+		width:100%;
+		height:15%;
+		
+	}
+	#onlineImg{
+		
+		width:100%;
+		height:85%;
 		background-image:url(../img/onlineImg.jpg);
 		background-repeat:no-repeat;
 		background-size:100%;
@@ -108,6 +120,7 @@
 	
 	#picture{
 		height:500px;
+		width:100%;
 		border-bottom:1px solid gray;
 		margin-bottom:20px;
 		background-image:url(../img/mainImage.jpg);

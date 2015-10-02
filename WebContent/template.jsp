@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>성공회대학교 상담 관리 시스템</title>
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/earlyaccess/hanna.css">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css">
 <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="assets/css/common.css">
 <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
@@ -14,14 +14,13 @@
 <script src="assets/js/common.js"></script>
 </head>
 <body>
-
-
-	<jsp:include page="header.jsp" flush="false" />
-	<jsp:include page="nav.jsp" flush="false" />
-	<jsp:include page="${article}" flush="false" />
-	<jsp:include page="footer.jsp" flush="false" />
+	<div id="wrap">
+	<c:import url="header.jsp"/> 
+	<c:import url="nav.jsp"/> 
+	<c:import url="${article }"/> 
+	<c:import url="footer.jsp"/> 
 	<div id="loading"><img src="assets/img/ajax-loader.gif"></div>
-
+	</div>
 	
 </body>
 </html>

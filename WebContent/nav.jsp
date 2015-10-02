@@ -6,12 +6,13 @@
 		
 	</div>
 	<div id="navContent">
-	
-		<li onclick="location.href='main.do'">Home</li>
-		<li>공지사항</li>
-		<li>이용안내</li>
-		<li>상담신청</li>
-		<li>자료실</li>
+		<ul>
+			<li onclick="location.href='main.do'">Home</li>
+			<li>공지사항</li>
+			<li>이용안내</li>
+			<li>상담신청</li>
+			<li>자료실</li>
+		</ul>
 	</div>
 	
 </div>
