@@ -46,7 +46,6 @@
 	<tr>
 	<td>학과</td>
 	 <td><select class="form-control" name="department">
-	              <option value="없음">해당없음</option>
              <c:forEach var="i" items="${ department }">
 		<option value="${i.departmentId }">${ i.departmentName }</option>
 	          </c:forEach>

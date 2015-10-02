@@ -27,11 +27,14 @@ public class AES256Util {
     		Properties props=new Properties();
     		
     		InputStream fis=getClass().getResourceAsStream("key.properties");
+    		
     		props.load(new BufferedInputStream(fis));
+    		
     		key=props.getProperty("value").trim();
     	}catch(Exception e){
     		e.printStackTrace();
     	}
+    	
     	return key;
     }
     /**
