@@ -56,6 +56,7 @@
     <tr>
           <td>부전공</td>
 	 <td><select class="form-control" name="minor">
+	               <option value="없음">해당없음</option>
                   <c:forEach var="i" items="${ department }">
 		<option value="${i.departmentId }">${ i.departmentName }</option>
 	              </c:forEach>
@@ -66,6 +67,7 @@
      <tr>
             <td>복수전공</td>
 	 <td><select class="form-control" name="doubleMajor">
+	               <option value="없음">해당없음</option>
                  <c:forEach var="i" items="${ department }">
 		<option value="${i.departmentId }">${ i.departmentName }</option>
 	             </c:forEach>
@@ -85,7 +87,7 @@
     
     <tr>
             <td>상태</td>
-	 <td><select class="form-control" name="ustatus">
+	 <td><select class="form-control" name="status">
                 <option>재학생</option>
                 <option>휴학생</option>
                

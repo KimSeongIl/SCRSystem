@@ -3,6 +3,8 @@ package scr.user;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 import scr.action.CommandAction;
 import scr.dao.UserDAO;
 import scr.dto.*;
@@ -22,11 +24,10 @@ public class StudentAddAction implements CommandAction{
 		}
 		
 		
-		if(!"없음".equals(request.getParameter("minor"))){
+		if(!"없음".equals(request.getParameter("minor"))){//없음이 아닌상태
 			int minor=Integer.parseInt(request.getParameter("minor"));
 			student.setMinorId(minor);
 		}
-		
 		if(!"없음".equals(request.getParameter("doubleMajor"))){
 			int doubleMajor=Integer.parseInt(request.getParameter("doubleMajor"));
 			student.setDoubleMajorId(doubleMajor);
@@ -46,6 +47,8 @@ public class StudentAddAction implements CommandAction{
 		student.setName(name);
 		student.setPhone(phone);
 		student.setEmail(email);
+		
+		
 		
 		
 		
