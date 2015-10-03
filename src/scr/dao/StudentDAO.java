@@ -26,8 +26,7 @@ public class StudentDAO {
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select student_id from student where student_id=? and email=?");){
 			AES256Util util=new AES256Util();
-			System.out.println(util.encrypt(student.getEmail()));
-			System.out.println(util.encrypt(student.getEmail()));
+			
 			pstmt.setInt(1, student.getStudentId());
 			pstmt.setString(2, util.encrypt(student.getEmail()));
 			ResultSet rs=pstmt.executeQuery();

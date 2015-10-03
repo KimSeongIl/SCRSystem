@@ -1,15 +1,7 @@
 package scr.user;
 
 
-import java.util.Properties;
 
-import javax.mail.Address;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +10,8 @@ import scr.dao.StudentDAO;
 import scr.dao.UserDAO;
 import scr.dto.StudentDTO;
 import scr.dto.UserDTO;
-import scr.util.SMTPAuthenticatior;
+
+import scr.util.SendMail;
 
 public class SearchPasswordProAction implements CommandAction{
 
@@ -48,9 +41,7 @@ public class SearchPasswordProAction implements CommandAction{
 		}
 		
 		
-		String from = "kkk4687@naver.com";
-		String to = uemail;
-		String subject = "성공회대학교 상담관리시스템 임시 비밀번호 입니다.";
+		
 
 
 		String tempPassword="";
@@ -70,59 +61,25 @@ public class SearchPasswordProAction implements CommandAction{
 			tempPassword+=c;
 
 		}
-		
+		String subject = "성공회대학교 상담관리시스템 임시 비밀번호 입니다.";
 		String content = "성공회대학교 상담관리시스템 임시 비밀번호 입니다 "+tempPassword;
 
-		Properties p = new Properties(); // 정보를 담을 객체
-
-		p.put("mail.smtp.host","smtp.naver.com"); // 네이버 SMTP
-
-		p.put("mail.smtp.port", "465");
-		p.put("mail.smtp.starttls.enable", "true");
-		p.put("mail.smtp.auth", "true");
-		p.put("mail.smtp.debug", "true");
-		p.put("mail.smtp.socketFactory.port", "465");
-		p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		p.put("mail.smtp.socketFactory.fallback", "false");
+		alert="<script>alert('임시비밀번호를 메일로 발송하였습니다');</script>";
 		
 
 		
+		SendMail sendMail=new SendMail();
+		alert=sendMail.sendMail(uemail, subject, content, alert);
 		
 		
+
 		
-
-		try{
-			Authenticator authenticator = new SMTPAuthenticatior();
-			Session ses = Session.getInstance(p, authenticator);
-			
-			ses.setDebug(true);
-
-			MimeMessage msg = new MimeMessage(ses); // 메일의 내용을 담을 객체
-			msg.setSubject(subject); // 제목
-
-			Address fromAddr = new InternetAddress(from);
-			msg.setFrom(fromAddr); // 보내는 사람
-
-			Address toAddr = new InternetAddress(to);
-			msg.addRecipient(Message.RecipientType.TO, toAddr); // 받는 사람
-
-			msg.setContent(content, "text/html;charset=UTF-8"); // 내용과 인코딩
-
-			Transport.send(msg); // 전송
-		} catch(Exception e){
-			e.printStackTrace();
-			
-			alert="<script>alert('Send Mail Failed..');history.back();</script>";
-			request.setAttribute("alert", alert);
-			// 오류 발생시 뒤로 돌아가도록
-			return "searchPasswordPro.jsp";
-		}
 		UserDTO user=new UserDTO();
 		user.setUid(uid);
 		user.setPassword(tempPassword);
 		UserDAO userDao=UserDAO.getInstance();
 		userDao.setTempPassword(user);
-		alert="<script>alert('성공적으로 발송하였습니다');</script>";
+		
 		
 		request.setAttribute("alert", alert);
 		
