@@ -53,7 +53,7 @@ public class StudentAddAction implements CommandAction{
 		
 		UserDAO dao=UserDAO.getInstance();
 		dao.studentAdd(user);
-		//dao.studentInfoAdd(student);
+		dao.studentInfoAdd(student);
 		return "main.jsp";
 	}
 }

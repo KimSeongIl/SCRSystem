@@ -80,6 +80,20 @@ public class UserDAO {
 		return dto;
 	}
 	
+	public void setTempPassword(UserDTO user){
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("update user set password=? where user_id=?");){
+			
+			pstmt.setString(1, Sha256.encrypt(user.getPassword()));
+			pstmt.setInt(2, user.getUid());
+			pstmt.executeUpdate();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 }

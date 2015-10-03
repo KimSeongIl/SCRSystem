@@ -119,6 +119,7 @@ public class MainController extends HttpServlet {
 		
 		RequestDispatcher dispatcher=request.getRequestDispatcher("template.jsp");
 		dispatcher.forward(request, response);
+		
 	}
 
 }
