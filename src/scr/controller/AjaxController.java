@@ -35,6 +35,7 @@ public class AjaxController extends HttpServlet{
 	    
 	    public void init(ServletConfig config)throws ServletException{
 	    	
+	    	super.init(config);
 	    	
 	    	String props=config.getInitParameter("propertyConfig");
 	    	

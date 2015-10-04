@@ -8,6 +8,7 @@ import scr.action.CommandAction;
 public class LoginAction implements CommandAction{
 
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
+		
 		return "login.jsp";
 	}
 }

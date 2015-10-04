@@ -1,8 +1,11 @@
 package scr.util;
 
 import java.io.BufferedInputStream;
-import java.io.InputStream;
+import java.io.FileInputStream;
 import java.util.Properties;
+
+
+
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
@@ -15,8 +18,9 @@ public class SMTPAuthenticatior extends Authenticator{
     	
     	try{
     		Properties props=new Properties();
+    		DefaultContext dc=DefaultContext.getInstance();
     		
-    		InputStream fis=getClass().getResourceAsStream("email.properties");
+    		FileInputStream fis=new FileInputStream(dc.getPath()+"/WEB-INF/email.properties");
     		
     		props.load(new BufferedInputStream(fis));
     		

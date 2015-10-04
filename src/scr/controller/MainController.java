@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import scr.action.CommandAction;
+import scr.util.DefaultContext;
+
 import java.util.*;
 import java.io.*;
 
@@ -32,6 +34,8 @@ public class MainController extends HttpServlet {
     
     public void init(ServletConfig config)throws ServletException{
     	
+    	super.init(config);
+    	DefaultContext.createInstance(getServletContext().getRealPath(""));
     	
     	String props=config.getInitParameter("propertyConfig");
     	

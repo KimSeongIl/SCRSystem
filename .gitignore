@@ -1,1 +1,3 @@
 build/classes
+WebContent/WEB-INF/key.properties
+WebContent/WEB-INF/email.properties

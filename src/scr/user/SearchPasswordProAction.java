@@ -69,6 +69,7 @@ public class SearchPasswordProAction implements CommandAction{
 
 		
 		SendMail sendMail=new SendMail();
+		
 		alert=sendMail.sendMail(uemail, subject, content, alert);
 		
 		

@@ -20,7 +20,13 @@
 	<c:import url="nav.jsp"/> 
 	<c:import url="${requestScope.article }"/> 
 	<c:import url="footer.jsp"/> 
-	<div id="loading"><img src="assets/img/ajax-loader.gif"></div>
+	
+	</div>
+	
+	<div class="wrap-loading display-none">
+		<div>
+			<img src="assets/img/ajax-loader.gif" />
+		</div>
 	</div>
 	
 </body>

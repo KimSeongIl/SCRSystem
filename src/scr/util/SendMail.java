@@ -1,7 +1,7 @@
 package scr.util;
 
 import java.io.BufferedInputStream;
-import java.io.InputStream;
+import java.io.FileInputStream;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -17,9 +17,9 @@ public class SendMail {
 	public String sendMail(String uemail,String subject,String content,String alert){
 		try{
 			Properties props=new Properties();
+    		DefaultContext dc=DefaultContext.getInstance();
+    		FileInputStream fis=new FileInputStream(dc.getPath()+"/WEB-INF/email.properties");
     		
-    		InputStream fis=getClass().getResourceAsStream("email.properties");
-    		System.out.println("fkfkfkfk"+fis);
     		
     		props.load(new BufferedInputStream(fis));
     		
