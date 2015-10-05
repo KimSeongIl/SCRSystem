@@ -4,7 +4,7 @@
 function signUp(check){
 
 	
-	alert(check.uname.value);
+	
 //	이름 입력여부 검사 
 	if(check.uname.value=="")
 	{

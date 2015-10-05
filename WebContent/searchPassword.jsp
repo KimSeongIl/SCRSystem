@@ -16,13 +16,13 @@
 				<tr>
 					<td colspan="2">
 						<span>
-							<input type="radio" value="student" name="user" id="student"><label for="student">학생</label>
+							<input type="radio" value="학생" name="user" id="student" checked><label for="student">학생</label>
 						</span>
 						<span>
-							<input type="radio" value="professor" name="user" id="professor"><label for="professor">교수</label>
+							<input type="radio" value="교수" name="user" id="professor"><label for="professor">교수</label>
 						</span>
 						<span>
-							<input type="radio" value="employee" name="user" id="employee"><label for="employee">직원</label>
+							<input type="radio" value="직원" name="user" id="employee"><label for="employee">직원</label>
 						</span>
 						
 					</td>

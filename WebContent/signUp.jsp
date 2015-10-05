@@ -87,7 +87,7 @@
     
     <tr>
             <td>상태</td>
-	 <td><select class="form-control" name="ustatus">
+	 <td><select class="form-control" name="status">
                 <option>재학생</option>
                 <option>휴학생</option>
                

@@ -1,1 +1,3 @@
-build/classes/scr/util/key.properties
+build/classes
+WebContent/WEB-INF/key.properties
+WebContent/WEB-INF/email.properties

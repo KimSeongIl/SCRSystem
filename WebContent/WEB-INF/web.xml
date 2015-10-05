@@ -17,6 +17,20 @@
     	<url-pattern>*.do</url-pattern>
   	</servlet-mapping>
   	
+  	<servlet>
+  		<servlet-name>AjaxController</servlet-name>
+  		<servlet-class>scr.controller.AjaxController</servlet-class>
+  		<init-param>
+  			<param-name>propertyConfig</param-name>
+  			<param-value>/WEB-INF/ajax.properties</param-value>
+  		</init-param>
+  	</servlet>
+  	
+  	<servlet-mapping>
+  		<servlet-name>AjaxController</servlet-name>
+  		<url-pattern>*.ajax</url-pattern>
+  	</servlet-mapping>
+  	
   	<welcome-file-list> 
 
   	<welcome-file>main.do</welcome-file> 

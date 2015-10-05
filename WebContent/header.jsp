@@ -9,7 +9,7 @@
 	<c:otherwise>
 	
 		<li id="sessionContent">${sessionScope.name}(${sessionScope.auth})</li>
-		<li id="myPage">마이페이지</li>
+		<li id="myPage" onclick="location.href='myPage.do'">마이페이지</li>
 		<li id="logout" onclick="location.href='logout.do'">로그아웃</li>
 	</c:otherwise>
 </c:choose>

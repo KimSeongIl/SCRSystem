@@ -41,9 +41,34 @@ public class UserDAO {
 	    
 	}
 	public void studentInfoAdd(StudentDTO student) {
+
+		String column="student_id,name,email,phone,department_id";
+		String param="?,?,?,?,?,?";
+		String query;
+		int num1=0;
+		int num2=0;
+		if(student.getMinorId()!=0){
+			param+=",?";
+			column+=",minor_id";
+			num1++;
+			
+		}
+			
+		if(student.getDoubleMajorId()!=0){
+			param+=",?";
+			column+=",double_major_id";
+			num2++;
+		}
+		column+=",status";
+		query="insert into student("+column+") values("+param+")";
+		
+	
+		
 		try(
 			Connection conn=Conn.getConnection();
-			PreparedStatement pstmt=conn.prepareStatement("insert into student values(?,?,?,?,?,?,?,?)");){
+			
+			PreparedStatement pstmt=conn.prepareStatement(query);){
+
 			AES256Util util=new AES256Util();
 			pstmt.setInt(1, student.getStudentId());
 			pstmt.setString(2,student.getName());
@@ -85,6 +110,20 @@ public class UserDAO {
 
 
 	
+	
+	public void setTempPassword(UserDTO user){
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("update user set password=? where user_id=?");){
+			
+			pstmt.setString(1, Sha256.encrypt(user.getPassword()));
+			pstmt.setInt(2, user.getUid());
+			pstmt.executeUpdate();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

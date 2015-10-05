@@ -1,7 +1,7 @@
 package scr.util;
 
 import java.io.BufferedInputStream;
-import java.io.InputStream;
+import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.Key;
@@ -25,8 +25,8 @@ public class AES256Util {
     	String key=null;
     	try{
     		Properties props=new Properties();
-    		
-    		InputStream fis=getClass().getResourceAsStream("key.properties");
+    		DefaultContext dc=DefaultContext.getInstance();
+    		FileInputStream fis=new FileInputStream(dc.getPath()+"/WEB-INF/key.properties");
     		
     		props.load(new BufferedInputStream(fis));
     		
@@ -44,6 +44,7 @@ public class AES256Util {
      */
     public AES256Util() throws UnsupportedEncodingException {
     	String key=getKey();
+    	
         this.iv = key.substring(0, 16);
         byte[] keyBytes = new byte[16];
         byte[] b = key.getBytes("UTF-8");

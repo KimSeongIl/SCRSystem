@@ -71,18 +71,27 @@ body{
 		background-color:#BF0000;
 		height:8px;
 	}
-	#loading{
-		position:absolute;
-		width:100%;
-		display:none;
-		text-align:center;
-		
-		
-  		height : 65%; 
-  		overflow : auto; 
-  		margin : auto; 
-  		position : absolute; 
-  		top : 50%; left : 0;  bottom : 0; right : 0;
+	
+	
+	.wrap-loading{ 
+    	position: fixed;
+    	left:0;
+    	right:0;
+    	top:0;
+    	bottom:0;
+    	background: rgba(0,0,0,0.5); /*not in ie */
+    	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
+    
+	}
+	.wrap-loading div{ 
+    	position: fixed;
+    	top:50%;
+    	left:50%;
+    	margin-left: -21px;
+    	margin-top: -21px;
+	}
+	.display-none{ 
+    	display:none;
 	}
 	#footer{
 		height:100px;

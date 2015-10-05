@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<link rel="stylesheet" type="text/css" href="assets/css/myPage.css">
-<div id="article">
+${requestScope.alert}
 
-	<c:import url="myPageMenu.jsp" />
-</div>
+<script>
+	location.href="login.do";
+</script>
