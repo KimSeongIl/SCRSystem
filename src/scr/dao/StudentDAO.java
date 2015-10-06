@@ -3,6 +3,7 @@ package scr.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.*;
 
 import scr.conn.Conn;
 import scr.dto.StudentDTO;
@@ -38,6 +39,46 @@ public class StudentDAO {
 		}catch(Exception e){
 			return 2;
 		}
+	}
+	
+	public List<StudentDTO> studentList(){
+		List<StudentDTO> list=new ArrayList<>();
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select student_id,name,email,phone,department_id,"
+						+ "(select department_name from department where department_id=department_Id limit 1) \"department\",minor_id,"
+						+ "ifnull((select department_name from department where department_id=minor_id limit 1),'없음') \"minor\",double_major_id,"
+						+ "ifnull((select department_name from department where department_id=double_major_Id limit 1),'없음') \"double_major\",status from student order by student_id");){
+			
+			ResultSet rs=pstmt.executeQuery();
+			AES256Util util=new AES256Util();
+			
+			if(rs.next()){
+				do{
+					
+					StudentDTO student=new StudentDTO();
+					
+					student.setStudentId(rs.getInt("student_id"));
+					student.setName(rs.getString("name"));
+					student.setEmail(util.decrypt(rs.getString("email")));
+					student.setPhone(util.decrypt(rs.getString("phone")));
+					student.setDepartmentId(rs.getInt("department_id"));
+					student.setDepartmentName(rs.getString("department"));
+					student.setMinorId(rs.getInt("minor_id"));
+					student.setMinorName(rs.getString("minor"));
+					student.setDoubleMajorId(rs.getInt("double_major_id"));
+					student.setDoubleMajorName(rs.getString("double_major"));
+					student.setStatus(rs.getString("status"));
+					
+					list.add(student);
+					
+				}while(rs.next());
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 }
