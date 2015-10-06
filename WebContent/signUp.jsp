@@ -16,7 +16,7 @@
     
 
 
-	<div id="article" style="padding-left:50px;">
+	<div id="article" >
 	<br>
 	
 	<form action="studentAdd.do" name="signupForm" id="signupForm" method="post" class="form-inline">
