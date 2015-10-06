@@ -10,34 +10,34 @@ public class NoticeDTO {
 	private String nContent;
 	private Timestamp nDate;
 	
-	public int getnId() {
+	public int getNId() {
 		return nId;
 	}
-	public void setnId(int nId) {
+	public void setNId(int nId) {
 		this.nId = nId;
 	}
 	
 	
-	public String getnName() {
+	public String getNName() {
 		return nName;
 	}
-	public void setnName(String nName) {
+	public void setNName(String nName) {
 		this.nName = nName;
 	}
 	
 	
-	public String getnTitle() {
+	public String getNTitle() {
 		return nTitle;
 	}
-	public void setnTitle(String nTitle) {
+	public void setNTitle(String nTitle) {
 		this.nTitle = nTitle;
 	}
 	
 	
-	public String getnContent() {
+	public String getNContent() {
 		return nContent;
 	}
-	public void setnContent(String nContent) {
+	public void setNContent(String nContent) {
 		this.nContent = nContent;
 	}
 	
