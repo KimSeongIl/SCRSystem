@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import scr.action.AjaxAction;
+import scr.dao.EmployeeDAO;
 import scr.dao.StudentDAO;
+import scr.dto.EmployeeDTO;
 import scr.dto.StudentDTO;
 import scr.util.JsonUtil;
 
@@ -21,9 +23,13 @@ public class StudentListAction implements AjaxAction{
 		List<StudentDTO> list=null;
 		StudentDAO studentDao=StudentDAO.getInstance();
 		if("직원".equals(auth)){
-			
+			EmployeeDTO employee=new EmployeeDTO();
+			employee.setEmployeeId(uid);
+			EmployeeDAO employeeDao=EmployeeDAO.getInstance();
+			EmployeeDTO departmentId=employeeDao.getDepartmentId(employee);
+			list=studentDao.studentList(departmentId);
 		}else if("관리자".equals(auth)){
-			list=studentDao.studentList();
+			list=studentDao.studentList(null);
 		}else{
 			return null;
 		}

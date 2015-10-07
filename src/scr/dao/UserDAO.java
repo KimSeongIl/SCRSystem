@@ -127,6 +127,18 @@ public class UserDAO {
 		}
 	}
 	
+	public void userDelete(UserDTO user){
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("delete from user where user_id=?");){
+			
+			pstmt.setInt(1, user.getUid());
+			pstmt.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 }

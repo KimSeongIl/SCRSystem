@@ -36,7 +36,7 @@ function signUp(check){
 
 	//학번에 숫자만 입력가능하도록 검사 
 
-	var uidCheck= /^[0-9+]{6,12}$/;
+	var uidCheck= /^[0-9+]{1,12}$/;
 
 
 	if(!uidCheck.test(check.uid.value))

@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.util.*;
 
 import scr.conn.Conn;
+import scr.dto.EmployeeDTO;
 import scr.dto.StudentDTO;
+import scr.dto.UserDTO;
 import scr.util.AES256Util;
 
 public class StudentDAO {
@@ -41,15 +43,21 @@ public class StudentDAO {
 		}
 	}
 	
-	public List<StudentDTO> studentList(){
+	public List<StudentDTO> studentList(EmployeeDTO check){
 		List<StudentDTO> list=new ArrayList<>();
+		String where="";
+		if(check!=null){
+			where=" where department_id=?";
+		}
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select student_id,name,email,phone,department_id,"
-						+ "(select department_name from department where department_id=department_Id limit 1) \"department\",minor_id,"
+						+ "(select department_name from department where department_id=student.department_Id limit 1) \"department\",minor_id,"
 						+ "ifnull((select department_name from department where department_id=minor_id limit 1),'없음') \"minor\",double_major_id,"
-						+ "ifnull((select department_name from department where department_id=double_major_Id limit 1),'없음') \"double_major\",status from student order by student_id");){
-			
+						+ "ifnull((select department_name from department where department_id=double_major_Id limit 1),'없음') \"double_major\",status from student "+where+" order by student_id");){
+			if(check!=null){
+				pstmt.setInt(1, check.getDepartmentId());
+			}
 			ResultSet rs=pstmt.executeQuery();
 			AES256Util util=new AES256Util();
 			
@@ -80,5 +88,19 @@ public class StudentDAO {
 		
 		return list;
 	}
+	
+	public void studentDelete(UserDTO user){
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("delete from student where student_id=?");){
+			
+			pstmt.setInt(1, user.getUid());
+			pstmt.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	
 	
 }

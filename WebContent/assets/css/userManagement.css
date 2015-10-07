@@ -7,3 +7,13 @@
 	
 	margin-top:50px;	
 }
+#userManagementContainer input{
+	margin-right:5px;
+}
+#addBtnDiv{
+	width:100%;
+	text-align:right;
+	margin:10px;
+	padding-right:30px;
+	
+}
