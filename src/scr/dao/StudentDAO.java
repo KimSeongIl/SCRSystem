@@ -32,12 +32,17 @@ public class StudentDAO {
 			
 			pstmt.setInt(1, student.getStudentId());
 			pstmt.setString(2, util.encrypt(student.getEmail()));
-			ResultSet rs=pstmt.executeQuery();
-			if(rs.next()){
-				return 1;
-			}else{
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					return 1;
+				}else{
+					return 2;
+				}
+			}catch(Exception e){
 				return 2;
 			}
+			
+			
 		}catch(Exception e){
 			return 2;
 		}
@@ -58,30 +63,35 @@ public class StudentDAO {
 			if(check!=null){
 				pstmt.setInt(1, check.getDepartmentId());
 			}
-			ResultSet rs=pstmt.executeQuery();
-			AES256Util util=new AES256Util();
-			
-			if(rs.next()){
-				do{
-					
-					StudentDTO student=new StudentDTO();
-					
-					student.setStudentId(rs.getInt("student_id"));
-					student.setName(rs.getString("name"));
-					student.setEmail(util.decrypt(rs.getString("email")));
-					student.setPhone(util.decrypt(rs.getString("phone")));
-					student.setDepartmentId(rs.getInt("department_id"));
-					student.setDepartmentName(rs.getString("department"));
-					student.setMinorId(rs.getInt("minor_id"));
-					student.setMinorName(rs.getString("minor"));
-					student.setDoubleMajorId(rs.getInt("double_major_id"));
-					student.setDoubleMajorName(rs.getString("double_major"));
-					student.setStatus(rs.getString("status"));
-					
-					list.add(student);
-					
-				}while(rs.next());
+			try(ResultSet rs=pstmt.executeQuery();){
+				AES256Util util=new AES256Util();
+				
+				if(rs.next()){
+					do{
+						
+						StudentDTO student=new StudentDTO();
+						
+						student.setStudentId(rs.getInt("student_id"));
+						student.setName(rs.getString("name"));
+						student.setEmail(util.decrypt(rs.getString("email")));
+						student.setPhone(util.decrypt(rs.getString("phone")));
+						student.setDepartmentId(rs.getInt("department_id"));
+						student.setDepartmentName(rs.getString("department"));
+						student.setMinorId(rs.getInt("minor_id"));
+						student.setMinorName(rs.getString("minor"));
+						student.setDoubleMajorId(rs.getInt("double_major_id"));
+						student.setDoubleMajorName(rs.getString("double_major"));
+						student.setStatus(rs.getString("status"));
+						
+						list.add(student);
+						
+					}while(rs.next());
+				}
+			}catch(Exception e){
+				e.printStackTrace();
 			}
+			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}

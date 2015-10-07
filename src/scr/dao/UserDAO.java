@@ -96,14 +96,19 @@ public class UserDAO {
 			PreparedStatement pstmt=conn.prepareStatement("select user_id,name,auth from user where user_id=? and password=?");){
 			pstmt.setInt(1, user.getUid());
 			pstmt.setString(2, Sha256.encrypt(user.getPassword()));
-			ResultSet rs=pstmt.executeQuery();
-			if(rs.next()){
-				dto=new UserDTO();
-				dto.setUid(rs.getInt("user_id"));
-				dto.setName(rs.getString("name"));
-				dto.setAuth(rs.getString("auth"));
-				
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					dto=new UserDTO();
+					dto.setUid(rs.getInt("user_id"));
+					dto.setName(rs.getString("name"));
+					dto.setAuth(rs.getString("auth"));
+					
+				}
+			}catch(Exception e){
+				e.printStackTrace();
 			}
+			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
