@@ -20,19 +20,26 @@ public class EmployeeDAO {
 	
 	public EmployeeDTO getDepartmentId(EmployeeDTO employee){
 		EmployeeDTO result=null;
+		
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select department_id from employee where employee_id=?");){
 			
 			pstmt.setInt(1, employee.getEmployeeId());
-			ResultSet rs=pstmt.executeQuery();
-			
-			if(rs.next()){
-				result=new EmployeeDTO();
-				result.setDepartmentId(rs.getInt("department_id"));
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					result=new EmployeeDTO();
+					result.setDepartmentId(rs.getInt("department_id"));
+				}
+			}catch(Exception e){
+				e.printStackTrace();
 			}
+			
+			
+			
 		}catch(Exception e){
 			e.printStackTrace();
+			
 		}
 		
 		return result;

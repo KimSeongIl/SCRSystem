@@ -25,7 +25,7 @@ public class DepartmentDAO {
 		
 		
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select department_id,department_name,office_no,office_tel from department");){
+				PreparedStatement pstmt=conn.prepareStatement("select department_id,department_name,office_no,office_tel from department order by department_id;");){
 
 			try( ResultSet rs=pstmt.executeQuery(); ){
 				

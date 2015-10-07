@@ -15,10 +15,11 @@ import javax.mail.internet.MimeMessage;
 public class SendMail {
 
 	public String sendMail(String uemail,String subject,String content,String alert){
-		try{
+		DefaultContext dc=DefaultContext.getInstance();
+		try(FileInputStream fis=new FileInputStream(dc.getPath()+"/WEB-INF/email.properties");){
 			Properties props=new Properties();
-    		DefaultContext dc=DefaultContext.getInstance();
-    		FileInputStream fis=new FileInputStream(dc.getPath()+"/WEB-INF/email.properties");
+    		
+    		
     		
     		
     		props.load(new BufferedInputStream(fis));

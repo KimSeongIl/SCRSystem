@@ -22,7 +22,7 @@ public class UserDAO {
 		return instance;
 	}
 	
-	public void studentAdd(UserDTO user) {
+	public void userAdd(UserDTO user) {
 		
 		try (
 			Connection conn=Conn.getConnection();

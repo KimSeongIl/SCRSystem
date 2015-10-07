@@ -57,9 +57,9 @@ public class StudentDAO {
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select student_id,name,email,phone,department_id,"
-						+ "(select department_name from department where department_id=student.department_Id limit 1) \"department\",minor_id,"
-						+ "ifnull((select department_name from department where department_id=minor_id limit 1),'없음') \"minor\",double_major_id,"
-						+ "ifnull((select department_name from department where department_id=double_major_Id limit 1),'없음') \"double_major\",status from student "+where+" order by student_id");){
+						+ "(select department_name from department where department_id=student.department_Id) \"department\",minor_id,"
+						+ "ifnull((select department_name from department where department_id=minor_id),'없음') \"minor\",double_major_id,"
+						+ "ifnull((select department_name from department where department_id=double_major_Id),'없음') \"double_major\",status from student "+where+" order by student_id");){
 			if(check!=null){
 				pstmt.setInt(1, check.getDepartmentId());
 			}
