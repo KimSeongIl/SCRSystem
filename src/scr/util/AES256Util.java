@@ -23,10 +23,11 @@ public class AES256Util {
 
     private String getKey(){
     	String key=null;
-    	try{
+    	DefaultContext dc=DefaultContext.getInstance();
+    	try(FileInputStream fis=new FileInputStream(dc.getPath()+"/WEB-INF/key.properties");){
     		Properties props=new Properties();
-    		DefaultContext dc=DefaultContext.getInstance();
-    		FileInputStream fis=new FileInputStream(dc.getPath()+"/WEB-INF/key.properties");
+    		
+    		
     		
     		props.load(new BufferedInputStream(fis));
     		

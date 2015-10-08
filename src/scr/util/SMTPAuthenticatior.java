@@ -15,12 +15,12 @@ public class SMTPAuthenticatior extends Authenticator{
 	
     @Override
     protected PasswordAuthentication getPasswordAuthentication() {
-    	
-    	try{
+    	DefaultContext dc=DefaultContext.getInstance();
+    	try(FileInputStream fis=new FileInputStream(dc.getPath()+"/WEB-INF/email.properties");){
     		Properties props=new Properties();
-    		DefaultContext dc=DefaultContext.getInstance();
     		
-    		FileInputStream fis=new FileInputStream(dc.getPath()+"/WEB-INF/email.properties");
+    		
+    		
     		
     		props.load(new BufferedInputStream(fis));
     		

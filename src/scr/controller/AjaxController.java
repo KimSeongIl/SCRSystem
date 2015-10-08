@@ -11,6 +11,7 @@ import java.util.Properties;
 
 
 
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import scr.action.AjaxAction;
+import scr.util.DefaultContext;
 
 @WebServlet("/AjaxController")
 public class AjaxController extends HttpServlet{
@@ -29,6 +31,7 @@ public class AjaxController extends HttpServlet{
 	
 	public AjaxController(){
 		super();
+
 	}
 	
 	 private Map<String, Object> commandMap=new HashMap<String, Object>();
@@ -36,6 +39,7 @@ public class AjaxController extends HttpServlet{
 	    public void init(ServletConfig config)throws ServletException{
 	    	
 	    	super.init(config);
+			DefaultContext.createInstance(getServletContext().getRealPath(""));
 	    	
 	    	String props=config.getInitParameter("propertyConfig");
 	    	
