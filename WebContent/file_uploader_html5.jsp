@@ -3,6 +3,7 @@
 <%@page import="java.io.*"%>
 <%@page import="java.util.UUID"%>
 <%@page import="java.text.SimpleDateFormat"%>
+
 <% 
 //파일정보
 String sFileInfo = "";
@@ -57,13 +58,12 @@ os.flush();
 os.close();
 ///////////////// 서버에 파일쓰기 /////////////////
 
-// 정보 출력
+//정보 출력
 sFileInfo += "&bNewLine=true";
 //sFileInfo += "&sFileName="+ realFileNm;;
-// img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
+//img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 sFileInfo += "&sFileName="+ filename;;
 sFileInfo += "&sFileURL="+"/editor/multiupload/"+realFileNm;
 out.println(sFileInfo);
 }
-
 %>
