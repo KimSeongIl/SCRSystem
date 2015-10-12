@@ -15,7 +15,7 @@
 			<li>이용안내</li>
 			<c:choose>
 				<c:when test="${empty sessionScope.auth || sessionScope.auth eq \"학생\" }">
-					<li>상담신청</li>
+					<li onclick="location.href='counselRequest.do'">상담신청</li>
 				</c:when>
 				<c:when test="${sessionScope eq \"교수\" }">
 					<li>상담관리</li>

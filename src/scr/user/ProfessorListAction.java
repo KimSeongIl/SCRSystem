@@ -20,6 +20,9 @@ public class ProfessorListAction implements AjaxAction{
 
 	public Map<String,Object> responseBody(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		HttpSession session=request.getSession();
+		if(session.getAttribute("uid")==null){
+			return JsonUtil.putFailJsonContainer("ProfessorListAction NoSession", "권한이 없습니다.");
+		}
 		int uid=(int)session.getAttribute("uid");
 		String auth=(String)session.getAttribute("auth");
 		List<ProfessorDTO> list=null;
@@ -30,7 +33,7 @@ public class ProfessorListAction implements AjaxAction{
 			EmployeeDAO employeeDao=EmployeeDAO.getInstance();
 			EmployeeDTO departmentId=employeeDao.getDepartmentId(employee);
 			list=professorDao.professorList(departmentId);
-		}else if("관리자".equals(auth)){
+		}else if("관리자".equals(auth) || "학생".equals(auth)){
 			list=professorDao.professorList(null);
 		}else{
 			return null;

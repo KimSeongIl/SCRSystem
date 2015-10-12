@@ -1,0 +1,16 @@
+h1{
+	margin-bottom:30px;
+}
+th{
+	text-align:center;
+}
+tbody{
+	cursor:pointer;
+}
+h1,#professorSearch,#professorListContainer{
+	text-align:center;
+}
+#professorSearch{
+	
+	margin-bottom:30px;
+}
