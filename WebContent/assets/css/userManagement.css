@@ -1,0 +1,17 @@
+#userManagementMenu{
+	margin-top:50px;
+}
+
+#userManagementContainer{
+	width:100%;
+	
+	margin-top:50px;	
+}
+
+#addBtnDiv{
+	width:100%;
+	text-align:right;
+	margin:10px;
+	padding-right:30px;
+	
+}

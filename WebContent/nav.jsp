@@ -19,6 +19,9 @@
 				<c:when test="${sessionScope eq \"교수\" }">
 					<li>상담관리</li>
 				</c:when>
+				<c:when test="${sessionScope.auth eq \"직원\" || sessionScope.auth eq \"관리자\" }">
+					<li onclick="location.href='userManagement.do'">회원관리</li>
+				</c:when>
 			</c:choose>
 			
 			<li>자료실</li>

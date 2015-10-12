@@ -118,6 +118,7 @@ body{
 	#article{
 		min-height:560px;
 		padding:10px;
+		padding-top:50px;
 	}
 	#wrap{
 		min-width:1040px;

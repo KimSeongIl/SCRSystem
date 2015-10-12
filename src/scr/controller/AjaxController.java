@@ -11,6 +11,7 @@ import java.util.Properties;
 
 
 
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import scr.action.AjaxAction;
+import scr.util.DefaultContext;
 
 @WebServlet("/AjaxController")
 public class AjaxController extends HttpServlet{
@@ -29,13 +31,15 @@ public class AjaxController extends HttpServlet{
 	
 	public AjaxController(){
 		super();
+
 	}
 	
 	 private Map<String, Object> commandMap=new HashMap<String, Object>();
-	    
+	    @Override
 	    public void init(ServletConfig config)throws ServletException{
 	    	
 	    	super.init(config);
+			DefaultContext.createInstance(getServletContext().getRealPath(""));
 	    	
 	    	String props=config.getInitParameter("propertyConfig");
 	    	
@@ -82,6 +86,7 @@ public class AjaxController extends HttpServlet{
 	    /**
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 		 */
+	    @Override
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			// TODO Auto-generated method stub
 			requestPro(request,response);
@@ -90,6 +95,7 @@ public class AjaxController extends HttpServlet{
 		/**
 		 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 		 */
+	    @Override
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			// TODO Auto-generated method stub
 			requestPro(request,response);

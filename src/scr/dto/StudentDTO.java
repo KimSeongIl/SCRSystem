@@ -7,8 +7,11 @@ public class StudentDTO {
 	private String email;
 	private String phone;
 	private int departmentId;
+	private String departmentName;
 	private int minorId;
+	private String minorName;
 	private int doubleMajorId;
+	private String doubleMajorName;
 	private String status;
 	
 	public void setStudentId(int studentId){
@@ -41,17 +44,35 @@ public class StudentDTO {
 	public int getDepartmentId(){
 		return departmentId;
 	}
+	public void setDepartmentName(String departmentName){
+		this.departmentName=departmentName;
+	}
+	public String getDepartmentName(){
+		return departmentName;
+	}
 	public void setMinorId(int minorId){
 		this.minorId=minorId;
 	}
 	public int getMinorId(){
 		return minorId;
 	}
+	public void setMinorName(String minorName){
+		this.minorName=minorName;
+	}
+	public String getMinorName(){
+		return minorName;
+	}
 	public void setDoubleMajorId(int doubleMajorId){
 		this.doubleMajorId=doubleMajorId;
 	}
 	public int getDoubleMajorId(){
 		return doubleMajorId;
+	}
+	public void setDoubleMajorName(String doubleMajorName){
+		this.doubleMajorName=doubleMajorName;
+	}
+	public String getDoubleMajorName(){
+		return doubleMajorName;
 	}
 	public void setStatus(String status){
 		this.status=status;

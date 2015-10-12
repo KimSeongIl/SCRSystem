@@ -23,10 +23,11 @@ public class AES256Util {
 
     private String getKey(){
     	String key=null;
-    	try{
+    	DefaultContext dc=DefaultContext.getInstance();
+    	try(FileInputStream fis=new FileInputStream(dc.getPath()+"/WEB-INF/key.properties");){
     		Properties props=new Properties();
-    		DefaultContext dc=DefaultContext.getInstance();
-    		FileInputStream fis=new FileInputStream(dc.getPath()+"/WEB-INF/key.properties");
+    		
+    		
     		
     		props.load(new BufferedInputStream(fis));
     		
@@ -86,6 +87,7 @@ public class AES256Util {
         Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
         c.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));
         byte[] byteStr = Base64.decodeBase64(str.getBytes());
+        
         return new String(c.doFinal(byteStr), "UTF-8");
     }
 

@@ -1,6 +1,6 @@
 function requestJsonData(requestUrl, requestParam, successFunction) {
 	$.ajax({
-		url : serverUrl + requestUrl,
+		url : requestUrl,
 		type : "POST",
 		async: true,
 		data : requestParam,

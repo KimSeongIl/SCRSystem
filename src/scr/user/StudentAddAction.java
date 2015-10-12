@@ -55,7 +55,7 @@ public class StudentAddAction implements CommandAction{
 		student.setStatus(status);
 		
 		UserDAO dao=UserDAO.getInstance();
-		dao.studentAdd(user);
+		dao.userAdd(user);
 		dao.studentInfoAdd(student);
 		return "main.jsp";
 	}

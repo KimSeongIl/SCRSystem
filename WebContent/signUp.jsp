@@ -1,4 +1,5 @@
-﻿
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 	<%@ page import="scr.dto.DepartmentDTO" %>
 
 	<%@ page import="java.util.*" %>
@@ -7,7 +8,10 @@
     
     <c:set var="department" value="${requestScope.department }"/>
     
-	<div id="article" style="padding-left:50px;">
+
+
+	<div id="article" >
+
 	<br>
 	
 	<form action="studentAdd.do" name="signupForm" id="signupForm" method="post" class="form-inline">
