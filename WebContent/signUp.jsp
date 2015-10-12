@@ -7,14 +7,6 @@
     
     <c:set var="department" value="${requestScope.department }"/>
     
-    
-    
-    
-    
-    
-    
-
-
 	<div id="article" style="padding-left:50px;">
 	<br>
 	

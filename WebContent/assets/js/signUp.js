@@ -49,8 +49,6 @@ function signUp(check){
 	}
 	}
 	
-	
-
 	//비밀번호 입력여부 검사
 	if(check.password.vlaue="")
 	{
@@ -74,9 +72,7 @@ function signUp(check){
 		check.password.focus();
 		return false;
 
-
 	}
-
 	
 	// 비밀번호 일치여부 검사 
 	if (check.password.value!=check.passwordConfirm.value)
@@ -147,27 +143,20 @@ function signUp(check){
 
 	if(!emailCheck.test(check.email.value))
 	{
-
 		alert("이메일 형식에 맞지 않습니다 ")
 		check.email.focus();
 		return false;
-
 	}
 	
 	//상태
-
 	
 	if(check.id=='signupForm'){
 		alert("회원가입을 축하드립니다")
 		return true;
 		//location.href('insertMember.do')
+	}		
 		
-	}
-	
-	
-		
-		
-	}
+}
 	
 	
 	

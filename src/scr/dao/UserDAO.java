@@ -36,9 +36,6 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	    
-	    
-	    
-	    
 	}
 	public void studentInfoAdd(StudentDTO student) {
 
@@ -108,9 +105,6 @@ public class UserDAO {
 		return dto;
 	}
 
-
-	
-	
 	public void setTempPassword(UserDTO user){
 		try(
 				Connection conn=Conn.getConnection();
@@ -125,6 +119,25 @@ public class UserDAO {
 		}
 	}
 	
+public boolean passwordCheck(UserDTO user) {
+		boolean check = false;
+		try (
+			Connection conn=Conn.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement("select user_id from user where user_id=? and password=? ");){
+			pstmt.setInt(1, user.getUid());
+		    pstmt.setString(2, Sha256.encrypt(user.getPassword()));
+		    ResultSet rs=pstmt.executeQuery();
+		    if(rs.next()){		    	
+		    	check=true;
+		    }else{
+		    	boolean dto ;
+		    	check=false;
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	   
+		return check;
+	}
 	
 	
 }
