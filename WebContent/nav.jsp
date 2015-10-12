@@ -6,7 +6,6 @@
 		
 		 <img src="assets/img/cap.png" alt="logo" onclick="location.href='main.do'"> 	
 		
-		
 	</div>
 	<div id="navContent">
 		<ul>

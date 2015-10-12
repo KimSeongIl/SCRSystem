@@ -8,15 +8,10 @@
     
     <c:set var="department" value="${requestScope.department }"/>
     
-    
-    
-    
-    
-    
-    
 
 
 	<div id="article" >
+
 	<br>
 	
 	<form action="studentAdd.do" name="signupForm" id="signupForm" method="post" class="form-inline">

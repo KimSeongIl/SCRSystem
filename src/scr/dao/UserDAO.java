@@ -36,11 +36,9 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	    
-	    
-	    
-	    
 	}
 	public void studentInfoAdd(StudentDTO student) {
+
 		String column="student_id,name,email,phone,department_id";
 		String param="?,?,?,?,?,?";
 		String query;
@@ -67,19 +65,16 @@ public class UserDAO {
 			Connection conn=Conn.getConnection();
 			
 			PreparedStatement pstmt=conn.prepareStatement(query);){
+
 			AES256Util util=new AES256Util();
 			pstmt.setInt(1, student.getStudentId());
 			pstmt.setString(2,student.getName());
 			pstmt.setString(3, util.encrypt(student.getEmail()));
 			pstmt.setString(4,util.encrypt(student.getPhone()));
 			pstmt.setInt(5,student.getDepartmentId());
-			if(student.getMinorId()!=0)
-				pstmt.setInt(6, student.getMinorId());
-			
-			if(student.getDoubleMajorId()!=0)
-				pstmt.setInt(6+num1, student.getDoubleMajorId());
-			
-			pstmt.setString(6+num1+num2, student.getStatus());
+			pstmt.setInt(6, student.getMinorId());
+			pstmt.setInt(7, student.getDoubleMajorId());
+			pstmt.setString(8, student.getStatus());
 			pstmt.executeUpdate();
 			
 		}catch(Exception e){
@@ -115,9 +110,6 @@ public class UserDAO {
 		return dto;
 	}
 
-
-	
-	
 	public void setTempPassword(UserDTO user){
 		try(
 				Connection conn=Conn.getConnection();
@@ -132,6 +124,27 @@ public class UserDAO {
 		}
 	}
 	
+
+public boolean passwordCheck(UserDTO user) {
+		boolean check = false;
+		try (
+			Connection conn=Conn.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement("select user_id from user where user_id=? and password=? ");){
+			pstmt.setInt(1, user.getUid());
+		    pstmt.setString(2, Sha256.encrypt(user.getPassword()));
+		    ResultSet rs=pstmt.executeQuery();
+		    if(rs.next()){		    	
+		    	check=true;
+		    }else{
+		    	boolean dto ;
+		    	check=false;
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	   
+		return check;
+	}
+
 	public void userDelete(UserDTO user){
 		try(
 				Connection conn=Conn.getConnection();
@@ -144,6 +157,7 @@ public class UserDAO {
 		}
 	}
 	
+
 	
 	
 }

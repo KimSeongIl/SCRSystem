@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -6,11 +7,11 @@
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <div id="article" >
 
-<form id="frm" action="" method="post" >
+<form id="frm" action="noticeView.do" method="post" >
 <table width="100%">
 		<tr>
 			<td>제목</td>
-			<td><input type="text" id="title" /></td>
+			<td><input type="text" id="title" name="title" /></td>
 		</tr>
 		<tr>
 			<td>내용</td>
@@ -54,10 +55,15 @@ $(function(){
 						}, 
 						fOnAppLoad : function(){
 							//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-							oEditors.getById["ir1"].exec("PASTE_HTML", ["기존 DB에 저장된 내용을 에디터에 적용할 문구"]);
+							//oEditors.getById["ir1"].exec("PASTE_HTML", ["기존 DB에 저장된 내용을 에디터에 적용할 문구"]);
 						},
 						fCreator: "createSEditor2"
 					});
+					
+					$("#save").click(function(){
+						oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+						$("#frm").submit();
+					})
 					
 					
 });
