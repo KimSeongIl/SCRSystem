@@ -3,10 +3,10 @@ package scr.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
 
 import scr.conn.Conn;
 import scr.dto.EmployeeDTO;
+import scr.util.AES256Util;
 
 public class EmployeeDAO {
 
@@ -44,6 +44,31 @@ public class EmployeeDAO {
 		}
 		
 		return result;
+	}
+	
+	public int matchEmail(EmployeeDTO employee){
+
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select employee_id from employee where employee_id=? and email=?");){
+			AES256Util util=new AES256Util();
+
+			pstmt.setInt(1, employee.getEmployeeId());
+			pstmt.setString(2, util.encrypt(employee.getEmail()));
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					return 1;
+				}else{
+					return 2;
+				}
+			}catch(Exception e){
+				return 2;
+			}
+
+
+		}catch(Exception e){
+			return 2;
+		}
 	}
 	
 	

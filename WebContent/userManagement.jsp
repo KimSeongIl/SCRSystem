@@ -94,6 +94,14 @@
 						</div>
 						
 						<div class="form-group">
+							<label class="col-sm-3 control-label">이메일</label>
+							<div class="col-sm-8">
+								<input type="email" class="form-control" name="email"
+									placeholder="Email.." required>
+							</div>
+						</div>
+						
+						<div class="form-group">
 							<label class="col-sm-3 control-label">학과</label>
 							<div class="col-sm-8">
 								<select class="form-control" name="departmentId">

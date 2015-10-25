@@ -5,6 +5,7 @@ public class EmployeeDTO {
 	private int employeeId;
 	private String employeeName;
 	private String phone;
+	private String email;
 	private int departmentId;
 	
 	public void setEmployeeId(int employeeId){
@@ -24,6 +25,12 @@ public class EmployeeDTO {
 	}
 	public String getPhone(){
 		return phone;
+	}
+	public void setEmail(String email){
+		this.email=email;
+	}
+	public String getEmail(){
+		return email;
 	}
 	public void setDepartmentId(int departmentId){
 		this.departmentId=departmentId;

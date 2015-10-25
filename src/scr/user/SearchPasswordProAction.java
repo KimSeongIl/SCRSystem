@@ -6,11 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import scr.action.CommandAction;
+import scr.dao.EmployeeDAO;
+import scr.dao.ProfessorDAO;
 import scr.dao.StudentDAO;
 import scr.dao.UserDAO;
+import scr.dto.EmployeeDTO;
+import scr.dto.ProfessorDTO;
 import scr.dto.StudentDTO;
 import scr.dto.UserDTO;
-
 import scr.util.SendMail;
 
 public class SearchPasswordProAction implements CommandAction{
@@ -32,9 +35,18 @@ public class SearchPasswordProAction implements CommandAction{
 			
 			
 		}else if("교수".equals(auth)){
+			ProfessorDTO professor=new ProfessorDTO();
+			professor.setProfessorId(uid);
+			professor.setEmail(uemail);
+			ProfessorDAO professorDao=ProfessorDAO.getInstance();
+			result=professorDao.matchEmail(professor);
 			
 		}else if("직원".equals(auth)){
-			
+			EmployeeDTO employee=new EmployeeDTO();
+			employee.setEmployeeId(uid);
+			employee.setEmail(uemail);
+			EmployeeDAO employeeDao=EmployeeDAO.getInstance();
+			result=employeeDao.matchEmail(employee);
 		}
 		
 		if(result==2){

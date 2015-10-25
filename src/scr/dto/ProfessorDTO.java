@@ -7,8 +7,10 @@ public class ProfessorDTO {
 	private int officeNo;
 	private String officeTel;
 	private String phone;
+	private String email;
 	private int departmentId;
 	private String departmentName;
+	
 	
 	public void setProfessorId(int professorId){
 		this.professorId=professorId;
@@ -39,6 +41,12 @@ public class ProfessorDTO {
 	}
 	public String getPhone(){
 		return phone;
+	}
+	public void setEmail(String email){
+		this.email=email;
+	}
+	public String getEmail(){
+		return email;
 	}
 	public void setDepartmentId(int departmentId){
 		this.departmentId=departmentId;

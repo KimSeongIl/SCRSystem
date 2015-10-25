@@ -95,6 +95,7 @@ var professorList=function(data){
 		str+="<th>사무실번호</th>";
 		str+="<th>사무실전화</th>";
 		str+="<th>핸드폰</th>";
+		str+="<th>이메일</th>";
 		str+="<th>학과</th>";
 		str+="<th></th>";
 		str+="</tr>";
@@ -112,6 +113,7 @@ var professorList=function(data){
 			else
 				str+="<td>"+value.officeTel+"</td>";
 			str+="<td>"+value.phone+"</td>";
+			str+="<td>"+value.email+"</td>";
 			str+="<td>"+value.departmentName+"</td>";
 			str+="<td><input type='button' id="+value.professorId+" class='btn btn-default professorDelete' value='삭제'>";
 			str+="</tr>";
@@ -199,6 +201,7 @@ $(document).ready(function(){
 		var officeNo=$('#professorAddForm input[name=officeNo').val();
 		var officeTel=$('#professorAddForm input[name=officeTel').val();
 		var phone=$('#professorAddForm input[name=phone]').val();
+		var email=$('#professorAddForm input[name=email]').val();
 		var departmentId=$('#professorAddForm select[name=departmentId]').val();
 		var departmentList="";
 		$('#departmentList li').each(function(){
@@ -212,6 +215,7 @@ $(document).ready(function(){
 			officeNo:officeNo,
 			officeTel:officeTel,
 			phone:phone,
+			email:email,
 			departmentId:departmentId,
 			departmentList:departmentList
 		},professorAdd);

@@ -42,19 +42,18 @@ public class UserDAO {
 		String column="student_id,name,email,phone,department_id";
 		String param="?,?,?,?,?,?";
 		String query;
-		int num1=0;
-		int num2=0;
+		
 		if(student.getMinorId()!=0){
 			param+=",?";
 			column+=",minor_id";
-			num1++;
+			
 			
 		}
 			
 		if(student.getDoubleMajorId()!=0){
 			param+=",?";
 			column+=",double_major_id";
-			num2++;
+			
 		}
 		column+=",status";
 		query="insert into student("+column+") values("+param+")";
@@ -136,7 +135,7 @@ public boolean passwordCheck(UserDTO user) {
 		    if(rs.next()){		    	
 		    	check=true;
 		    }else{
-		    	boolean dto ;
+		    	
 		    	check=false;
 		    }
 		} catch (Exception e) {

@@ -33,6 +33,7 @@ public class ProfessorAddAction implements AjaxAction{
 		}
 
 		String phone=request.getParameter("phone");
+		String email=request.getParameter("email");
 		int departmentId=Integer.parseInt(request.getParameter("departmentId"));
 		String departmentList=request.getParameter("departmentList");
 
@@ -52,6 +53,7 @@ public class ProfessorAddAction implements AjaxAction{
 		professor.setOfficeNo(officeNo);
 		professor.setOfficeTel(officeTel);
 		professor.setPhone(phone);
+		professor.setEmail(email);
 		professor.setDepartmentId(departmentId);
 
 		ProfessorDAO professorDao=ProfessorDAO.getInstance();
