@@ -21,18 +21,15 @@ public class SearchPasswordProAction implements CommandAction{
 		String auth=request.getParameter("user");
 		int uid=Integer.parseInt(request.getParameter("uid"));
 		String uemail=request.getParameter("uemail");
+		int result=0;
 		if("학생".equals(auth)){
 			StudentDTO student=new StudentDTO();
 			student.setStudentId(uid);
 			student.setEmail(uemail);
 			StudentDAO studentDao=StudentDAO.getInstance();
-			int result=studentDao.matchEmail(student);
+			result=studentDao.matchEmail(student);
 			
-			if(result==2){
-				alert="<script>alert('정보가 맞지 않거나 오류가 발생했습니다');history.back();</script>";
-				request.setAttribute("alert", alert);
-				return "searchPasswordPro.jsp";
-			}
+			
 			
 		}else if("교수".equals(auth)){
 			
@@ -40,7 +37,11 @@ public class SearchPasswordProAction implements CommandAction{
 			
 		}
 		
-		
+		if(result==2){
+			alert="<script>alert('정보가 맞지 않거나 오류가 발생했습니다');history.back();</script>";
+			request.setAttribute("alert", alert);
+			return "searchPasswordPro.jsp";
+		}
 		
 
 

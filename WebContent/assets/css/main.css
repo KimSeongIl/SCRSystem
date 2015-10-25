@@ -11,7 +11,10 @@
 		width:30%;
 		border-right:1px solid black;	
 	}
-	
+	#download{
+		width:28%;
+		border-right:1px solid black;
+	}
 	
 	
 	#online{
@@ -36,7 +39,7 @@
 		height:100%;
 		
 	}
-	#noticeTitle,#onlineTitle,#linkTitle{
+	#noticeTitle,#onlineTitle,#linkTitle,#downloadTitle{
 		clear:both;
 		text-align:center;
 		width:100%;
@@ -52,6 +55,12 @@
 		background-repeat:no-repeat;
 		
 		
+	}
+	#downloadTitle{
+		margin-top:2px;
+		margin-left:5px;
+		background-image:url(../img/download.jpg);
+		background-repeat:no-repeat;
 	}
 	#onlineTitle{
 		margin-top:2px;

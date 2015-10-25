@@ -160,6 +160,33 @@ $(document).ready(function(){
 			
 		}
 	})
+	$('.department_grp').change(function(){
+		var exist=false;
+		var department_id=$(this).val();
+		if(department_id!=0){
+			$('#departmentList li').each(function(){
+				if($(this).attr('id')==department_id){
+					exist=true;
+				}
+					
+			})
+			if(exist){
+				alert('이미 추가했습니다.');
+				return;
+			}
+			
+			$('#departmentList').html(function(index,html){
+				return html+"<li id="+department_id+">"+$('.department_grp option:selected').text()+"<span class='departmentListDelete'>X</span></li>";
+			})
+		}
+		
+		
+	})
+	$(document).on('click','.departmentListDelete',function(){
+		
+		$(this).parent().remove();
+	})
+	
 	
 	$('#professorAddForm').submit(function(){
 		var professorId=$('#professorAddForm input[name=professorId]').val();
@@ -167,7 +194,11 @@ $(document).ready(function(){
 		var officeNo=$('#professorAddForm input[name=officeNo').val();
 		var officeTel=$('#professorAddForm input[name=officeTel').val();
 		var phone=$('#professorAddForm input[name=phone]').val();
-		var departmentId=$('#professorAddForm select').val();
+		var departmentList="";
+		$('#departmentList li').each(function(){
+			departmentList+=$(this).attr('id')+",";
+		})
+		
 		
 		requestJsonData("professorAdd.ajax",{
 			professorId:professorId,
@@ -175,7 +206,7 @@ $(document).ready(function(){
 			officeNo:officeNo,
 			officeTel:officeTel,
 			phone:phone,
-			departmentId:departmentId
+			departmentList:departmentList
 		},professorAdd);
 		
 		return false;

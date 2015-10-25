@@ -99,17 +99,7 @@ public class StudentDAO {
 		return list;
 	}
 	
-	public void studentDelete(UserDTO user){
-		try(
-				Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("delete from student where student_id=?");){
-			
-			pstmt.setInt(1, user.getUid());
-			pstmt.executeUpdate();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
+	
 
 	
 	

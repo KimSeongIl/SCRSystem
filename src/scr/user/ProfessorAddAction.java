@@ -5,6 +5,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 import scr.action.AjaxAction;
 import scr.dao.ProfessorDAO;
 import scr.dao.UserDAO;
@@ -33,7 +35,11 @@ public class ProfessorAddAction implements AjaxAction{
 		}
 		
 		String phone=request.getParameter("phone");
-		int departmentId=Integer.parseInt(request.getParameter("departmentId"));
+		String departmentList=request.getParameter("departmentList");
+		
+		String[] arr=departmentList.split(",");
+		
+		
 		
 		UserDTO user=new UserDTO();
 		user.setUid(professorId);
@@ -50,11 +56,14 @@ public class ProfessorAddAction implements AjaxAction{
 		professor.setOfficeNo(officeNo);
 		professor.setOfficeTel(officeTel);
 		professor.setPhone(phone);
-		professor.setDepartmentId(departmentId);
+		
 		
 		ProfessorDAO professorDao=ProfessorDAO.getInstance();
 		professorDao.professorAdd(professor);
-		
+		for(int i=0;i<arr.length;i++){
+			if(!arr[i].equals(""))
+				professorDao.professorDepartmentAdd(professorId,Integer.parseInt(arr[i]));
+		}
 		return JsonUtil.putSuccessJsonContainer(null);
 		
 	}

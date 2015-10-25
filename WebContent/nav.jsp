@@ -16,7 +16,7 @@
 				<c:when test="${empty sessionScope.auth || sessionScope.auth eq \"학생\" }">
 					<li onclick="location.href='counselRequest.do'">상담신청</li>
 				</c:when>
-				<c:when test="${sessionScope eq \"교수\" }">
+				<c:when test="${sessionScope.auth eq \"교수\" }">
 					<li>상담관리</li>
 				</c:when>
 				<c:when test="${sessionScope.auth eq \"직원\" || sessionScope.auth eq \"관리자\" }">

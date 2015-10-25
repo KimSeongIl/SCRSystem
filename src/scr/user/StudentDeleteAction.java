@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import scr.action.AjaxAction;
-import scr.dao.StudentDAO;
 import scr.dao.UserDAO;
 import scr.dto.UserDTO;
 import scr.util.JsonUtil;
@@ -22,8 +21,7 @@ public class StudentDeleteAction implements AjaxAction{
 		
 		UserDTO user=new UserDTO();
 		user.setUid(uid);
-		StudentDAO studentDao=StudentDAO.getInstance();
-		studentDao.studentDelete(user);;
+		
 		UserDAO userDao=UserDAO.getInstance();
 		userDao.userDelete(user);
 		
