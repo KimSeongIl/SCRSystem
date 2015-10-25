@@ -24,7 +24,6 @@ public class ProfessorDAO {
 		return instance;
 	}
 	
-	
 	public List<ProfessorDTO> professorList(EmployeeDTO check){
 		List<ProfessorDTO> list=new ArrayList<>();
 		String where="";
@@ -33,8 +32,8 @@ public class ProfessorDAO {
 		}
 		try(
 				Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,office_no,office_tel,phone"
-						
+				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,office_no,office_tel,phone,department_id,"
+						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\" "
 						+ " from professor "+where+" order by professor_id");){
 			if(check!=null){
 				pstmt.setInt(1, check.getDepartmentId());
@@ -52,7 +51,8 @@ public class ProfessorDAO {
 						professor.setOfficeNo(rs.getInt("office_no"));
 						professor.setOfficeTel(rs.getString("office_tel"));
 						professor.setPhone(util.decrypt(rs.getString("phone")));
-						
+						professor.setDepartmentId(rs.getInt("department_id"));
+						professor.setDepartmentName(rs.getString("department"));
 					
 						
 						list.add(professor);
@@ -76,7 +76,7 @@ public class ProfessorDAO {
 		String query;
 		int num=0;
 		int num1=0;
-		
+		int num2=0;
 		
 		
 		if(professor.getOfficeNo()!=0){
@@ -92,7 +92,11 @@ public class ProfessorDAO {
 			num1++;
 		}
 		
-		
+		if(professor.getDepartmentId()!=0){
+			param+=",?";
+			column+=",department_id";
+			num2++;
+		}
 		
 		query="insert into professor("+column+") values("+param+")";
 		
@@ -115,7 +119,9 @@ public class ProfessorDAO {
 				pstmt.setString(3+num+num1,professor.getOfficeTel());
 			}
 			
-			
+			if(professor.getDepartmentId()!=0){
+				pstmt.setInt(3+num+num1+num2, professor.getDepartmentId());
+			}
 			
 			pstmt.executeUpdate();
 			
@@ -124,7 +130,6 @@ public class ProfessorDAO {
 		}
 		
 	}
-	
 	public void professorDepartmentAdd(int professorId,int departmentId){
 		try(
 				Connection conn=Conn.getConnection();
@@ -147,5 +152,4 @@ public class ProfessorDAO {
 			e.printStackTrace();
 		}
 	}
-	
 }

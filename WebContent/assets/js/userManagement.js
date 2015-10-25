@@ -174,6 +174,11 @@ $(document).ready(function(){
 				alert('이미 추가했습니다.');
 				return;
 			}
+			if($('#professorAddForm select[name=departmentId').val()==department_id){
+				alert('학과와 중복됩니다');
+				$('#professorAddForm select[name=departmentGroup] option:first-child').attr('selected','true');
+				return;
+			}
 			
 			$('#departmentList').html(function(index,html){
 				return html+"<li id="+department_id+">"+$('.department_grp option:selected').text()+"<span class='departmentListDelete'>X</span></li>";
@@ -194,6 +199,7 @@ $(document).ready(function(){
 		var officeNo=$('#professorAddForm input[name=officeNo').val();
 		var officeTel=$('#professorAddForm input[name=officeTel').val();
 		var phone=$('#professorAddForm input[name=phone]').val();
+		var departmentId=$('#professorAddForm select[name=departmentId]').val();
 		var departmentList="";
 		$('#departmentList li').each(function(){
 			departmentList+=$(this).attr('id')+",";
@@ -206,6 +212,7 @@ $(document).ready(function(){
 			officeNo:officeNo,
 			officeTel:officeTel,
 			phone:phone,
+			departmentId:departmentId,
 			departmentList:departmentList
 		},professorAdd);
 		

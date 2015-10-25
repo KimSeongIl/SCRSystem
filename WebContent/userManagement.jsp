@@ -96,7 +96,20 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">학과</label>
 							<div class="col-sm-8">
-								<select class="form-control department_grp" name="department">
+								<select class="form-control" name="departmentId">
+										<option value="0">없음</option>
+									<c:forEach var="department" items="${requestScope.departmentList }">
+										<option value="${department.departmentId }">${department.departmentName }</option>
+									</c:forEach> 
+								</select>
+								
+								
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">부학과</label>
+							<div class="col-sm-8">
+								<select class="form-control department_grp" name="departmentGroup">
 										<option value="0">없음</option>
 									<c:forEach var="department" items="${requestScope.departmentList }">
 										<option value="${department.departmentId }">${department.departmentName }</option>
