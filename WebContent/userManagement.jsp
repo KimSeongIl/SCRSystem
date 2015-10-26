@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" type="text/css" href="assets/css/userManagement.css">
 
-<c:if test="${\"직원\" ne sessionScope.auth && \"관리자\" ne sessionScope.auth}">
+<c:if test="${\"관리자\" ne sessionScope.auth}">
 	<script>
 		alert('권한이 없습니다');
 		location.href="login.do";

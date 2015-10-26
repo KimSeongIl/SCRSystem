@@ -17,7 +17,7 @@ public class SignUpAction implements CommandAction {
 		
 
 		
-		List<DepartmentDTO> list=department.viewDepartment();
+		List<DepartmentDTO> list=department.departmentList();
 		
 		
 		request.setAttribute("department",list);

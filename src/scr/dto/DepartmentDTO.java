@@ -4,9 +4,10 @@ public class DepartmentDTO {
 
 	private int departmentId;
 	private String departmentName;
-	private String officeNo;
+	private int officeNo;
 	private String officeTel;
 	private int employeeId;
+	private String employeeName;
 	
 	public void setDepartmentId(int departmentId){
 		this.departmentId=departmentId;
@@ -20,10 +21,10 @@ public class DepartmentDTO {
 	public String getDepartmentName(){
 		return departmentName;
 	}
-	public void setOfficeNo(String officeNo){
+	public void setOfficeNo(int officeNo){
 		this.officeNo=officeNo;
 	}
-	public String getOfficeNo(){
+	public int getOfficeNo(){
 		return officeNo;
 	}
 	public void setOfficeTel(String officeTel){
@@ -37,5 +38,11 @@ public class DepartmentDTO {
 	}
 	public int getEmployeeId(){
 		return employeeId;
+	}
+	public void setEmployeeName(String employeeName){
+		this.employeeName=employeeName;
+	}
+	public String getEmployeeName(){
+		return employeeName;
 	}
 }

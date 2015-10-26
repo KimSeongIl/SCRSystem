@@ -65,6 +65,7 @@ var studentList=function(data){
 		
 		
 		var str="<table class='table'>";
+		str+="<thead>";
 		str+="<tr>";
 		str+="<th>학번</th>";
 		str+="<th>이름</th>";
@@ -76,6 +77,8 @@ var studentList=function(data){
 		str+="<th>상태</th>";
 		str+="<th></th>";
 		str+="</tr>";
+		str+="</thead>";
+		str+="<tbody>";
 		$.each(studentList,function(key,value){
 			
 			str+="<tr>";
@@ -87,16 +90,17 @@ var studentList=function(data){
 			str+="<td>"+value.minorName+"</td>";
 			str+="<td>"+value.doubleMajorName+"</td>";
 			str+="<td>"+value.status+"</td>";
-			str+="<td><input type='button' id="+value.studentId+" class='btn btn-default studentDelete' value='삭제'>";
+			str+="<td><input type='button' uid="+value.studentId+" class='btn btn-default studentDelete' value='삭제'></td>";
 			str+="</tr>";
 		})
+		str+="</tbody>";
 		str+="</table>";
 		
 		$('#userManagementContainer').html(str);
 		
 		$('.studentDelete').click(function(){
 			if(confirm('삭제하시겠습니까')){
-				var id=$(this).attr('id');
+				var id=$(this).attr('uid');
 				requestJsonData("UserDelete.ajax",{uid:id},studentDelete);
 			}
 		})
@@ -116,6 +120,7 @@ var professorList=function(data){
 		str+="<input type='button' class='btn btn-primary' href='#professorModal' data-toggle='modal' value='교수 추가'>";
 		str+="</div>";
 		str+="<table class='table'>";
+		str+="<thead>";
 		str+="<tr>";
 		str+="<th>교수번호</th>";
 		str+="<th>이름</th>";
@@ -126,6 +131,8 @@ var professorList=function(data){
 		str+="<th>학과</th>";
 		str+="<th></th>";
 		str+="</tr>";
+		str+="</thead>";
+		str+="<tbody>";
 		$.each(professorList,function(key,value){
 			
 			str+="<tr>";
@@ -142,16 +149,17 @@ var professorList=function(data){
 			str+="<td>"+value.phone+"</td>";
 			str+="<td>"+value.email+"</td>";
 			str+="<td>"+value.departmentName+"</td>";
-			str+="<td><input type='button' id="+value.professorId+" class='btn btn-default professorDelete' value='삭제'>";
+			str+="<td><input type='button' uid="+value.professorId+" class='btn btn-default professorDelete' value='삭제'></td>";
 			str+="</tr>";
 		})
+		str+="</tbody>";
 		str+="</table>";
 		
 		$('#userManagementContainer').html(str);
 		
 		$('.professorDelete').click(function(){
 			if(confirm('삭제하시겠습니까')){
-				var id=$(this).attr('id');
+				var id=$(this).attr('uid');
 				requestJsonData("UserDelete.ajax",{uid:id},professorDelete);
 			}
 		})
@@ -167,14 +175,16 @@ var employeeList=function(data){
 		str+="<input type='button' class='btn btn-primary' href='#employeeModal' data-toggle='modal' value='직원 추가'>";
 		str+="</div>";
 		str+="<table class='table'>";
+		str+="<thead>"
 		str+="<tr>";
 		str+="<th>직원번호</th>";
 		str+="<th>이름</th>";
 		str+="<th>핸드폰</th>";
 		str+="<th>이메일</th>";
-		str+="<th>담당학과</th>";
 		str+="<th></th>";
 		str+="</tr>";
+		str+="</thead>";
+		str+="<tbody>";
 		$.each(employeeList,function(key,value){
 			
 			str+="<tr>";
@@ -182,17 +192,17 @@ var employeeList=function(data){
 			str+="<td>"+value.employeeName+"</td>";
 			str+="<td>"+value.phone+"</td>";
 			str+="<td>"+value.email+"</td>";
-			str+="<td>"+value.departmentName+"</td>";
-			str+="<td><input type='button' id="+value.employeeId+" class='btn btn-default employeeDelete' value='삭제'>";
+			str+="<td><input type='button' uid="+value.employeeId+" class='btn btn-default employeeDelete' value='삭제'></td>";
 			str+="</tr>";
 		})
+		str+="</tbody>";
 		str+="</table>";
 		
 		$('#userManagementContainer').html(str);
 		
 		$('.employeeDelete').click(function(){
 			if(confirm('삭제하시겠습니까')){
-				var id=$(this).attr('id');
+				var id=$(this).attr('uid');
 				requestJsonData("userDelete.ajax",{uid:id},employeeDelete);
 			}
 		})

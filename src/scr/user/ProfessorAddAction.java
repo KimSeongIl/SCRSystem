@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import scr.action.AjaxAction;
 import scr.dao.ProfessorDAO;
@@ -19,7 +20,10 @@ public class ProfessorAddAction implements AjaxAction{
 		if(!"POST".equals(request.getMethod())){
 			return JsonUtil.putFailJsonContainer("ProfessorAddAction NotPost 001", "비정상적인 접근방식입니다");
 		}
-
+		HttpSession session=request.getSession();
+		if(!"관리자".equals(session.getAttribute("auth"))){
+			return JsonUtil.putFailJsonContainer("ProfessorAddAction NoSession", "권한이 없습니다.");
+		}
 		int professorId=Integer.parseInt(request.getParameter("professorId"));
 		String professorName=request.getParameter("professorName");
 		int officeNo=0;

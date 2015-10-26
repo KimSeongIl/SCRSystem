@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scr.conn.Conn;
-import scr.dto.EmployeeDTO;
 import scr.dto.ProfessorDTO;
-import scr.dto.UserDTO;
 import scr.util.AES256Util;
 
 public class ProfessorDAO {

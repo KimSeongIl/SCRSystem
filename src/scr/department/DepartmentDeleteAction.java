@@ -1,6 +1,5 @@
-package scr.user;
+package scr.department;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,11 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import scr.action.AjaxAction;
-import scr.dao.UserDAO;
-import scr.dto.UserDTO;
+import scr.dao.DepartmentDAO;
+import scr.dto.DepartmentDTO;
 import scr.util.JsonUtil;
 
-public class UserDeleteAction implements AjaxAction{
+public class DepartmentDeleteAction implements AjaxAction{
 
 	public Map<String,Object> responseBody(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 
@@ -23,15 +22,13 @@ public class UserDeleteAction implements AjaxAction{
 		if(!"관리자".equals(session.getAttribute("auth"))){
 			return JsonUtil.putFailJsonContainer("UserDeleteAction NoSession", "권한이 없습니다.");
 		}
-		int uid=Integer.parseInt(request.getParameter("uid"));
-
-		UserDTO user=new UserDTO();
-		user.setUid(uid);
 		
-		UserDAO userDao=UserDAO.getInstance();
-		boolean result=userDao.userDelete(user);
-		Map<String,Object> param=new HashMap<>();
-		param.put("deleted", result);
-		return JsonUtil.putSuccessJsonContainer(param);
+		int did=Integer.parseInt(request.getParameter("did"));
+		DepartmentDTO department=new DepartmentDTO();
+		department.setDepartmentId(did);
+		DepartmentDAO departmentDao=DepartmentDAO.getInstance();
+		departmentDao.departmentDelete(department);
+		
+		return JsonUtil.putSuccessJsonContainer(null);
 	}
 }

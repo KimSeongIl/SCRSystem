@@ -26,7 +26,7 @@
 				</c:when>
 				<c:when test="${sessionScope.auth eq \"관리자\" }">
 					<li onclick="location.href='userManagement.do'">회원관리</li>
-					<li>학과관리</li>
+					<li onclick="location.href='departmentManagement.do'">학과관리</li>
 					<li>상담관리</li>
 					<li>게시판관리</li>
 				</c:when>

@@ -25,10 +25,7 @@ public class EmployeeDAO {
 		List<EmployeeDTO> list=new ArrayList<EmployeeDTO>();
 		try(
 				Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select employee_id,employee_name,phone,email,"
-						+ "ifnull((select department_id from department where employee_id=employee.employee_id),0) \"department_id\", "
-						+ "ifnull((select department_name from department where employee_id=employee.employee_id),'없음') \"department\" "
-						+ " from employee order by employee_id")){
+				PreparedStatement pstmt=conn.prepareStatement("select employee_id,employee_name,phone,email from employee order by employee_id")){
 			try(ResultSet rs=pstmt.executeQuery();){
 				
 				AES256Util util=new AES256Util();
@@ -39,8 +36,7 @@ public class EmployeeDAO {
 						employee.setEmployeeName(rs.getString("employee_name"));
 						employee.setPhone(util.decrypt(rs.getString("phone")));
 						employee.setEmail(util.decrypt(rs.getString("email")));
-						employee.setDepartmentId(rs.getInt("department_id"));
-						employee.setDepartmentName(rs.getString("department"));
+						
 						list.add(employee);
 					}while(rs.next());
 				}
