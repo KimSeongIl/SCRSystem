@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.*;
 
 import scr.conn.Conn;
-import scr.dto.EmployeeDTO;
 import scr.dto.StudentDTO;
 import scr.util.AES256Util;
 
@@ -47,21 +46,17 @@ public class StudentDAO {
 		}
 	}
 	
-	public List<StudentDTO> studentList(EmployeeDTO check){
+	public List<StudentDTO> studentList(){
 		List<StudentDTO> list=new ArrayList<>();
-		String where="";
-		if(check!=null){
-			where=" where department_id=?";
-		}
+		
+		
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select student_id,name,email,phone,department_id,"
 						+ "(select department_name from department where department_id=student.department_Id) \"department\",minor_id,"
 						+ "ifnull((select department_name from department where department_id=minor_id),'없음') \"minor\",double_major_id,"
-						+ "ifnull((select department_name from department where department_id=double_major_Id),'없음') \"double_major\",status from student "+where+" order by student_id");){
-			if(check!=null){
-				pstmt.setInt(1, check.getDepartmentId());
-			}
+						+ "ifnull((select department_name from department where department_id=double_major_Id),'없음') \"double_major\",status from student order by student_id");){
+			
 			try(ResultSet rs=pstmt.executeQuery();){
 				AES256Util util=new AES256Util();
 				

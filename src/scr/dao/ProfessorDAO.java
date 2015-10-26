@@ -24,20 +24,16 @@ public class ProfessorDAO {
 		return instance;
 	}
 
-	public List<ProfessorDTO> professorList(EmployeeDTO check){
+	public List<ProfessorDTO> professorList(){
 		List<ProfessorDTO> list=new ArrayList<>();
-		String where="";
-		if(check!=null){
-			where=" where department_id=?";
-		}
+		
+		
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,office_no,office_tel,phone,email,department_id,"
 						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\" "
-						+ " from professor "+where+" order by professor_id");){
-			if(check!=null){
-				pstmt.setInt(1, check.getDepartmentId());
-			}
+						+ " from professor order by professor_id");){
+			
 			try(ResultSet rs=pstmt.executeQuery();){
 				AES256Util util=new AES256Util();
 
@@ -143,17 +139,7 @@ public class ProfessorDAO {
 			e.printStackTrace();
 		}
 	}
-	public void professorDelete(UserDTO user){
-		try(
-				Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("delete from professor where professor_id=?");){
-
-			pstmt.setInt(1, user.getUid());
-			pstmt.executeUpdate();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
+	
 
 	public int matchEmail(ProfessorDTO professor){
 

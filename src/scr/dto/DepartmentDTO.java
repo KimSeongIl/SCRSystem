@@ -6,6 +6,7 @@ public class DepartmentDTO {
 	private String departmentName;
 	private String officeNo;
 	private String officeTel;
+	private int employeeId;
 	
 	public void setDepartmentId(int departmentId){
 		this.departmentId=departmentId;
@@ -30,5 +31,11 @@ public class DepartmentDTO {
 	}
 	public String getOfficeTel(){
 		return officeTel;
+	}
+	public void setEmployeeId(int employeeId){
+		this.employeeId=employeeId;
+	}
+	public int getEmployeeId(){
+		return employeeId;
 	}
 }

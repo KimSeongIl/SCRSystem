@@ -6,7 +6,7 @@
 <c:if test="${\"직원\" ne sessionScope.auth && \"관리자\" ne sessionScope.auth}">
 	<script>
 		alert('권한이 없습니다');
-		history.back();
+		location.href="login.do";
 	</script>
 </c:if>
 
@@ -20,10 +20,8 @@
 	<ul class="nav nav-tabs" id="userManagementMenu">
   		<li role="presentation" class="active" id="studentList"><a href="#">학생</a></li>
   		<li role="presentation" id="professorList"><a href="#">교수</a></li>
-  		
-<c:if test="${\"관리자\" eq sessionScope.auth }">
   		<li role="presentation" id="employeeList"><a href="#">직원</a></li>
-</c:if>
+
 	</ul>
 	
 	<div id="userManagementContainer">
@@ -39,6 +37,72 @@
 
 
 
+<div id="employeeModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">x</button>
+					<h2>직원 추가</h2>
+				</div>
+				<div class="modal-body">
+					<div class="col-sm-offset-5 col-sm-10">
+						<label class="col-sm-8" id="generNum"> </label>
+					</div>
+					<form class="form-horizontal" id="employeeAddForm" method="post">
+					
+						<div class="form-group">
+							<label class="col-sm-3 control-label">직원 번호</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" name="employeeId"
+									placeholder="Id.." required>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-3 control-label">직원 이름</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" name="employeeName"
+									placeholder="Name.." required>
+							</div>
+						</div>
+						
+						
+						<div class="form-group">
+							<label class="col-sm-3 control-label">핸드폰</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" name="phone"
+									placeholder="Phone.." required>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-3 control-label">이메일</label>
+							<div class="col-sm-8">
+								<input type="email" class="form-control" name="email"
+									placeholder="Email.." required>
+							</div>
+						</div>
+						
+
+						<div class="form-group">
+							<div class="col-sm-offset-5 col-sm-10">
+								<button type="submit" class="btn btn-primary" id="employeeAddButton"
+						>직원 추가</button>
+							</div>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
 <div id="professorModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">

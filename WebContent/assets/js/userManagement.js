@@ -11,6 +11,18 @@ var professorAdd=function(data){
 		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
 	}
 }
+var employeeAdd=function(data){
+	if(data.result=="success"){
+		alert('추가되었습니다');
+		requestJsonData("employeeList.ajax",{},employeeList);
+		
+		$("#employeeModal").modal('hide');
+		$("#employeeModal .form-control").val('');
+		
+	}else{
+		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
+	}
+}
 
 var studentDelete=function(data){
 	
@@ -27,6 +39,21 @@ var professorDelete=function(data){
 	if(data.result=="success"){
 		alert('삭제되었습니다');
 		requestJsonData("professorList.ajax",{},professorList);
+	}else{
+		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
+	}
+}
+
+var employeeDelete=function(data){
+	
+	if(data.result=="success"){
+		var deleted=data.resData[0].deleted;
+		if(deleted){
+			alert('삭제되었습니다');
+		}else{
+			alert('소속 학과가 있어서 지울수 없습니다');
+		}
+		requestJsonData("employeeList.ajax",{},employeeList);
 	}else{
 		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
 	}
@@ -70,7 +97,7 @@ var studentList=function(data){
 		$('.studentDelete').click(function(){
 			if(confirm('삭제하시겠습니까')){
 				var id=$(this).attr('id');
-				requestJsonData("studentDelete.ajax",{uid:id},studentDelete);
+				requestJsonData("UserDelete.ajax",{uid:id},studentDelete);
 			}
 		})
 	}else{
@@ -125,7 +152,48 @@ var professorList=function(data){
 		$('.professorDelete').click(function(){
 			if(confirm('삭제하시겠습니까')){
 				var id=$(this).attr('id');
-				requestJsonData("professorDelete.ajax",{uid:id},professorDelete);
+				requestJsonData("UserDelete.ajax",{uid:id},professorDelete);
+			}
+		})
+	}else{
+		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
+	}
+}
+var employeeList=function(data){
+	if(data.result=="success"){
+		var employeeList=data.resData[0].employeeList;
+		
+		var str="<div id='addBtnDiv'>";
+		str+="<input type='button' class='btn btn-primary' href='#employeeModal' data-toggle='modal' value='직원 추가'>";
+		str+="</div>";
+		str+="<table class='table'>";
+		str+="<tr>";
+		str+="<th>직원번호</th>";
+		str+="<th>이름</th>";
+		str+="<th>핸드폰</th>";
+		str+="<th>이메일</th>";
+		str+="<th>담당학과</th>";
+		str+="<th></th>";
+		str+="</tr>";
+		$.each(employeeList,function(key,value){
+			
+			str+="<tr>";
+			str+="<td>"+value.employeeId+"</td>";
+			str+="<td>"+value.employeeName+"</td>";
+			str+="<td>"+value.phone+"</td>";
+			str+="<td>"+value.email+"</td>";
+			str+="<td>"+value.departmentName+"</td>";
+			str+="<td><input type='button' id="+value.employeeId+" class='btn btn-default employeeDelete' value='삭제'>";
+			str+="</tr>";
+		})
+		str+="</table>";
+		
+		$('#userManagementContainer').html(str);
+		
+		$('.employeeDelete').click(function(){
+			if(confirm('삭제하시겠습니까')){
+				var id=$(this).attr('id');
+				requestJsonData("userDelete.ajax",{uid:id},employeeDelete);
 			}
 		})
 	}else{
@@ -197,9 +265,9 @@ $(document).ready(function(){
 	
 	$('#professorAddForm').submit(function(){
 		var professorId=$('#professorAddForm input[name=professorId]').val();
-		var professorName=$('#professorAddForm input[name=professorName').val();
-		var officeNo=$('#professorAddForm input[name=officeNo').val();
-		var officeTel=$('#professorAddForm input[name=officeTel').val();
+		var professorName=$('#professorAddForm input[name=professorName]').val();
+		var officeNo=$('#professorAddForm input[name=officeNo]').val();
+		var officeTel=$('#professorAddForm input[name=officeTel]').val();
 		var phone=$('#professorAddForm input[name=phone]').val();
 		var email=$('#professorAddForm input[name=email]').val();
 		var departmentId=$('#professorAddForm select[name=departmentId]').val();
@@ -222,5 +290,21 @@ $(document).ready(function(){
 		
 		return false;
 		
+	})
+	
+	$('#employeeAddForm').submit(function(){
+		var employeeId=$('#employeeAddForm input[name=employeeId]').val();
+		var employeeName=$('#employeeAddForm input[name=employeeName]').val();
+		var phone=$('#employeeAddForm input[name=phone]').val();
+		var email=$('#employeeAddForm input[name=email]').val();
+		
+		requestJsonData("employeeAdd.ajax",{
+			employeeId:employeeId,
+			employeeName:employeeName,
+			phone:phone,
+			email:email
+		},employeeAdd);
+		
+		return false;
 	})
 })

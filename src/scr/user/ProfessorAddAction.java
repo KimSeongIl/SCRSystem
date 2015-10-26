@@ -17,7 +17,7 @@ public class ProfessorAddAction implements AjaxAction{
 	public Map<String,Object> responseBody(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		request.setCharacterEncoding("UTF-8");
 		if(!"POST".equals(request.getMethod())){
-			return JsonUtil.putFailJsonContainer("ProfessorDeleteAction NotPost 001", "비정상적인 접근방식입니다");
+			return JsonUtil.putFailJsonContainer("ProfessorAddAction NotPost 001", "비정상적인 접근방식입니다");
 		}
 
 		int professorId=Integer.parseInt(request.getParameter("professorId"));
