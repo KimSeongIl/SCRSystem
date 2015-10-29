@@ -34,8 +34,15 @@ var professorList=function(data){
 		
 		$('.professorPage').click(function(){
 			thisPage=$(this).attr('page');
+			var category=data.resData[0].category;
+			if(category==undefined){
+				requestJsonData("professorList.ajax",{page:thisPage},professorList);
+			}
+			else{
+				var content=data.resData[0].content;
+				requestJsonDataGet("professorList.ajax",{page:thisPage,category:category,content:content},professorList);
+			}
 			
-			requestJsonData("professorList.ajax",{page:thisPage},professorList);
 		})
 		
 	}else{
@@ -48,4 +55,22 @@ var professorList=function(data){
 $(document).ready(function(){
 	thisPage=1;
 	requestJsonData("professorList.ajax",{page:thisPage},professorList);
+	
+	$('#professorSearch').submit(function(){
+		
+		var category=$('#searchCategory').val();
+		var content=$('#searchContent').val().trim();
+		thisPage=1;
+		requestJsonDataGet("professorList.ajax",{page:thisPage,category:category,content:content},professorList);
+		return false;
+	})
+	
+	$('#searchBtn').click(function(){
+		if($('#searchContent').val().trim()==""){
+			thisPage=1;
+			requestJsonData("professorList.ajax",{page:thisPage},professorList);
+			return false;
+		}
+	})
+	
 })

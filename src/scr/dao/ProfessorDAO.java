@@ -21,15 +21,15 @@ public class ProfessorDAO {
 	public static ProfessorDAO getInstance(){
 		return instance;
 	}
-	
+
 	public double professorCount(){
-		
+
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select count(*) \"count\" from professor");){
-			
+
 			try(ResultSet rs=pstmt.executeQuery();){
-				
+
 				if(rs.next()){
 					return rs.getInt("count");
 				}
@@ -39,20 +39,156 @@ public class ProfessorDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
+
 		return 0;
 	}
 
+	public double professorSearchCountByProfessor(String content){
+
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) \"count\" from professor where professor_name like concat ('%', ?, '%') ");){
+
+			pstmt.setString(1, content);
+
+			try(ResultSet rs=pstmt.executeQuery();){
+
+				if(rs.next()){
+					return rs.getInt("count");
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+
+	public double professorSearchCountByDepartment(String content){
+
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) \"count\" from professor where department_id in (select department_id from department where department_name like concat ('%', ?, '%') ) or professor_id in (select professor_id from pro_dept where department_id in (select department_id from department where department_name like concat ('%', ?, '%') ));");){
+
+			pstmt.setString(1, content);
+			pstmt.setString(2, content);
+
+			try(ResultSet rs=pstmt.executeQuery();){
+
+				if(rs.next()){
+					return rs.getInt("count");
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+	
+	
+	public List<ProfessorDTO> professorSearchListByProfessor(int start,int limit,String content){
+		List<ProfessorDTO> list=new ArrayList<>();
+
+
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,department_id,"
+						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\" "
+						+ " from professor where professor_name like concat ('%', ?, '%')  order by department_id,professor_id limit ?,?");){
+
+			pstmt.setString(1, content);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, limit);
+			
+			try(ResultSet rs=pstmt.executeQuery();){
+				
+
+				if(rs.next()){
+					do{
+
+						ProfessorDTO professor=new ProfessorDTO();
+
+						professor.setProfessorId(rs.getInt("professor_id"));
+						professor.setProfessorName(rs.getString("professor_name"));
+						professor.setDepartmentId(rs.getInt("department_id"));
+						professor.setDepartmentName(rs.getString("department"));
+
+
+						list.add(professor);
+
+					}while(rs.next());
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	public List<ProfessorDTO> professorSearchListByDepartment(int start,int limit,String content){
+		List<ProfessorDTO> list=new ArrayList<>();
+
+
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,department_id,"
+						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\" "
+						+ " from professor where department_id in (select department_id from department where department_name like concat ('%', ?, '%')) or professor_id in (select professor_id from pro_dept where department_id in (select department_id from department where department_name like concat ('%', ?, '%'))) order by department_id,professor_id limit ?,?");){
+
+			pstmt.setString(1, content);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, limit);
+			
+			try(ResultSet rs=pstmt.executeQuery();){
+				
+
+				if(rs.next()){
+					do{
+
+						ProfessorDTO professor=new ProfessorDTO();
+
+						professor.setProfessorId(rs.getInt("professor_id"));
+						professor.setProfessorName(rs.getString("professor_name"));
+						professor.setDepartmentId(rs.getInt("department_id"));
+						professor.setDepartmentName(rs.getString("department"));
+
+
+						list.add(professor);
+
+					}while(rs.next());
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 	public List<ProfessorDTO> professorList(int start,int limit){
 		List<ProfessorDTO> list=new ArrayList<>();
-		
-		
+
+
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,office_no,office_tel,phone,email,department_id,"
 						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\" "
 						+ " from professor order by department_id,professor_id limit ?,?");){
-			
+
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, limit);
 			try(ResultSet rs=pstmt.executeQuery();){
@@ -160,7 +296,7 @@ public class ProfessorDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 
 	public int matchEmail(ProfessorDTO professor){
 
