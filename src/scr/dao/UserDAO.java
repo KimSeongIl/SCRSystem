@@ -37,50 +37,7 @@ public class UserDAO {
 		}
 	    
 	}
-	public void studentInfoAdd(StudentDTO student) {
-
-		String column="student_id,name,email,phone,department_id";
-		String param="?,?,?,?,?,?";
-		String query;
-		
-		if(student.getMinorId()!=0){
-			param+=",?";
-			column+=",minor_id";
-			
-			
-		}
-			
-		if(student.getDoubleMajorId()!=0){
-			param+=",?";
-			column+=",double_major_id";
-			
-		}
-		column+=",status";
-		query="insert into student("+column+") values("+param+")";
-		
 	
-		
-		try(
-			Connection conn=Conn.getConnection();
-			
-			PreparedStatement pstmt=conn.prepareStatement(query);){
-
-			AES256Util util=new AES256Util();
-			pstmt.setInt(1, student.getStudentId());
-			pstmt.setString(2,student.getName());
-			pstmt.setString(3, util.encrypt(student.getEmail()));
-			pstmt.setString(4,util.encrypt(student.getPhone()));
-			pstmt.setInt(5,student.getDepartmentId());
-			pstmt.setInt(6, student.getMinorId());
-			pstmt.setInt(7, student.getDoubleMajorId());
-			pstmt.setString(8, student.getStatus());
-			pstmt.executeUpdate();
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}
 	
 	
 	public UserDTO login(UserDTO user){

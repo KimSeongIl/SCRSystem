@@ -21,6 +21,70 @@ public class StudentDAO {
 		return instance;
 	}
 	
+	public double studentCount(){
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) \"count\" from student");){
+			
+			try(ResultSet rs=pstmt.executeQuery();){
+				
+				if(rs.next()){
+					return rs.getInt("count");
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	public void studentAdd(StudentDTO student) {
+
+		String column="student_id,name,email,phone,department_id";
+		String param="?,?,?,?,?,?";
+		String query;
+		
+		if(student.getMinorId()!=0){
+			param+=",?";
+			column+=",minor_id";
+			
+			
+		}
+			
+		if(student.getDoubleMajorId()!=0){
+			param+=",?";
+			column+=",double_major_id";
+			
+		}
+		column+=",status";
+		query="insert into student("+column+") values("+param+")";
+		
+	
+		
+		try(
+			Connection conn=Conn.getConnection();
+			
+			PreparedStatement pstmt=conn.prepareStatement(query);){
+
+			AES256Util util=new AES256Util();
+			pstmt.setInt(1, student.getStudentId());
+			pstmt.setString(2,student.getName());
+			pstmt.setString(3, util.encrypt(student.getEmail()));
+			pstmt.setString(4,util.encrypt(student.getPhone()));
+			pstmt.setInt(5,student.getDepartmentId());
+			pstmt.setInt(6, student.getMinorId());
+			pstmt.setInt(7, student.getDoubleMajorId());
+			pstmt.setString(8, student.getStatus());
+			pstmt.executeUpdate();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public int matchEmail(StudentDTO student){
 		
 		try(
@@ -46,7 +110,7 @@ public class StudentDAO {
 		}
 	}
 	
-	public List<StudentDTO> studentList(){
+	public List<StudentDTO> studentList(int start,int limit){
 		List<StudentDTO> list=new ArrayList<>();
 		
 		
@@ -55,7 +119,9 @@ public class StudentDAO {
 				PreparedStatement pstmt=conn.prepareStatement("select student_id,name,email,phone,department_id,"
 						+ "(select department_name from department where department_id=student.department_Id) \"department\",minor_id,"
 						+ "ifnull((select department_name from department where department_id=minor_id),'없음') \"minor\",double_major_id,"
-						+ "ifnull((select department_name from department where department_id=double_major_Id),'없음') \"double_major\",status from student order by student_id");){
+						+ "ifnull((select department_name from department where department_id=double_major_Id),'없음') \"double_major\",status from student order by department_id,student_id limit ?,?");){
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, limit);
 			
 			try(ResultSet rs=pstmt.executeQuery();){
 				AES256Util util=new AES256Util();

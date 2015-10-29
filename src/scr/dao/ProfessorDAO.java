@@ -21,8 +21,29 @@ public class ProfessorDAO {
 	public static ProfessorDAO getInstance(){
 		return instance;
 	}
+	
+	public double professorCount(){
+		
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) \"count\" from professor");){
+			
+			try(ResultSet rs=pstmt.executeQuery();){
+				
+				if(rs.next()){
+					return rs.getInt("count");
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
 
-	public List<ProfessorDTO> professorList(){
+	public List<ProfessorDTO> professorList(int start,int limit){
 		List<ProfessorDTO> list=new ArrayList<>();
 		
 		
@@ -30,8 +51,10 @@ public class ProfessorDAO {
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,office_no,office_tel,phone,email,department_id,"
 						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\" "
-						+ " from professor order by professor_id");){
+						+ " from professor order by department_id,professor_id limit ?,?");){
 			
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, limit);
 			try(ResultSet rs=pstmt.executeQuery();){
 				AES256Util util=new AES256Util();
 

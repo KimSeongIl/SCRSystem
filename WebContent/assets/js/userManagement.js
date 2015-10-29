@@ -1,8 +1,10 @@
+var thisPage;
+
 var professorAdd=function(data){
 	
 	if(data.result=="success"){
 		alert('추가되었습니다');
-		requestJsonData("professorList.ajax",{},professorList);
+		requestJsonData("professorList.ajax",{page:thisPage},professorList);
 		
 		$("#professorModal").modal('hide');
 		$("#professorModal .form-control").val('');
@@ -14,7 +16,7 @@ var professorAdd=function(data){
 var employeeAdd=function(data){
 	if(data.result=="success"){
 		alert('추가되었습니다');
-		requestJsonData("employeeList.ajax",{},employeeList);
+		requestJsonData("employeeList.ajax",{page:thisPage},employeeList);
 		
 		$("#employeeModal").modal('hide');
 		$("#employeeModal .form-control").val('');
@@ -28,7 +30,7 @@ var studentDelete=function(data){
 	
 	if(data.result=="success"){
 		alert('삭제되었습니다');
-		requestJsonData("studentList.ajax",{},studentList);
+		requestJsonData("studentList.ajax",{page:thisPage},studentList);
 	}else{
 		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
 	}
@@ -38,7 +40,7 @@ var professorDelete=function(data){
 	
 	if(data.result=="success"){
 		alert('삭제되었습니다');
-		requestJsonData("professorList.ajax",{},professorList);
+		requestJsonData("professorList.ajax",{page:thisPage},professorList);
 	}else{
 		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
 	}
@@ -53,7 +55,7 @@ var employeeDelete=function(data){
 		}else{
 			alert('소속 학과가 있어서 지울수 없습니다');
 		}
-		requestJsonData("employeeList.ajax",{},employeeList);
+		requestJsonData("employeeList.ajax",{page:thisPage},employeeList);
 	}else{
 		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
 	}
@@ -96,12 +98,19 @@ var studentList=function(data){
 		str+="</tbody>";
 		str+="</table>";
 		
+		var pageCount=data.resData[0].pageCount;
+		str+=pagination(pageCount,thisPage,"studentPage");
 		$('#userManagementContainer').html(str);
 		
+		$('.studentPage').click(function(){
+			thisPage=$(this).attr('page');
+			
+			requestJsonData("studentList.ajax",{page:thisPage},studentList);
+		})
 		$('.studentDelete').click(function(){
 			if(confirm('삭제하시겠습니까')){
 				var id=$(this).attr('uid');
-				requestJsonData("UserDelete.ajax",{uid:id},studentDelete);
+				requestJsonData("userDelete.ajax",{uid:id},studentDelete);
 			}
 		})
 	}else{
@@ -114,7 +123,8 @@ var studentList=function(data){
 var professorList=function(data){
 	
 	if(data.result=="success"){
-		var professorList=data.resData[0].professorList;
+		
+		var list=data.resData[0].professorList;
 		
 		var str="<div id='addBtnDiv'>";
 		str+="<input type='button' class='btn btn-primary' href='#professorModal' data-toggle='modal' value='교수 추가'>";
@@ -133,7 +143,7 @@ var professorList=function(data){
 		str+="</tr>";
 		str+="</thead>";
 		str+="<tbody>";
-		$.each(professorList,function(key,value){
+		$.each(list,function(key,value){
 			
 			str+="<tr>";
 			str+="<td>"+value.professorId+"</td>";
@@ -155,12 +165,20 @@ var professorList=function(data){
 		str+="</tbody>";
 		str+="</table>";
 		
+		var pageCount=data.resData[0].pageCount;
+		str+=pagination(pageCount,thisPage,"professorPage");
 		$('#userManagementContainer').html(str);
+		
+		$('.professorPage').click(function(){
+			thisPage=$(this).attr('page');
+			
+			requestJsonData("professorList.ajax",{page:thisPage},professorList);
+		})
 		
 		$('.professorDelete').click(function(){
 			if(confirm('삭제하시겠습니까')){
 				var id=$(this).attr('uid');
-				requestJsonData("UserDelete.ajax",{uid:id},professorDelete);
+				requestJsonData("userDelete.ajax",{uid:id},professorDelete);
 			}
 		})
 	}else{
@@ -198,8 +216,15 @@ var employeeList=function(data){
 		str+="</tbody>";
 		str+="</table>";
 		
+		var pageCount=data.resData[0].pageCount;
+		str+=pagination(pageCount,thisPage,"employeePage");
 		$('#userManagementContainer').html(str);
 		
+		$('.employeePage').click(function(){
+			thisPage=$(this).attr('page');
+			
+			requestJsonData("employeeList.ajax",{page:thisPage},employeeList);
+		})
 		$('.employeeDelete').click(function(){
 			if(confirm('삭제하시겠습니까')){
 				var id=$(this).attr('uid');
@@ -212,13 +237,15 @@ var employeeList=function(data){
 }
 
 $(document).ready(function(){
-	
-	requestJsonData("studentList.ajax",{},studentList);
+	thisPage=1;
+	requestJsonData("studentList.ajax",{page:thisPage},studentList);
 	$('#studentList').click(function(){
 		if($(this).attr('class')!='active'){
 			$(this).parent().find('.active').removeClass('active');
 			$(this).addClass('active');
-			requestJsonData("studentList.ajax",{},studentList);
+			thisPage=1;
+			requestJsonData("studentList.ajax",{page:thisPage},studentList);
+			
 		}
 		
 	})
@@ -227,7 +254,9 @@ $(document).ready(function(){
 		if($(this).attr('class')!='active'){
 			$(this).parent().find('.active').removeClass('active');
 			$(this).addClass('active');
-			requestJsonData("professorList.ajax",{},professorList);
+			thisPage=1;
+			
+			requestJsonData("professorList.ajax",{page:thisPage},professorList);
 			
 		}
 	})
@@ -236,7 +265,8 @@ $(document).ready(function(){
 		if($(this).attr('class')!='active'){
 			$(this).parent().find('.active').removeClass('active');
 			$(this).addClass('active');
-			requestJsonData("employeeList.ajax",{},employeeList);
+			thisPage=1;
+			requestJsonData("employeeList.ajax",{page:thisPage},employeeList);
 			
 		}
 	})
@@ -271,6 +301,9 @@ $(document).ready(function(){
 		
 		$(this).parent().remove();
 	})
+	
+	
+	
 	
 	
 	$('#professorAddForm').submit(function(){

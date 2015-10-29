@@ -24,12 +24,20 @@ public class EmployeeListAction implements AjaxAction{
 		}
 		List<EmployeeDTO> list=null;
 		
+		
+		
 		EmployeeDAO employeeDao=EmployeeDAO.getInstance();
-		list=employeeDao.employeeList();
+		
+		int page=Integer.parseInt(request.getParameter("page"));
+		double count=employeeDao.employeeCount();
+		
+		int limit=5;
+		double pageCount=count/limit;
+		list=employeeDao.employeeList((page-1)*limit,limit);
 		
 		Map<String,Object> param=new HashMap<String,Object>();
 		param.put("employeeList", list);
-		
+		param.put("pageCount", Math.ceil(pageCount));
 		
 		return JsonUtil.putSuccessJsonContainer(param);
 	}

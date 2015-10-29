@@ -23,15 +23,24 @@ public class ProfessorListAction implements AjaxAction{
 			return JsonUtil.putFailJsonContainer("ProfessorListAction NoSession", "권한이 없습니다.");
 		}
 		
+		
 		List<ProfessorDTO> list=null;
 		ProfessorDAO professorDao=ProfessorDAO.getInstance();
 		
-		list=professorDao.professorList();
+		int page=Integer.parseInt(request.getParameter("page"));
+		double count=professorDao.professorCount();
+		
+		int limit=5;
+		double pageCount=count/limit;
+
+		
+		list=professorDao.professorList((page-1)*limit,limit);
+		
 		
 		
 		Map<String,Object> param=new HashMap<String,Object>();
 		param.put("professorList", list);
-		
+		param.put("pageCount", Math.ceil(pageCount));
 		return JsonUtil.putSuccessJsonContainer(param);
 	}
 }

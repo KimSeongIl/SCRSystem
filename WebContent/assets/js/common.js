@@ -1,4 +1,39 @@
-function requestJsonData(requestUrl, requestParam, successFunction) {
+var pagination=function(pageCount,thisPage,eventName){
+	var str="";
+	str+="<div class='paginationContainer'>";
+	str+="<ul class='pagination'>";
+	
+	
+	if(pageCount>=1){
+		
+		var currentPage=Math.floor((thisPage-1)/5);
+		
+		if(currentPage!=0){
+			str+="<li class="+eventName+" page="+((currentPage-1)*5+1)+"><a aria-label='Previous' ><span aria-hidden='true'>&laquo;</span></a></li>";
+		}
+		
+		
+		var disabled=thisPage==1? 'disabled' : eventName;
+		
+		str+="<li class="+disabled+" page="+(Number(thisPage)-1)+"><a aria-label='Previous' ><span aria-hidden='true'>이전</span></a></li>";
+		for(var i=(currentPage*5+1);i<=(currentPage*5+5);i++){
+			
+			if(i<=pageCount)
+				str+="<li class='"+(thisPage==i? 'active' : eventName)+" ' page="+i+"><a>"+i+"</a></li>";
+		}
+		disabled=thisPage==pageCount? 'disabled' : eventName;
+		str+="<li class="+disabled+" page="+(Number(thisPage)+1)+"> <a aria-label='Next'><span aria-hidden='true'>다음</span></a></li>";
+		if(Math.floor(pageCount/5)!=currentPage){
+			str+="<li class="+eventName+" page="+((currentPage+1)*5+1)+"><a aria-label='Previous' ><span aria-hidden='true'>&raquo;</span></a></li>";
+		}
+	}
+		
+	str+="</ul>";
+	str+="</div>";
+	return str;
+}
+
+var requestJsonData=function (requestUrl, requestParam, successFunction) {
 	$.ajax({
 		url : requestUrl,
 		type : "POST",
@@ -25,7 +60,7 @@ function requestJsonData(requestUrl, requestParam, successFunction) {
 	
 }
 
-function requestJsonDataNoLoading(requestUrl, requestParam, successFunction) {
+var requestJsonDataNoLoading=function (requestUrl, requestParam, successFunction) {
 	$.ajax({
 		url : serverUrl + requestUrl,
 		type : "POST",

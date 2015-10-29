@@ -1,11 +1,21 @@
+var thisPage;
 var professorList=function(data){
 	
 	if(data.result=="success"){
-		var professorList=data.resData[0].professorList;
+		var list=data.resData[0].professorList;
 		
 		
 		var str="";
-		$.each(professorList,function(key,value){
+		str+="<table class='table table-hover'>";
+		str+="<thead>";
+		str+="<tr>";
+		str+="<th>교수번호</th>";
+		str+="<th>이름</th>";
+		str+="<th>학과</th>";
+		str+="</tr>";
+		str+="</thead>";
+		str+="<tbody>";
+		$.each(list,function(key,value){
 			
 			str+="<tr>";
 			str+="<td>"+value.professorId+"</td>";
@@ -13,10 +23,20 @@ var professorList=function(data){
 			str+="<td>"+value.departmentName+"</td>";
 			str+="</tr>";
 		})
+		str+="</tbody>";
+		str+="</table>";
+		
+		var pageCount=data.resData[0].pageCount;
 		
 		
-		$('#professorListContainer tbody').html(str);
+		str+=pagination(pageCount,thisPage,"professorPage");
+		$('#professorListContainer').html(str);
 		
+		$('.professorPage').click(function(){
+			thisPage=$(this).attr('page');
+			
+			requestJsonData("professorList.ajax",{page:thisPage},professorList);
+		})
 		
 	}else{
 		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
@@ -26,5 +46,6 @@ var professorList=function(data){
 
 
 $(document).ready(function(){
-	requestJsonData("professorList.ajax",{},professorList);
+	thisPage=1;
+	requestJsonData("professorList.ajax",{page:thisPage},professorList);
 })

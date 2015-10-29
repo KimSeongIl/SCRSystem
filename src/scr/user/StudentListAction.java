@@ -24,12 +24,17 @@ public class StudentListAction implements AjaxAction{
 		List<StudentDTO> list=null;
 		StudentDAO studentDao=StudentDAO.getInstance();
 		
-		list=studentDao.studentList();
+		int page=Integer.parseInt(request.getParameter("page"));
+		double count=studentDao.studentCount();
+		
+		int limit=5;
+		double pageCount=count/limit;
+		list=studentDao.studentList((page-1)*limit,limit);
 		
 		
 		Map<String,Object> param=new HashMap<String,Object>();
 		param.put("studentList", list);
-		
+		param.put("pageCount", Math.ceil(pageCount));
 		return JsonUtil.putSuccessJsonContainer(param);
 		
 	}
