@@ -110,7 +110,7 @@ public class AjaxController extends HttpServlet{
 				if(command.indexOf(request.getContextPath())==0){
 					command=command.substring(request.getContextPath().length()+1);
 				}
-				com=(AjaxAction)commandMap.get(command);
+				com=(AjaxAction)commandMap.get(command);//받아온값
 				
 				
 				result=com.responseBody(request,response);
@@ -121,7 +121,7 @@ public class AjaxController extends HttpServlet{
 			}
 			
 			response.setContentType("application/json;charset=UTF-8");
-			String json=new Gson().toJson(result);
+			String json=new Gson().toJson(result);//json 형식으로 변형 
 			PrintWriter out=response.getWriter();
 			out.println(json);
 			
