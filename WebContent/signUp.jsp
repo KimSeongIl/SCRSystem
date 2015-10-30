@@ -8,40 +8,35 @@
     
     <c:set var="department" value="${requestScope.department }"/>
     
-    
-    
-    
-    
-    
-    
 
 
 	<div id="article" >
+
 	<br>
 	
-	<form action="studentAdd.do" name="signupForm" id="signupForm" method="post" class="form-inline">
+	<form action="studentAdd.do" name="signupForm" id="signupForm" method="post" class="form-inline"  >
 	<div id="signUpTitle"><b>회원가입</b><br></div>
 	<hr>
   <table id="signUp">  
 	
    <tr>
            <td>이름</td>
-	<td><input type="text" class="form-control" placeholder="이름" name="uname"></td>
+	<td><input type="text" class="form-control" placeholder="이름" name="uname" required></td>
     </tr>
     
     <tr>    
           <td>학번</td>
-    <td><input type="text" class="form-control" placeholder="학번" name="uid"></td>      
+    <td><input type="number" class="form-control" placeholder="학번" name="uid" required></td>      
 	</tr>
 	
 	<tr>
 	<td>비밀번호</td>
-	<td><input type="password" class="form-control" placeholder="비밀번호" name="password"></td>
+	<td><input type="password" class="form-control" placeholder="비밀번호" name="password" required title="영어,숫자,특수문자 조합(6~12)" pattern="(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,12}"></td>
 	</tr>
 	
 	<tr>
 	<td>비번확인</td>
-	<td><input type="password" class="form-control" placeholder="비밀번호 확인" name="passwordConfirm"></td>
+	<td><input type="password" class="form-control" placeholder="비밀번호 확인" name="passwordConfirm" required></td>
 	</tr>
 	
 	<tr>
@@ -78,12 +73,12 @@
             
 	<tr>
            <td>핸드폰번호</td>
-    <td><input type="text" class="form-control" placeholder="-포함하여 입력하시오" name="phone"></td>
+    <td><input type="text" class="form-control" placeholder="-포함하여 입력하시오" name="phone" title="xxx-xxxx-xxxx" required pattern="(010|011)-\d{3,4}-\d{4}"></td>
     </tr>
     
     <tr>
            <td>이메일</td>
-    <td><input type="text" class="form-control" placeholder="이메일" name="email"><td>
+    <td><input type="email" class="form-control" placeholder="이메일" name="email" required><td>
     </tr>
     
     <tr>
@@ -101,7 +96,7 @@
 <hr>
 	
 
-<div id="joinBtn"><input type="submit" class="btn btn-primary" id="join" onclick="if(!signUp(this.form)){return false;}" value="가입하기"/></div>
+<div id="joinBtn"><input type="submit" class="btn btn-primary" id="join" value="가입하기"/></div>
 	
 	</form>
   

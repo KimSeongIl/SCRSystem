@@ -36,57 +36,8 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	    
-	    
-	    
-	    
 	}
-	public void studentInfoAdd(StudentDTO student) {
-		String column="student_id,name,email,phone,department_id";
-		String param="?,?,?,?,?,?";
-		String query;
-		int num1=0;
-		int num2=0;
-		if(student.getMinorId()!=0){
-			param+=",?";
-			column+=",minor_id";
-			num1++;
-			
-		}
-			
-		if(student.getDoubleMajorId()!=0){
-			param+=",?";
-			column+=",double_major_id";
-			num2++;
-		}
-		column+=",status";
-		query="insert into student("+column+") values("+param+")";
-		
 	
-		
-		try(
-			Connection conn=Conn.getConnection();
-			
-			PreparedStatement pstmt=conn.prepareStatement(query);){
-			AES256Util util=new AES256Util();
-			pstmt.setInt(1, student.getStudentId());
-			pstmt.setString(2,student.getName());
-			pstmt.setString(3, util.encrypt(student.getEmail()));
-			pstmt.setString(4,util.encrypt(student.getPhone()));
-			pstmt.setInt(5,student.getDepartmentId());
-			if(student.getMinorId()!=0)
-				pstmt.setInt(6, student.getMinorId());
-			
-			if(student.getDoubleMajorId()!=0)
-				pstmt.setInt(6+num1, student.getDoubleMajorId());
-			
-			pstmt.setString(6+num1+num2, student.getStatus());
-			pstmt.executeUpdate();
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}
 	
 	
 	public UserDTO login(UserDTO user){
@@ -115,9 +66,6 @@ public class UserDAO {
 		return dto;
 	}
 
-
-	
-	
 	public void setTempPassword(UserDTO user){
 		try(
 				Connection conn=Conn.getConnection();
@@ -132,7 +80,28 @@ public class UserDAO {
 		}
 	}
 	
-	public void userDelete(UserDTO user){
+
+public boolean passwordCheck(UserDTO user) {
+		boolean check = false;
+		try (
+			Connection conn=Conn.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement("select user_id from user where user_id=? and password=? ");){
+			pstmt.setInt(1, user.getUid());
+		    pstmt.setString(2, Sha256.encrypt(user.getPassword()));
+		    ResultSet rs=pstmt.executeQuery();
+		    if(rs.next()){		    	
+		    	check=true;
+		    }else{
+		    	
+		    	check=false;
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	   
+		return check;
+	}
+
+	public boolean userDelete(UserDTO user){
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("delete from user where user_id=?");){
@@ -140,10 +109,12 @@ public class UserDAO {
 			pstmt.setInt(1, user.getUid());
 			pstmt.executeUpdate();
 		}catch(Exception e){
-			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 	
+
 	
 	
 }

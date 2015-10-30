@@ -146,6 +146,14 @@ body{
 		width:1040px;
 		
 	}
+	.paginationContainer{
+		width:100%;
+		text-align:center;
+	}
+	
+	.pagination a{
+		cursor:pointer;
+	}
 	
 
 	

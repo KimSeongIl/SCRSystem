@@ -1,4 +1,8 @@
-﻿<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
 <div id="category">
 	<div id="notice">
@@ -6,26 +10,38 @@
 		<div id="noticeTitle">
 		</div>
 	</div>
-	<div id="online">
-		<div id="onlineTitle">
-		</div>
-		<div id="onlineContainer">
-			<div id="onlineContent">
-				<div id="onlineText">
+	<c:choose>
+		<c:when test="${empty sessionScope.auth || \"학생\" eq sessionScope.auth }">
+			<div id="online">
+				<div id="onlineTitle">
 				</div>
-				<div id="onlineBtn">
-					<input type="button" class="btn btn-default" value="온라인상담  >">
-				</div>
-			</div>
-			<div id="onlineImgContainer">
-				<div id="onlineImgMargin">
-				</div>
-				<div id="onlineImg">
-				</div>
-			</div>
+				<div id="onlineContainer">
+					<div id="onlineContent">
+						<div id="onlineText">
+						</div>
+						<div id="onlineBtn">
+							<input type="button" class="btn btn-default" value="온라인상담  >">
+						</div>
+					</div>
+					<div id="onlineImgContainer">
+						<div id="onlineImgMargin">
+						</div>
+						<div id="onlineImg">
+						</div>
+					</div>
 			
-		</div>
-	</div>
+				</div>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div id="download">
+		
+				<div id="downloadTitle">
+				</div>
+			</div>
+		</c:otherwise>
+	</c:choose>
+	
 	<div id="link">
 		<div id="linkTitle">
 		</div>

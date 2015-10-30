@@ -9,34 +9,32 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import scr.action.AjaxAction;
-import scr.dao.EmployeeDAO;
 import scr.dao.StudentDAO;
-import scr.dto.EmployeeDTO;
 import scr.dto.StudentDTO;
 import scr.util.JsonUtil;
 
 public class StudentListAction implements AjaxAction{
 	public Map<String,Object> responseBody(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		HttpSession session=request.getSession();
-		int uid=(int)session.getAttribute("uid");
+		
 		String auth=(String)session.getAttribute("auth");
+		if(!"관리자".equals(auth)){
+			return JsonUtil.putFailJsonContainer("ProfessorListAction NoSession", "권한이 없습니다.");
+		}
 		List<StudentDTO> list=null;
 		StudentDAO studentDao=StudentDAO.getInstance();
-		if("직원".equals(auth)){
-			EmployeeDTO employee=new EmployeeDTO();
-			employee.setEmployeeId(uid);
-			EmployeeDAO employeeDao=EmployeeDAO.getInstance();
-			EmployeeDTO departmentId=employeeDao.getDepartmentId(employee);
-			list=studentDao.studentList(departmentId);
-		}else if("관리자".equals(auth)){
-			list=studentDao.studentList(null);
-		}else{
-			return null;
-		}
+		
+		int page=Integer.parseInt(request.getParameter("page"));
+		double count=studentDao.studentCount();
+		
+		int limit=5;
+		double pageCount=count/limit;
+		list=studentDao.studentList((page-1)*limit,limit);
+		
 		
 		Map<String,Object> param=new HashMap<String,Object>();
 		param.put("studentList", list);
-		
+		param.put("pageCount", Math.ceil(pageCount));
 		return JsonUtil.putSuccessJsonContainer(param);
 		
 	}

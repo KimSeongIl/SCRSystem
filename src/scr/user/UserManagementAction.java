@@ -15,7 +15,7 @@ public class UserManagementAction implements CommandAction{
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		
 		DepartmentDAO department=DepartmentDAO.getInstance();
-		List<DepartmentDTO> list=(ArrayList<DepartmentDTO>)department.viewDepartment();
+		List<DepartmentDTO> list=(ArrayList<DepartmentDTO>)department.departmentList();
 		
 		request.setAttribute("departmentList", list);
 		return "userManagement.jsp";

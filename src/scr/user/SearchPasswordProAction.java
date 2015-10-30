@@ -6,11 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import scr.action.CommandAction;
+import scr.dao.EmployeeDAO;
+import scr.dao.ProfessorDAO;
 import scr.dao.StudentDAO;
 import scr.dao.UserDAO;
+import scr.dto.EmployeeDTO;
+import scr.dto.ProfessorDTO;
 import scr.dto.StudentDTO;
 import scr.dto.UserDTO;
-
 import scr.util.SendMail;
 
 public class SearchPasswordProAction implements CommandAction{
@@ -21,26 +24,36 @@ public class SearchPasswordProAction implements CommandAction{
 		String auth=request.getParameter("user");
 		int uid=Integer.parseInt(request.getParameter("uid"));
 		String uemail=request.getParameter("uemail");
+		int result=0;
 		if("학생".equals(auth)){
 			StudentDTO student=new StudentDTO();
 			student.setStudentId(uid);
 			student.setEmail(uemail);
 			StudentDAO studentDao=StudentDAO.getInstance();
-			int result=studentDao.matchEmail(student);
+			result=studentDao.matchEmail(student);
 			
-			if(result==2){
-				alert="<script>alert('정보가 맞지 않거나 오류가 발생했습니다');history.back();</script>";
-				request.setAttribute("alert", alert);
-				return "searchPasswordPro.jsp";
-			}
+			
 			
 		}else if("교수".equals(auth)){
+			ProfessorDTO professor=new ProfessorDTO();
+			professor.setProfessorId(uid);
+			professor.setEmail(uemail);
+			ProfessorDAO professorDao=ProfessorDAO.getInstance();
+			result=professorDao.matchEmail(professor);
 			
 		}else if("직원".equals(auth)){
-			
+			EmployeeDTO employee=new EmployeeDTO();
+			employee.setEmployeeId(uid);
+			employee.setEmail(uemail);
+			EmployeeDAO employeeDao=EmployeeDAO.getInstance();
+			result=employeeDao.matchEmail(employee);
 		}
 		
-		
+		if(result==2){
+			alert="<script>alert('정보가 맞지 않거나 오류가 발생했습니다');history.back();</script>";
+			request.setAttribute("alert", alert);
+			return "searchPasswordPro.jsp";
+		}
 		
 
 

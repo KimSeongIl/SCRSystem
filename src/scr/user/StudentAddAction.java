@@ -5,7 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import scr.action.CommandAction;
+import scr.dao.StudentDAO;
 import scr.dao.UserDAO;
 import scr.dto.*;
 
@@ -56,7 +58,8 @@ public class StudentAddAction implements CommandAction{
 		
 		UserDAO dao=UserDAO.getInstance();
 		dao.userAdd(user);
-		dao.studentInfoAdd(student);
+		StudentDAO studentDao=StudentDAO.getInstance();
+		studentDao.studentAdd(student);
 		return "main.jsp";
 	}
 }
