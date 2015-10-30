@@ -42,23 +42,25 @@ public class StudentDAO {
 	}
 	public void studentAdd(StudentDTO student) {
 
-		String column="student_id,name,email,phone,department_id";
+		String column="student_id,name,email,phone,department_id,status";
 		String param="?,?,?,?,?,?";
 		String query;
 		
+		int num1=0;
+		int num2=0;
 		if(student.getMinorId()!=0){
 			param+=",?";
 			column+=",minor_id";
-			
+			num1++;
 			
 		}
 			
 		if(student.getDoubleMajorId()!=0){
 			param+=",?";
 			column+=",double_major_id";
-			
+			num2++;
 		}
-		column+=",status";
+		
 		query="insert into student("+column+") values("+param+")";
 		
 	
@@ -74,9 +76,15 @@ public class StudentDAO {
 			pstmt.setString(3, util.encrypt(student.getEmail()));
 			pstmt.setString(4,util.encrypt(student.getPhone()));
 			pstmt.setInt(5,student.getDepartmentId());
-			pstmt.setInt(6, student.getMinorId());
-			pstmt.setInt(7, student.getDoubleMajorId());
-			pstmt.setString(8, student.getStatus());
+			pstmt.setString(6, student.getStatus());
+			if(student.getMinorId()!=0){
+				pstmt.setInt(6+num1, student.getMinorId());
+			}
+			if(student.getDoubleMajorId()!=0){
+				pstmt.setInt(6+num1+num2, student.getDoubleMajorId());
+			}
+			
+			
 			pstmt.executeUpdate();
 			
 		}catch(Exception e){

@@ -4,6 +4,13 @@
 
 <link rel="stylesheet" type="text/css" href="assets/css/counsel.css">
 
+<c:if test="${\"학생\" ne sessionScope.auth}">
+	<script>
+		alert('권한이 없습니다');
+		location.href="login.do";
+	</script>
+</c:if>
+
 <div id="article">
 	<h1>상담신청</h1>
 	

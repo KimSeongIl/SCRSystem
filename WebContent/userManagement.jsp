@@ -72,7 +72,7 @@
 							<label class="col-sm-3 control-label">핸드폰</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" name="phone"
-									placeholder="Phone.." required>
+									placeholder="Phone.." required title="xxx-xxxx-xxxx" required pattern="(010|011)-\d{3,4}-\d{4}">
 							</div>
 						</div>
 						
@@ -121,7 +121,7 @@
 							<label class="col-sm-3 control-label">교수 번호</label>
 							<div class="col-sm-8">
 								<input type="number" class="form-control" name="professorId"
-									placeholder="Id.." required>
+									placeholder="Id.." required >
 							</div>
 						</div>
 						
@@ -129,7 +129,7 @@
 							<label class="col-sm-3 control-label">교수 이름</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" name="professorName"
-									placeholder="Name.." required>
+									placeholder="Name.." required  >
 							</div>
 						</div>
 						
@@ -153,7 +153,7 @@
 							<label class="col-sm-3 control-label">핸드폰</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" name="phone"
-									placeholder="Phone.." required>
+									placeholder="Phone.." title="xxx-xxxx-xxxx" required pattern="(010|011)-\d{3,4}-\d{4}">
 							</div>
 						</div>
 						

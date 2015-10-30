@@ -1,54 +1,46 @@
 var thisPage;
 
-var professorAdd=function(data){
+var professorAdd=function(){
 	
-	if(data.result=="success"){
+	
 		alert('추가되었습니다');
 		requestJsonData("professorList.ajax",{page:thisPage},professorList);
 		
 		$("#professorModal").modal('hide');
 		$("#professorModal .form-control").val('');
 		
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
+	
 }
-var employeeAdd=function(data){
-	if(data.result=="success"){
+var employeeAdd=function(){
+	
 		alert('추가되었습니다');
 		requestJsonData("employeeList.ajax",{page:thisPage},employeeList);
 		
 		$("#employeeModal").modal('hide');
 		$("#employeeModal .form-control").val('');
 		
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
+	
 }
 
-var studentDelete=function(data){
+var studentDelete=function(){
 	
-	if(data.result=="success"){
+	
 		alert('삭제되었습니다');
 		requestJsonData("studentList.ajax",{page:thisPage},studentList);
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
+	
 }
 
-var professorDelete=function(data){
+var professorDelete=function(){
 	
-	if(data.result=="success"){
+	
 		alert('삭제되었습니다');
 		requestJsonData("professorList.ajax",{page:thisPage},professorList);
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
+	
 }
 
-var employeeDelete=function(data){
+var employeeDelete=function(){
 	
-	if(data.result=="success"){
+	
 		var deleted=data.resData[0].deleted;
 		if(deleted){
 			alert('삭제되었습니다');
@@ -56,13 +48,11 @@ var employeeDelete=function(data){
 			alert('소속 학과가 있어서 지울수 없습니다');
 		}
 		requestJsonData("employeeList.ajax",{page:thisPage},employeeList);
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
-}
-var studentList=function(data){
 	
-	if(data.result=="success"){
+}
+var studentList=function(){
+	
+	
 		var studentList=data.resData[0].studentList;
 		
 		
@@ -113,16 +103,14 @@ var studentList=function(data){
 				requestJsonData("userDelete.ajax",{uid:id},studentDelete);
 			}
 		})
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
+	
 }
 
 
 
-var professorList=function(data){
+var professorList=function(){
 	
-	if(data.result=="success"){
+	
 		
 		var list=data.resData[0].professorList;
 		
@@ -181,12 +169,10 @@ var professorList=function(data){
 				requestJsonData("userDelete.ajax",{uid:id},professorDelete);
 			}
 		})
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
+	
 }
 var employeeList=function(data){
-	if(data.result=="success"){
+	
 		var employeeList=data.resData[0].employeeList;
 		
 		var str="<div id='addBtnDiv'>";
@@ -231,9 +217,7 @@ var employeeList=function(data){
 				requestJsonData("userDelete.ajax",{uid:id},employeeDelete);
 			}
 		})
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
+	
 }
 
 $(document).ready(function(){

@@ -47,7 +47,15 @@ var requestJsonData=function (requestUrl, requestParam, successFunction) {
 	    complete:function(){
 	        $('.wrap-loading').addClass('display-none');
 	    },
-		success : successFunction,
+		success : function(data){
+			if(data.result=="success"){
+				successFunction
+			}else{
+				alert("오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
+				
+			}
+			
+		},
 		error : function(request,status,error){
 			alert("오류가 발생했습니다.\n재시도 또는 다시 접속해주세요.\n\n[오류정보]\ncode:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	        $('.wrap-loading').addClass('display-none');
@@ -74,7 +82,15 @@ var requestJsonDataGet=function(requestUrl,requestParam,successFunction){
 	    complete:function(){
 	        $('.wrap-loading').addClass('display-none');
 	    },
-		success : successFunction,
+		success : function(data){
+			if(data.result=="success"){
+				successFunction
+			}else{
+				alert("오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
+				
+			}
+			
+		},
 		error : function(request,status,error){
 			alert("오류가 발생했습니다.\n재시도 또는 다시 접속해주세요.\n\n[오류정보]\ncode:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	        $('.wrap-loading').addClass('display-none');
@@ -93,7 +109,15 @@ var requestJsonDataNoLoading=function (requestUrl, requestParam, successFunction
 		data : requestParam,
 		dataType : "json",
 		timeout: 10000,
-		success : successFunction,
+		success : function(data){
+			if(data.result=="success"){
+				successFunction
+			}else{
+				alert("오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
+				
+			}
+			
+		},
 		error : function(request,status,error){
 			alert("오류가 발생했습니다.\n재시도 또는 다시 접속해주세요.\n\n[오류정보]\ncode:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		},
@@ -103,3 +127,4 @@ var requestJsonDataNoLoading=function (requestUrl, requestParam, successFunction
 	});
 	
 }
+

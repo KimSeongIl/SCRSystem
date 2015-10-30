@@ -1,20 +1,18 @@
-var departmentAdd=function(data){
+var departmentAdd=function(){
 	
-	if(data.result=="success"){
+	
 		alert('추가되었습니다');
 		requestJsonData("departmentList.ajax",{},departmentList);
 		
 		$("#departmentModal").modal('hide');
 		$("#departmentModal .form-control").val('');
 		
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
+	
 }
 
-var departmentModify=function(data){
+var departmentModify=function(){
 	
-	if(data.result=="success"){
+	
 		var updated=data.resData[0].updated;
 		if(updated){
 			alert('수정되었습니다');
@@ -25,23 +23,19 @@ var departmentModify=function(data){
 		
 		$("#departmentModifyModal").modal('hide');
 		$("#departmentModifyModal .form-control").val('');
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
+	
 }
 
-var departmentDelete=function(data){
+var departmentDelete=function(){
 	
-	if(data.result=="success"){
+	
 		alert('삭제되었습니다');
 		requestJsonData("departmentList.ajax",{},departmentList);
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
+	
 }
 
-var departmentList=function(data){
-	if(data.result=="success"){
+var departmentList=function(){
+	
 		var departmentList=data.resData[0].departmentList;
 		
 		var str="";
@@ -94,10 +88,9 @@ var departmentList=function(data){
 				requestJsonData("departmentDelete.ajax",{did:id},departmentDelete);
 			}
 		})
-	}else{
-		alert("오류가 발생했습니다.\n계속적으로 발생시 관리자께 해당 메시지를 캡쳐하여 보내주세요.\n\n오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
-	}
+	
 }
+
 
 $(document).ready(function(){
 	
