@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.io.*"%>
@@ -8,10 +9,14 @@
 //파일정보
 String sFileInfo = "";
 //파일명을 받는다 - 일반 원본파일명
+System.out.print("2");
+
 String filename = request.getHeader("file-name");
 //파일 확장자
+System.out.print(filename);
 String filename_ext = filename.substring(filename.lastIndexOf(".")+1);
 //확장자를소문자로 변경
+System.out.print(filename_ext);
 filename_ext = filename_ext.toLowerCase();
 	
 //이미지 검증 배열변수
@@ -32,8 +37,10 @@ if(cnt == 0) {
 //이미지이므로 신규 파일로 디렉토리 설정 및 업로드	
 //파일 기본경로
 String dftFilePath = request.getServletContext().getRealPath("/");
+
 //파일 기본경로 _ 상세경로
 String filePath = dftFilePath + "editor" + File.separator +"multiupload" + File.separator;
+
 File file = new File(filePath);
 if(!file.exists()) {
 	file.mkdirs();
