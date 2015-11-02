@@ -31,7 +31,7 @@ public class EmployeeListAction implements AjaxAction{
 		int page=Integer.parseInt(request.getParameter("page"));
 		double count=employeeDao.employeeCount();
 		
-		int limit=5;
+		int limit=10;
 		double pageCount=count/limit;
 		list=employeeDao.employeeList((page-1)*limit,limit);
 		

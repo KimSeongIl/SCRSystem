@@ -10,6 +10,7 @@ public class ProfessorDTO {
 	private String email;
 	private int departmentId;
 	private String departmentName;
+	private String img;
 	
 	
 	public void setProfessorId(int professorId){
@@ -59,5 +60,11 @@ public class ProfessorDTO {
 	}
 	public String getDepartmentName(){
 		return departmentName;
+	}
+	public void setImg(String img){
+		this.img=img;
+	}
+	public String getImg(){
+		return img;
 	}
 }

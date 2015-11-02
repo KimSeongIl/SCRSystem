@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import scr.action.AjaxAction;
 import scr.dao.ProfessorDAO;
 import scr.dao.UserDAO;
@@ -24,22 +27,37 @@ public class ProfessorAddAction implements AjaxAction{
 		if(!"관리자".equals(session.getAttribute("auth"))){
 			return JsonUtil.putFailJsonContainer("ProfessorAddAction NoSession", "권한이 없습니다.");
 		}
-		int professorId=Integer.parseInt(request.getParameter("professorId"));
-		String professorName=request.getParameter("professorName");
+		
+		
+		MultipartRequest multi = null;
+		int maxSize = 10*1024*1024;
+		String encType = "utf-8";
+		String realFolder = request.getServletContext().getRealPath("/assets/img/profile");
+		
+		multi = new MultipartRequest( request,realFolder,maxSize,encType,new DefaultFileRenamePolicy());
+		
+			
+		int professorId=Integer.parseInt(multi.getParameter("professorId"));
+		String professorName=multi.getParameter("professorName");
 		int officeNo=0;
-		if(!"".equals(request.getParameter("officeNo").trim())){
-			officeNo=Integer.parseInt(request.getParameter("officeNo"));
+		if(!"".equals(multi.getParameter("officeNo").trim())){
+			officeNo=Integer.parseInt(multi.getParameter("officeNo"));
 		}
 
 		String officeTel=null;
-		if(!"".equals(request.getParameter("officeTel").trim())){
-			officeTel=request.getParameter("officeTel");
+		if(!"".equals(multi.getParameter("officeTel").trim())){
+			officeTel=multi.getParameter("officeTel");
 		}
 
-		String phone=request.getParameter("phone");
-		String email=request.getParameter("email");
-		int departmentId=Integer.parseInt(request.getParameter("departmentId"));
-		String departmentList=request.getParameter("departmentList");
+		String phone=multi.getParameter("phone");
+		String email=multi.getParameter("email");
+		int departmentId=Integer.parseInt(multi.getParameter("departmentId"));
+		
+		String img=null;
+		if(multi.getFilesystemName("img")!=null){
+			img=multi.getFilesystemName("img");
+		}
+		String departmentList=multi.getParameter("departmentList");
 
 		String[] arr=departmentList.split(",");
 		UserDTO user=new UserDTO();
@@ -59,6 +77,7 @@ public class ProfessorAddAction implements AjaxAction{
 		professor.setPhone(phone);
 		professor.setEmail(email);
 		professor.setDepartmentId(departmentId);
+		professor.setImg(img);
 
 		ProfessorDAO professorDao=ProfessorDAO.getInstance();
 		professorDao.professorAdd(professor);

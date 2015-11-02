@@ -34,6 +34,7 @@ var pagination=function(pageCount,thisPage,eventName){
 }
 
 var requestJsonData=function (requestUrl, requestParam, successFunction) {
+	
 	$.ajax({
 		url : requestUrl,
 		type : "POST",
@@ -48,8 +49,9 @@ var requestJsonData=function (requestUrl, requestParam, successFunction) {
 	        $('.wrap-loading').addClass('display-none');
 	    },
 		success : function(data){
+			
 			if(data.result=="success"){
-				successFunction
+				successFunction(data);
 			}else{
 				alert("오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
 				
@@ -84,7 +86,7 @@ var requestJsonDataGet=function(requestUrl,requestParam,successFunction){
 	    },
 		success : function(data){
 			if(data.result=="success"){
-				successFunction
+				successFunction(data);
 			}else{
 				alert("오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
 				
@@ -101,6 +103,46 @@ var requestJsonDataGet=function(requestUrl,requestParam,successFunction){
 		}
 	});
 }
+var requestJsonDataFile=function(requestUrl,requestParam,successFunction){
+	
+	$.ajax({
+		url : requestUrl,
+		type : "POST",
+		async: true,
+		data : requestParam,
+		dataType:"json",
+		processData: false, 
+        contentType:false,
+		enctype: 'multipart/form-data',
+		timeout: 10000,
+		beforeSend:function(){
+	        $('.wrap-loading').removeClass('display-none');
+	        
+	    },
+	    complete:function(){
+	        $('.wrap-loading').addClass('display-none');
+	       
+	    },
+		success : function(data){
+			if(data.result=="success"){
+				successFunction(data);
+			}else{
+				alert("오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
+				
+			}
+			
+		},
+		error : function(request,status,error){
+			alert("오류가 발생했습니다.\n재시도 또는 다시 접속해주세요.\n\n[오류정보]\ncode:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	        $('.wrap-loading').addClass('display-none');
+		},
+		fail : function() {
+			alert("인터넷 연결 상태를 확인해주세요.");
+	        $('.wrap-loading').addClass('display-none');
+		}
+	});
+}
+
 var requestJsonDataNoLoading=function (requestUrl, requestParam, successFunction) {
 	$.ajax({
 		url : serverUrl + requestUrl,
@@ -111,7 +153,7 @@ var requestJsonDataNoLoading=function (requestUrl, requestParam, successFunction
 		timeout: 10000,
 		success : function(data){
 			if(data.result=="success"){
-				successFunction
+				successFunction(data);s
 			}else{
 				alert("오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
 				

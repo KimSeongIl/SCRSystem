@@ -1,17 +1,41 @@
 var thisPage;
 
-var professorAdd=function(){
+var readImg=function(input){
+	
+	if( $('input[name=professorImg]').val() != "" ){
+		var ext = $('input[name=professorImg]').val().split('.').pop().toLowerCase();
+		      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+		    	  alert('gif,png,jpg,jpeg 파일만 업로드 할수 있습니다.');
+		    	  $('input[name=professorImg]').val('');
+		      }else{
+		    	  if(input.files && input.files[0]){
+		    			var reader=new FileReader();
+		    			reader.onload=function(e){
+		    				$('#professorImg').attr('src',e.target.result);
+		    			}
+		    			
+		    			reader.readAsDataURL(input.files[0]);
+		    		}
+		    	  
+		      }
+		}
+	
+}
+var professorAdd=function(data){
 	
 	
 		alert('추가되었습니다');
 		requestJsonData("professorList.ajax",{page:thisPage},professorList);
 		
 		$("#professorModal").modal('hide');
+		$('#professorImg').attr('src','assets/img/alt.png');
 		$("#professorModal .form-control").val('');
+		$('#professorModal select[name=departmentId]').val('0');
+		$('#professorModal select[name=departmentGroup]').val('0');
 		
 	
 }
-var employeeAdd=function(){
+var employeeAdd=function(data){
 	
 		alert('추가되었습니다');
 		requestJsonData("employeeList.ajax",{page:thisPage},employeeList);
@@ -22,7 +46,7 @@ var employeeAdd=function(){
 	
 }
 
-var studentDelete=function(){
+var studentDelete=function(data){
 	
 	
 		alert('삭제되었습니다');
@@ -30,7 +54,7 @@ var studentDelete=function(){
 	
 }
 
-var professorDelete=function(){
+var professorDelete=function(data){
 	
 	
 		alert('삭제되었습니다');
@@ -38,7 +62,7 @@ var professorDelete=function(){
 	
 }
 
-var employeeDelete=function(){
+var employeeDelete=function(data){
 	
 	
 		var deleted=data.resData[0].deleted;
@@ -50,7 +74,7 @@ var employeeDelete=function(){
 		requestJsonData("employeeList.ajax",{page:thisPage},employeeList);
 	
 }
-var studentList=function(){
+var studentList=function(data){
 	
 	
 		var studentList=data.resData[0].studentList;
@@ -108,14 +132,14 @@ var studentList=function(){
 
 
 
-var professorList=function(){
+var professorList=function(data){
 	
 	
 		
 		var list=data.resData[0].professorList;
 		
 		var str="<div id='addBtnDiv'>";
-		str+="<input type='button' class='btn btn-primary' href='#professorModal' data-toggle='modal' value='교수 추가'>";
+		str+="<input type='button' class='btn btn-primary' id='professorAddBtn' href='#professorModal' data-toggle='modal' value='교수 추가'>";
 		str+="</div>";
 		str+="<table class='table'>";
 		str+="<thead>";
@@ -168,6 +192,13 @@ var professorList=function(){
 				var id=$(this).attr('uid');
 				requestJsonData("userDelete.ajax",{uid:id},professorDelete);
 			}
+		})
+		$('#professorAddBtn').click(function(){
+				$("#professorModal").modal('hide');
+				$('#professorImg').attr('src','assets/img/alt.png');
+				$("#professorModal .form-control").val('');
+				$('#professorModal select[name=departmentId]').val('0');
+				$('#professorModal select[name=departmentGroup]').val('0');
 		})
 	
 }
@@ -303,17 +334,18 @@ $(document).ready(function(){
 			departmentList+=$(this).attr('id')+",";
 		})
 		
+		var data=new FormData();
+		data.append("professorId",professorId);
+		data.append("professorName",professorName);
+		data.append("officeNo",officeNo);
+		data.append("officeTel",officeTel);
+		data.append("phone",phone);
+		data.append("email",email);
+		data.append("departmentId",departmentId);
+		data.append("departmentList",departmentList);
+		data.append("img",$('input[name=professorImg]')[0].files[0]);
+		requestJsonDataFile("professorAdd.ajax",data,professorAdd);
 		
-		requestJsonData("professorAdd.ajax",{
-			professorId:professorId,
-			professorName:professorName,
-			officeNo:officeNo,
-			officeTel:officeTel,
-			phone:phone,
-			email:email,
-			departmentId:departmentId,
-			departmentList:departmentList
-		},professorAdd);
 		
 		return false;
 		

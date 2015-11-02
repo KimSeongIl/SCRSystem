@@ -1,5 +1,5 @@
 var thisPage;
-var professorList=function(){
+var professorList=function(data){
 	
 	
 		var list=data.resData[0].professorList;
@@ -17,7 +17,7 @@ var professorList=function(){
 		str+="<tbody>";
 		$.each(list,function(key,value){
 			
-			str+="<tr>";
+			str+="<tr onclick='location.href=\"professorProfile.do?id="+value.professorId+"\"'>";
 			str+="<td>"+value.professorId+"</td>";
 			str+="<td>"+value.professorName+"</td>";
 			str+="<td>"+value.departmentName+"</td>";
@@ -51,6 +51,7 @@ var professorList=function(){
 
 $(document).ready(function(){
 	thisPage=1;
+	
 	requestJsonData("professorList.ajax",{page:thisPage},professorList);
 	
 	$('#professorSearch').submit(function(){

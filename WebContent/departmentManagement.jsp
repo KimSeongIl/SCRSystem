@@ -76,7 +76,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">담당직원</label>
 							<div class="col-sm-8">
-								<select class="form-control" name="departmentId">
+								<select class="form-control" name="employeeId">
 										
 									<c:forEach var="employee" items="${requestScope.employeeList }">
 										<option value="${employee.employeeId }">${employee.employeeName }(${employee.employeeId })</option>
@@ -153,7 +153,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">담당직원</label>
 							<div class="col-sm-8">
-								<select class="form-control" name="departmentId">
+								<select class="form-control" name="employeeId">
 										
 									<c:forEach var="employee" items="${requestScope.employeeList }">
 										<option value="${employee.employeeId }">${employee.employeeName }(${employee.employeeId })</option>

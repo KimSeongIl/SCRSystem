@@ -231,6 +231,7 @@ public class ProfessorDAO {
 		int num=0;
 		int num1=0;
 		int num2=0;
+		int num3=0;
 
 
 		if(professor.getOfficeNo()!=0){
@@ -250,6 +251,11 @@ public class ProfessorDAO {
 			param+=",?";
 			column+=",department_id";
 			num2++;
+		}
+		if(professor.getImg()!=null){
+			param+=",?";
+			column+=",img";
+			num3++;
 		}
 
 		query="insert into professor("+column+") values("+param+")";
@@ -276,6 +282,9 @@ public class ProfessorDAO {
 
 			if(professor.getDepartmentId()!=0){
 				pstmt.setInt(4+num+num1+num2, professor.getDepartmentId());
+			}
+			if(professor.getImg()!=null){
+				pstmt.setString(4+num+num1+num2+num3, professor.getImg());
 			}
 
 			pstmt.executeUpdate();

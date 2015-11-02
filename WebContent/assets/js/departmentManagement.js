@@ -1,4 +1,4 @@
-var departmentAdd=function(){
+var departmentAdd=function(data){
 	
 	
 		alert('추가되었습니다');
@@ -6,11 +6,11 @@ var departmentAdd=function(){
 		
 		$("#departmentModal").modal('hide');
 		$("#departmentModal .form-control").val('');
-		
+		$('#departmentModal select[name=employeeId] option:first-child').attr('selected','true');
 	
 }
 
-var departmentModify=function(){
+var departmentModify=function(data){
 	
 	
 		var updated=data.resData[0].updated;
@@ -23,10 +23,10 @@ var departmentModify=function(){
 		
 		$("#departmentModifyModal").modal('hide');
 		$("#departmentModifyModal .form-control").val('');
-	
+		$('#departmentModifyModal select[name=employeeId] option:first-child').attr('selected','true');
 }
 
-var departmentDelete=function(){
+var departmentDelete=function(data){
 	
 	
 		alert('삭제되었습니다');
@@ -34,7 +34,7 @@ var departmentDelete=function(){
 	
 }
 
-var departmentList=function(){
+var departmentList=function(data){
 	
 		var departmentList=data.resData[0].departmentList;
 		
@@ -79,7 +79,7 @@ var departmentList=function(){
 			$('#departmentModifyForm input[name=departmentName]').val($(this).parent().parent().find('td:nth-child(2)').text());
 			$('#departmentModifyForm input[name=officeNo]').val($(this).parent().parent().find('td:nth-child(3)').text());
 			$('#departmentModifyForm input[name=officeTel]').val($(this).parent().parent().find('td:nth-child(4)').text());
-			$('#departmentModifyForm select[name=departmentId]').find('option[value='+$(this).attr('eid')+']').attr('selected','true');
+			$('#departmentModifyForm select[name=employeeId]').find('option[value='+$(this).attr('eid')+']').attr('selected','true');
 			$('#departmentModifyButton').attr('did',$(this).parent().parent().find('td:nth-child(1)').text());
 		})
 		$('.departmentDelete').click(function(){
@@ -101,7 +101,7 @@ $(document).ready(function(){
 		var departmentName=$('#departmentAddForm input[name=departmentName]').val();
 		var officeNo=$('#departmentAddForm input[name=officeNo]').val();
 		var officeTel=$('#departmentAddForm input[name=officeTel]').val();
-		var employeeId=$('#departmentAddForm select[name=departmentId]').val();
+		var employeeId=$('#departmentAddForm select[name=employeeId]').val();
 		
 		requestJsonData("departmentAdd.ajax",{
 			departmentId:departmentId,
@@ -121,7 +121,7 @@ $(document).ready(function(){
 		var departmentName=$('#departmentModifyForm input[name=departmentName]').val();
 		var officeNo=$('#departmentModifyForm input[name=officeNo]').val();
 		var officeTel=$('#departmentModifyForm input[name=officeTel]').val();
-		var employeeId=$('#departmentModifyForm select[name=departmentId]').val();
+		var employeeId=$('#departmentModifyForm select[name=employeeId]').val();
 		
 		requestJsonData("departmentModify.ajax",{
 			originId:originId,
