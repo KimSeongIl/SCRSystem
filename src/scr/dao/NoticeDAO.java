@@ -27,7 +27,7 @@ public class NoticeDAO {
 			pstmt.setString(2, nTitle);
 			pstmt.setString(3, nContent);
 		
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
