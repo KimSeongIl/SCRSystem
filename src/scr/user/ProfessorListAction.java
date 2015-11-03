@@ -31,7 +31,12 @@ public class ProfessorListAction implements AjaxAction{
 		
 		int page=Integer.parseInt(request.getParameter("page"));
 		double count=0;
-		final int limit=5;
+		
+		int limit;
+		if(request.getParameter("limit")==null)
+			limit=10;
+		else
+			limit=Integer.parseInt(request.getParameter("limit"));
 		
 		Map<String,Object> param=new HashMap<String,Object>();
 		if(category==null){

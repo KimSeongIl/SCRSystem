@@ -117,6 +117,20 @@
 					</div>
 					<form class="form-horizontal" id="professorAddForm" method="post">
 					
+					
+						<div class="form-group" id="imgContainer">
+							
+							<img src="assets/img/alt.png" id="professorImg" width="140px" height="140px" alt="img" class="img-rounded">
+							
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-3 control-label">교수 이미지</label>
+							<div class="col-sm-8">
+								<input type="file" class="form-control" name="professorImg"
+									placeholder="File.." onchange="readImg(this)">
+							</div>
+						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">교수 번호</label>
 							<div class="col-sm-8">

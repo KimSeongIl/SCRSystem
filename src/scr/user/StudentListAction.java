@@ -27,7 +27,7 @@ public class StudentListAction implements AjaxAction{
 		int page=Integer.parseInt(request.getParameter("page"));
 		double count=studentDao.studentCount();
 		
-		int limit=5;
+		int limit=10;
 		double pageCount=count/limit;
 		list=studentDao.studentList((page-1)*limit,limit);
 		
