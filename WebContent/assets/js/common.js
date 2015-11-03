@@ -4,6 +4,8 @@ var pagination=function(pageCount,thisPage,eventName){
 	str+="<ul class='pagination'>";
 	
 	
+	
+	
 	if(pageCount>=1){
 		
 		var currentPage=Math.floor((thisPage-1)/5);

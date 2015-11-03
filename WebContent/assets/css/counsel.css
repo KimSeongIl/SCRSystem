@@ -14,3 +14,14 @@ h1,#professorSearch,#professorListContainer{
 	
 	margin-bottom:30px;
 }
+.professorListDiv{
+	height:300px;
+	border:1px solid black;
+	text-align:center;
+	
+}
+.professorListDiv table{
+	
+	margin:auto;
+	height:150px;
+}

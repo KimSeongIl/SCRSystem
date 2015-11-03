@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scr.conn.Conn;
+import scr.dto.DepartmentDTO;
 import scr.dto.ProfessorDTO;
 import scr.util.AES256Util;
 
@@ -93,12 +94,12 @@ public class ProfessorDAO {
 	
 	public List<ProfessorDTO> professorSearchListByProfessor(int start,int limit,String content){
 		List<ProfessorDTO> list=new ArrayList<>();
-
+		
 
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,department_id,"
-						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\" "
+						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\",img "
 						+ " from professor where professor_name like concat ('%', ?, '%')  order by department_id,professor_id limit ?,?");){
 
 			pstmt.setString(1, content);
@@ -117,8 +118,26 @@ public class ProfessorDAO {
 						professor.setProfessorName(rs.getString("professor_name"));
 						professor.setDepartmentId(rs.getInt("department_id"));
 						professor.setDepartmentName(rs.getString("department"));
-
-
+						professor.setImg(rs.getString("img"));
+						ArrayList<DepartmentDTO> departmentList=new ArrayList<>();
+						try(PreparedStatement pstmt2=conn.prepareStatement("select department_id,department_name from department where department_id in(select department_id from pro_dept where professor_id=?)");){
+							pstmt2.setInt(1, rs.getInt("professor_id"));
+							try(ResultSet rs2=pstmt2.executeQuery();){
+								if(rs2.next()){
+									do{
+										DepartmentDTO department=new DepartmentDTO();
+										department.setDepartmentId(rs2.getInt("department_id"));
+										department.setDepartmentName(rs2.getString("department_name"));
+										departmentList.add(department);
+									}while(rs2.next());
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+						professor.setDepartmentList(departmentList);
 						list.add(professor);
 
 					}while(rs.next());
@@ -142,7 +161,7 @@ public class ProfessorDAO {
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,department_id,"
-						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\" "
+						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\",img "
 						+ " from professor where department_id in (select department_id from department where department_name like concat ('%', ?, '%')) or professor_id in (select professor_id from pro_dept where department_id in (select department_id from department where department_name like concat ('%', ?, '%'))) order by department_id,professor_id limit ?,?");){
 
 			pstmt.setString(1, content);
@@ -162,8 +181,26 @@ public class ProfessorDAO {
 						professor.setProfessorName(rs.getString("professor_name"));
 						professor.setDepartmentId(rs.getInt("department_id"));
 						professor.setDepartmentName(rs.getString("department"));
-
-
+						professor.setImg(rs.getString("img"));
+						ArrayList<DepartmentDTO> departmentList=new ArrayList<>();
+						try(PreparedStatement pstmt2=conn.prepareStatement("select department_id,department_name from department where department_id in(select department_id from pro_dept where professor_id=?)");){
+							pstmt2.setInt(1, rs.getInt("professor_id"));
+							try(ResultSet rs2=pstmt2.executeQuery();){
+								if(rs2.next()){
+									do{
+										DepartmentDTO department=new DepartmentDTO();
+										department.setDepartmentId(rs2.getInt("department_id"));
+										department.setDepartmentName(rs2.getString("department_name"));
+										departmentList.add(department);
+									}while(rs2.next());
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+						professor.setDepartmentList(departmentList);
 						list.add(professor);
 
 					}while(rs.next());
@@ -186,12 +223,14 @@ public class ProfessorDAO {
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,office_no,office_tel,phone,email,department_id,"
-						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\" "
+						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\",img "
 						+ " from professor order by department_id,professor_id limit ?,?");){
 
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, limit);
+			
 			try(ResultSet rs=pstmt.executeQuery();){
+				
 				AES256Util util=new AES256Util();
 
 				if(rs.next()){
@@ -207,10 +246,30 @@ public class ProfessorDAO {
 						professor.setEmail(util.decrypt(rs.getString("email")));
 						professor.setDepartmentId(rs.getInt("department_id"));
 						professor.setDepartmentName(rs.getString("department"));
-
-
+						professor.setImg(rs.getString("img"));
+						ArrayList<DepartmentDTO> departmentList=new ArrayList<>();
+						try(PreparedStatement pstmt2=conn.prepareStatement("select department_id,department_name from department where department_id in(select department_id from pro_dept where professor_id=?)");){
+							pstmt2.setInt(1, rs.getInt("professor_id"));
+							
+							try(ResultSet rs2=pstmt2.executeQuery();){
+								
+								if(rs2.next()){
+									do{
+										DepartmentDTO department=new DepartmentDTO();
+										department.setDepartmentId(rs2.getInt("department_id"));
+										department.setDepartmentName(rs2.getString("department_name"));
+										departmentList.add(department);
+									}while(rs2.next());
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+						professor.setDepartmentList(departmentList);
 						list.add(professor);
-
+						
 					}while(rs.next());
 				}
 			}catch(Exception e){

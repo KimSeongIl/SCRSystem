@@ -28,7 +28,7 @@ var professorAdd=function(data){
 		requestJsonData("professorList.ajax",{page:thisPage},professorList);
 		
 		$("#professorModal").modal('hide');
-		$('#professorImg').attr('src','assets/img/alt.png');
+		$('#professorImg').attr('src','assets/img/sample.png');
 		$("#professorModal .form-control").val('');
 		$('#professorModal select[name=departmentId]').val('0');
 		$('#professorModal select[name=departmentGroup]').val('0');
@@ -195,7 +195,7 @@ var professorList=function(data){
 		})
 		$('#professorAddBtn').click(function(){
 				$("#professorModal").modal('hide');
-				$('#professorImg').attr('src','assets/img/alt.png');
+				$('#professorImg').attr('src','assets/img/sample.png');
 				$("#professorModal .form-control").val('');
 				$('#professorModal select[name=departmentId]').val('0');
 				$('#professorModal select[name=departmentGroup]').val('0');

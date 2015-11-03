@@ -57,7 +57,7 @@ public class SearchPasswordProAction implements CommandAction{
 		
 
 
-		String tempPassword="";
+		StringBuilder tempPassword=new StringBuilder("");
 
 		for(int i=0;i<10;i++){
 			int num=(int)(Math.random()*3);
@@ -71,11 +71,11 @@ public class SearchPasswordProAction implements CommandAction{
 			}
 
 
-			tempPassword+=c;
+			tempPassword.append(c);
 
 		}
 		String subject = "성공회대학교 상담관리시스템 임시 비밀번호 입니다.";
-		String content = "성공회대학교 상담관리시스템 임시 비밀번호 입니다 "+tempPassword;
+		String content = "성공회대학교 상담관리시스템 임시 비밀번호 입니다 "+tempPassword.toString();
 
 		alert="<script>alert('임시비밀번호를 메일로 발송하였습니다');</script>";
 		
@@ -90,7 +90,7 @@ public class SearchPasswordProAction implements CommandAction{
 		
 		UserDTO user=new UserDTO();
 		user.setUid(uid);
-		user.setPassword(tempPassword);
+		user.setPassword(tempPassword.toString());
 		UserDAO userDao=UserDAO.getInstance();
 		userDao.setTempPassword(user);
 		

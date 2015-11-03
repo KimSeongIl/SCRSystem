@@ -1,5 +1,7 @@
 package scr.dto;
 
+import java.util.ArrayList;
+
 public class ProfessorDTO {
 
 	private int professorId;
@@ -11,6 +13,7 @@ public class ProfessorDTO {
 	private int departmentId;
 	private String departmentName;
 	private String img;
+	private ArrayList<DepartmentDTO> departmentList;
 	
 	
 	public void setProfessorId(int professorId){
@@ -66,5 +69,11 @@ public class ProfessorDTO {
 	}
 	public String getImg(){
 		return img;
+	}
+	public void setDepartmentList(ArrayList<DepartmentDTO> departmentList){
+		this.departmentList=departmentList;
+	}
+	public ArrayList<DepartmentDTO> getDepartmentList(){
+		return departmentList;
 	}
 }
