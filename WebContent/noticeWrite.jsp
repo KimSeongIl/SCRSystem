@@ -7,16 +7,16 @@
 <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <div id="article" >
 
-<form id="frm" action="noticeView.do" method="post" >
+<form id="frm" action="noticeInsert.do" method="post" >
 <table width="100%">
 		<tr>
 			<td>제목</td>
-			<td><input type="text" id="title" name="title" /></td>
+			<td><input type="text" id="title" name="nTitle" /></td>
 		</tr>
 		<tr>
 			<td>내용</td>
 			<td>
-				<textarea rows="10" cols="30" id="ir1" name="content" style="width:766px; height:412px; "></textarea>
+				<textarea rows="10" cols="30" id="ir1" name="NContent" style="width:766px; height:412px; "></textarea>
 			</td>
 		</tr>
 		<tr>

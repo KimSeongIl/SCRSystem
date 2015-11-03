@@ -56,20 +56,11 @@ public class NoticePhotoAction implements AjaxAction{
 		//ì´ë¯¸ì§ì´ë¯ë¡ ì ê· íì¼ë¡ ëë í ë¦¬ ì¤ì  ë° ìë¡ë	
 		//íì¼ ê¸°ë³¸ê²½ë¡
 		String dftFilePath = request.getServletContext().getRealPath("");
-		String path="";
-		try(FileInputStream fis=new FileInputStream(dftFilePath+"/WEB-INF/upload.properties");){
-    		Properties props=new Properties();
-    		
-    		
-    		
-    		props.load(new BufferedInputStream(fis));
-    		
-    		path=props.getProperty("path").trim();
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}
+		System.out.println("dftFilePath->"+dftFilePath);
+		//String path="";
+		
 		//íì¼ ê¸°ë³¸ê²½ë¡ _ ìì¸ê²½ë¡
-		String filePath = path + File.separator+ "editor" + File.separator +"upload" + File.separator;
+		String filePath = dftFilePath + "editor" + File.separator +"upload" + File.separator;
 		System.out.println(filePath);
 		File file = new File(filePath);
 		if(!file.exists()) {

@@ -331,7 +331,7 @@
      * @return
      */
     function html5Upload() {
-    	alert("01");
+    	//alert("01");
     	var tempFile,
     		sUploadURL;
     	
@@ -684,7 +684,7 @@
  				}
  			}
  		}
-alert(data);
+//alert(data);
  		req.send(data);
  		return this;
  	};
