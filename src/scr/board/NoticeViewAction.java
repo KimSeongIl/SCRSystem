@@ -17,9 +17,9 @@ public class NoticeViewAction implements CommandAction{
 		
 	    List noticeList=notice.viewNoticeBoard();//공지사항 받아온 정보를 List에 넣기 
 	    
-	    System.out.println("NoticeViewACtion->"+noticeList.size());
+	    
 	    request.setAttribute("noticeList", noticeList);
-	    System.out.println("1");
+	   
 		
 		return "noticeView.jsp";
 	}

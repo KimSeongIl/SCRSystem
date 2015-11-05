@@ -5,7 +5,8 @@
 <%@ page import="scr.dao.NoticeDAO"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<link rel="stylesheet" type="text/css" href="assets/css/notice.css">
+<link rel="stylesheet" type="text/css" href="assets/css/notice.css"> 
+
 
 <div id="article">
 	<div id="noticeLine">
@@ -30,7 +31,7 @@
 			out.println("<tr>");
 			out.println("<td>"+notice.getNId()+"</td>");
 			out.println("<td>"+notice.getNName()+"</td>");
-			out.println("<td>"+notice.getNTitle()+"</td>");
+			out.println("<td><a href='noticeDetail.do?nid="+notice.getNId()+"'>"+notice.getNTitle()+"</a></td>");
 			out.println("<td>"+notice.getNDate()+"</td>");
 			
 			out.println("</tr>");

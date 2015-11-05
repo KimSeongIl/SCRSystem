@@ -333,6 +333,7 @@
     function html5Upload() {
     	//alert("01");
     	var tempFile,
+    	
     		sUploadURL;
     	
 //    	sUploadURL= 'file_uploader_html5.php'; 	//upload URL

@@ -19,12 +19,12 @@ public class NoticeDAO {
 	public static NoticeDAO getInstance(){
 		return instance;
 	}
-	
-//공지사항 입력 정보 삽입하기 
+
+	//공지사항 입력 정보 삽입하기 
 	public void insertNoticeBoard(String nName,String nTitle,String nContent ){
 		try(Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("insert into notice(notice_name,notice_title,notice_content) values(?,?,?)");){
-
+            nContent="editor/"+nContent;
 			pstmt.setString(1, nName);
 			pstmt.setString(2, nTitle);
 			pstmt.setString(3, nContent);
@@ -48,14 +48,14 @@ public class NoticeDAO {
 			if(rs.next()){
 				noticeList=new ArrayList();
 				do{
-					System.out.println("-----");
+
 					notice=new NoticeDTO();
-					notice.setNId(rs.getInt("notice_id"));
+					notice.setNId(rs.getInt("notice_id")); //getInt(디비에 저장된 칼럼 명)
 					notice.setNName(rs.getString("notice_name"));
 					notice.setNTitle(rs.getString("notice_title"));
 					notice.setNContent(rs.getString("notice_content"));
 					notice.setNDate(rs.getTimestamp("notice_date"));
-System.out.println(notice);
+
 					noticeList.add(notice);
 
 
@@ -70,7 +70,42 @@ System.out.println(notice);
 		return noticeList;
 
 	}
-	
+
+	//공지사항 게시판 nid기준으로 자료가져오기
+	public NoticeDTO noticeViewById(int nId){
+		
+		
+		NoticeDTO notice=null;
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select * from notice where notice_id=?");){
+
+			pstmt.setInt(1, nId);
+
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					
+					notice=new NoticeDTO();
+					
+					notice.setNName(rs.getString("notice_name"));
+					notice.setNTitle(rs.getString("notice_title"));
+					notice.setNContent(rs.getString("notice_content"));
+					notice.setNDate(rs.getTimestamp("notice_date"));
+					
+
+
+				}
+
+			}catch(Exception ee){
+
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return notice;
+	}
+
 
 
 
