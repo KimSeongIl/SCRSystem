@@ -4,9 +4,7 @@ h1{
 th{
 	text-align:center;
 }
-tbody{
-	cursor:pointer;
-}
+
 h1,#professorSearch,#professorListContainer{
 	text-align:center;
 }

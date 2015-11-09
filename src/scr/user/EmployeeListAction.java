@@ -28,14 +28,32 @@ public class EmployeeListAction implements AjaxAction{
 		
 		EmployeeDAO employeeDao=EmployeeDAO.getInstance();
 		
+		String content=request.getParameter("content");
 		int page=Integer.parseInt(request.getParameter("page"));
 		double count=employeeDao.employeeCount();
 		
-		int limit=10;
-		double pageCount=count/limit;
-		list=employeeDao.employeeList((page-1)*limit,limit);
+		int limit;
+		if(request.getParameter("limit")==null)
+			limit=10;
+		else
+			limit=Integer.parseInt(request.getParameter("limit"));
 		
 		Map<String,Object> param=new HashMap<String,Object>();
+		if(content==null){
+			count=employeeDao.employeeCount();
+			
+			list=employeeDao.employeeList((page-1)*limit,limit);
+		}else{
+			count=employeeDao.employeeSearchCountByName(content);
+			
+			list=employeeDao.employeeSearchListByName((page-1)*limit, limit, content);
+			
+			param.put("content", content);
+		}
+		double pageCount=count/limit;
+		
+		
+		
 		param.put("employeeList", list);
 		param.put("pageCount", Math.ceil(pageCount));
 		

@@ -11,17 +11,23 @@
 </c:if>
 
 <div id="article">
-
-	<h1>
+	<div>
+	<h1 style="display:inline-block;">
 		회원관리
 	</h1>
+	<div style="display:inline-block;width:40%;float:right;margin-top:25px;margin-bottom:10px;text-align:right;">
+			<form id="searchForm">
+			<input type="search" class="form-control" id="searchInput" style="width:50%;display:inline-block;margin-right:10px;" placeholder="이름으로 검색">
+			<input width="50%" class="btn btn-default"  id="searchBtn" type="submit" value="검색" >
+			</form>
+	</div>
 	<hr>
-	
+	</div>
 	<ul class="nav nav-tabs" id="userManagementMenu">
   		<li role="presentation" class="active" id="studentList"><a href="#">학생</a></li>
   		<li role="presentation" id="professorList"><a href="#">교수</a></li>
   		<li role="presentation" id="employeeList"><a href="#">직원</a></li>
-
+		
 	</ul>
 	
 	<div id="userManagementContainer">
