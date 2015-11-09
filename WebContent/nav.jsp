@@ -13,7 +13,7 @@
 			
 			<c:choose>
 				<c:when test="${empty sessionScope.auth || sessionScope.auth eq \"학생\" }">
-					<li>공지사항</li>
+					<li onclick="location.href='noticeView.do'">공지사항</li>
 					<li>이용안내</li>
 					<li onclick="location.href='counselRequest.do'">상담신청</li>
 					<li>자료실</li>

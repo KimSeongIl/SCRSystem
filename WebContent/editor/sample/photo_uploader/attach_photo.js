@@ -331,8 +331,9 @@
      * @return
      */
     function html5Upload() {
-    	alert("01");
+    	//alert("01");
     	var tempFile,
+    	
     		sUploadURL;
     	
 //    	sUploadURL= 'file_uploader_html5.php'; 	//upload URL
@@ -684,7 +685,7 @@
  				}
  			}
  		}
-alert(data);
+//alert(data);
  		req.send(data);
  		return this;
  	};

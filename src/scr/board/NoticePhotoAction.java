@@ -56,21 +56,12 @@ public class NoticePhotoAction implements AjaxAction{
 		//ì´ë¯¸ì§ì´ë¯ë¡ ì ê· íì¼ë¡ ëë í ë¦¬ ì¤ì  ë° ìë¡ë	
 		//íì¼ ê¸°ë³¸ê²½ë¡
 		String dftFilePath = request.getServletContext().getRealPath("");
-		String path="";
-		try(FileInputStream fis=new FileInputStream(dftFilePath+"/WEB-INF/upload.properties");){
-    		Properties props=new Properties();
-    		
-    		
-    		
-    		props.load(new BufferedInputStream(fis));
-    		
-    		path=props.getProperty("path").trim();
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}
+		System.out.println("dftFilePath->"+dftFilePath);
+		//String path="";
+		
 		//íì¼ ê¸°ë³¸ê²½ë¡ _ ìì¸ê²½ë¡
-		String filePath = path + File.separator+ "editor" + File.separator +"upload" + File.separator;
-		System.out.println(filePath);
+		String filePath = dftFilePath + "editor" + File.separator +"upload" + File.separator;
+		System.out.println("filePath"+filePath);
 		File file = new File(filePath);
 		if(!file.exists()) {
 			file.mkdirs();
@@ -80,7 +71,8 @@ public class NoticePhotoAction implements AjaxAction{
 		String today= formatter.format(new java.util.Date());
 		realFileNm = today+UUID.randomUUID().toString() + filename.substring(filename.lastIndexOf("."));
 		String rlFileNm = filePath + realFileNm;//realFileNm->이미지 값 
-		System.out.println(realFileNm);
+		System.out.println("filePath->>"+filePath);
+		System.out.println("realFileNm->>"+realFileNm);
 		
 		///////////////// ìë²ì íì¼ì°ê¸° ///////////////// 
 		InputStream is = request.getInputStream();
@@ -99,10 +91,13 @@ public class NoticePhotoAction implements AjaxAction{
 
 		// ì ë³´ ì¶ë ¥
 		sFileInfo += "&bNewLine=true";
+		System.out.println("sFileInfo_>>>"+sFileInfo);
 		//sFileInfo += "&sFileName="+ realFileNm;;
 		// img íê·¸ì title ìì±ì ìë³¸íì¼ëªì¼ë¡ ì ì©ìì¼ì£¼ê¸° ìí¨
 		sFileInfo += "&sFileName="+ filename;;
+		System.out.println("sFileInfo2_>>>"+sFileInfo);
 		sFileInfo += "&sFileURL="+"upload/"+realFileNm;
+		System.out.println("sFileInfo3_>>>"+sFileInfo);
 		
 
 		}
