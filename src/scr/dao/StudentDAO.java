@@ -40,6 +40,80 @@ public class StudentDAO {
 		
 		return 0;
 	}
+	public double studentSearchCountByName(String content){
+
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) \"count\" from student where name like concat ('%', ?, '%') ");){
+
+			pstmt.setString(1, content);
+
+			try(ResultSet rs=pstmt.executeQuery();){
+
+				if(rs.next()){
+					return rs.getInt("count");
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+	
+	public List<StudentDTO> studentSearchListByName(int start,int limit,String content){
+		List<StudentDTO> list=new ArrayList<>();
+		
+
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select student_id,name,department_id,phone,email,"
+						+ "ifnull((select department_name from department where department_id=student.department_Id),'없음') \"department\",minor_id, "
+						+ "ifnull((select department_name from department where department_id=minor_id),'없음') \"minor\",double_major_id,"
+						+ "ifnull((select department_name from department where department_id=double_major_Id),'없음') \"double_major\",status"
+						+ " from student where name like concat ('%', ?, '%')  order by department_id,student_id limit ?,?");){
+
+			pstmt.setString(1, content);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, limit);
+			AES256Util util=new AES256Util();
+			try(ResultSet rs=pstmt.executeQuery();){
+				
+
+				if(rs.next()){
+					do{
+
+						StudentDTO student=new StudentDTO();
+
+						student.setStudentId(rs.getInt("student_id"));
+						student.setName(rs.getString("name"));
+						student.setPhone(util.decrypt(rs.getString("phone")));
+						student.setEmail(util.decrypt(rs.getString("email")));
+						student.setDepartmentId(rs.getInt("department_id"));
+						student.setDepartmentName(rs.getString("department"));
+						student.setMinorId(rs.getInt("minor_id"));
+						student.setMinorName(rs.getString("minor"));
+						student.setDoubleMajorId(rs.getInt("double_major_id"));
+						student.setDoubleMajorName(rs.getString("double_major"));
+						student.setStatus(rs.getString("status"));
+						list.add(student);
+						
+
+					}while(rs.next());
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 	public void studentAdd(StudentDTO student) {
 
 		String column="student_id,name,email,phone,department_id,status";

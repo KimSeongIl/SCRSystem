@@ -41,7 +41,7 @@ var professorList=function(data){
 			}
 			str+="</tr>";
 			str+="<tr>";
-			str+="<td colspan='2'><input type='button' class='btn btn-primary' value='상담신청'></td>";
+			str+="<td colspan='2'><input onclick='location.href=\"professorProfile.do?pid="+value.professorId+"\" ' type='button' class='btn btn-primary' value='상담신청'></td>";
 			str+="</tr>";
 			str+="</table>";
 			str+="</div>";

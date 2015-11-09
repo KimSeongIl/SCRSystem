@@ -98,14 +98,14 @@ public class ProfessorDAO {
 
 		try(
 				Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,department_id,"
+				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,department_id,phone,email,"
 						+ "ifnull((select department_name from department where department_id=professor.department_Id),'없음') \"department\",img "
 						+ " from professor where professor_name like concat ('%', ?, '%')  order by department_id,professor_id limit ?,?");){
 
 			pstmt.setString(1, content);
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, limit);
-			
+			AES256Util util=new AES256Util();
 			try(ResultSet rs=pstmt.executeQuery();){
 				
 
@@ -116,6 +116,8 @@ public class ProfessorDAO {
 
 						professor.setProfessorId(rs.getInt("professor_id"));
 						professor.setProfessorName(rs.getString("professor_name"));
+						professor.setPhone(util.decrypt(rs.getString("phone")));
+						professor.setEmail(util.decrypt(rs.getString("email")));
 						professor.setDepartmentId(rs.getInt("department_id"));
 						professor.setDepartmentName(rs.getString("department"));
 						professor.setImg(rs.getString("img"));

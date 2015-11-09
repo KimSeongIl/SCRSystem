@@ -41,6 +41,74 @@ public class EmployeeDAO {
 		return 0;
 	}
 	
+	public double employeeSearchCountByName(String content){
+
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) \"count\" from employee where employee_name like concat ('%', ?, '%') ");){
+
+			pstmt.setString(1, content);
+
+			try(ResultSet rs=pstmt.executeQuery();){
+
+				if(rs.next()){
+					return rs.getInt("count");
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+	
+	
+	public List<EmployeeDTO> employeeSearchListByName(int start,int limit,String content){
+		List<EmployeeDTO> list=new ArrayList<>();
+		
+
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select employee_id,employee_name,phone,email"
+						
+						+ " from employee where employee_name like concat ('%', ?, '%')  order by employee_id limit ?,?");){
+
+			pstmt.setString(1, content);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, limit);
+			AES256Util util=new AES256Util();
+			try(ResultSet rs=pstmt.executeQuery();){
+				
+
+				if(rs.next()){
+					do{
+
+						EmployeeDTO employee=new EmployeeDTO();
+
+						employee.setEmployeeId(rs.getInt("employee_id"));
+						employee.setEmployeeName(rs.getString("employee_name"));
+						employee.setPhone(util.decrypt(rs.getString("phone")));
+						employee.setEmail(util.decrypt(rs.getString("email")));
+						
+						
+						list.add(employee);
+
+					}while(rs.next());
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
 	public List<EmployeeDTO> employeeList(){
 		List<EmployeeDTO> list=new ArrayList<EmployeeDTO>();
 		try(

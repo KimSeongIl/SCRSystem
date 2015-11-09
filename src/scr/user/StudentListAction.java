@@ -21,18 +21,42 @@ public class StudentListAction implements AjaxAction{
 		if(!"관리자".equals(auth)){
 			return JsonUtil.putFailJsonContainer("ProfessorListAction NoSession", "권한이 없습니다.");
 		}
+		
+		String content=request.getParameter("content");
+		
+		
 		List<StudentDTO> list=null;
 		StudentDAO studentDao=StudentDAO.getInstance();
 		
 		int page=Integer.parseInt(request.getParameter("page"));
-		double count=studentDao.studentCount();
-		
-		int limit=10;
-		double pageCount=count/limit;
-		list=studentDao.studentList((page-1)*limit,limit);
-		
+		double count =0;
 		
 		Map<String,Object> param=new HashMap<String,Object>();
+		
+		int limit;
+		if(request.getParameter("limit")==null)
+			limit=10;
+		else
+			limit=Integer.parseInt(request.getParameter("limit"));
+		if(content==null){
+			count=studentDao.studentCount();
+			
+			list=studentDao.studentList((page-1)*limit,limit);
+		}else{
+			count=studentDao.studentSearchCountByName(content);
+			
+			list=studentDao.studentSearchListByName((page-1)*limit, limit, content);
+			
+			param.put("content", content);
+		}
+		
+		
+		
+		double pageCount=count/limit;
+		
+		
+		
+		
 		param.put("studentList", list);
 		param.put("pageCount", Math.ceil(pageCount));
 		return JsonUtil.putSuccessJsonContainer(param);
