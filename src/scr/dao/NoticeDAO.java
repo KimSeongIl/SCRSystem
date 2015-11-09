@@ -24,7 +24,7 @@ public class NoticeDAO {
 	public void insertNoticeBoard(String nName,String nTitle,String nContent ){
 		try(Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("insert into notice(notice_name,notice_title,notice_content) values(?,?,?)");){
-            nContent="editor/"+nContent;
+            
 			pstmt.setString(1, nName);
 			pstmt.setString(2, nTitle);
 			pstmt.setString(3, nContent);

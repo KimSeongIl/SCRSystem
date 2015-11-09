@@ -70,7 +70,11 @@ $(function(){
 
 
 function pasteHTML(filepath){
-    var sHTML = '<img src="<%=request.getContextPath()%>/C:/project/SRcSystem/WebContent/editor/uploads/'+filepath+'">';
+	<%
+	System.out.println("----------------------------------");
+	System.out.println("getContextPath->>>"+request.getContextPath());
+	%>
+    var sHTML = '<img src="<%=request.getContextPath()%>/C:/project/SRcSystem/WebContent/editor/upload/'+filepath+'">';
     oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);
 }
 </script>
