@@ -148,7 +148,7 @@ var requestJsonDataFile=function(requestUrl,requestParam,successFunction){
 
 var requestJsonDataNoLoading=function (requestUrl, requestParam, successFunction) {
 	$.ajax({
-		url : serverUrl + requestUrl,
+		url : requestUrl,
 		type : "POST",
 		async: true,
 		data : requestParam,
@@ -156,7 +156,7 @@ var requestJsonDataNoLoading=function (requestUrl, requestParam, successFunction
 		timeout: 10000,
 		success : function(data){
 			if(data.result=="success"){
-				successFunction(data);s
+				successFunction(data);
 			}else{
 				alert("오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);
 				
