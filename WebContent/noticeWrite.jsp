@@ -16,7 +16,9 @@
 		<tr>
 			<td>내용</td>
 			<td>
-				<textarea rows="10" cols="30" id="ir1" name="nContent" style="width:766px; height:412px; "></textarea>
+				<textarea rows="10" cols="30" id="ir1" name="nContent" style="width:850px; height:500px; ">
+			
+				</textarea>
 			</td>
 		</tr>
 		<tr>

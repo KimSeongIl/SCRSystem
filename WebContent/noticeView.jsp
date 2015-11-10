@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="assets/css/notice.css"> 
 
 
+
 <div id="article">
 	<div id="noticeLine">
 
@@ -42,13 +43,27 @@
 
 
 		</table>
-		<button onclick="location.href='noticeWrite.do'">글쓰기</button>
+		
 
 	</div>
+	<center>
+	
+	 <select id="searchSelect">
+	 <option>작성자</option>
+	 <option>제목</option>
+	 <option>내용</option>
+	 </select>
+	 <input type="search" id="searchValue">
+	 <input type="button" value="검색" onclick="boardSearch()">
+	 
+	 
+	 
+	 </center>
+	 <button onclick="location.href='noticeWrite.do'">글쓰기</button>
 
 
 </div>
 
-
+<script src="assets/js/notice.js"></script>
 
 

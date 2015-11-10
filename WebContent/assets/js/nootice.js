@@ -1,0 +1,25 @@
+function boardSearch(){
+	var value=$('#searchValue').val().trim();
+	var select;
+	
+	alert("value->"+value);
+	
+	if($('#searchSelect').val()=='작성자'){
+		select=1;
+	}else if($('#searchSelect').val()=='제목'){
+		select=2;
+		
+	}else if($('#searchSelect').val()=='내용'){
+		select=3;
+		
+	}
+	
+	alert("select->"+select);
+	if(value==''){
+		alert("한글자이상부터 검색 가능합니다");
+	}else{
+		location.href="noticeSearch.do?select="+select+"&value="+value;
+	}
+	
+	
+}
