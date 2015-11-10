@@ -120,9 +120,7 @@ public class MainController extends HttpServlet {
 		}
 		
 		
-		request.setAttribute("article", view);
-		
-		
+		request.setAttribute("article", view);	
 		
 		RequestDispatcher dispatcher=request.getRequestDispatcher("template.jsp");
 		dispatcher.forward(request, response);

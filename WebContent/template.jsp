@@ -16,11 +16,20 @@
 <body>
 
 	<div id="wrap">
+	<% /*
 	<c:import url="header.jsp"/> 
 	<c:import url="nav.jsp"/> 
 	<c:import url="${requestScope.article }"/> 
 	<c:import url="footer.jsp"/> 
-	
+	 
+	 */
+	 %>
+	 <%String article=(String)request.getAttribute("article"); %>
+	<jsp:include page="header.jsp" flush="false" />
+	<jsp:include page="nav.jsp" flush="false" />
+	<jsp:include page="<%=article %>" flush="false" />
+	<jsp:include page="footer.jsp" flush="false" /> 
+	 
 	</div>
 	
 	<div class="wrap-loading display-none">
@@ -31,6 +40,5 @@
 	
 </body>
 </html>
-
 
 

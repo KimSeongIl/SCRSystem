@@ -1,33 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    <%@ page import="scr.dto.NoticeDTO" %>
-    <%@ page import="java.util.*" %>
-  
-<%
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+   <%@ page import="scr.dto.NoticeDTO" %>
+   <%@ page import="java.util.*" %>
+   <script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+   
+   
+   <c:set var="notice" value="${noticeList}" scope="request"/>
+   <c:set var="nName" value="${noticeList.getNName()}"/>
+   <c:set var="nTitle" value="${noticeList.getNTitle()}"/>
+   <c:set var="nContent" value="${noticeList.getNContent()}"/>
+   <c:set var="nDate" value="${noticeList.getNDate()}"/>
 
-NoticeDTO notice=(NoticeDTO)request.getAttribute("noticeList");
+<div id="article" >
 
-String nName=notice.getNName();
-String nTitle=notice.getNTitle();
-String nContent=notice.getNContent();
-String nDate=String.valueOf(notice.getNDate());
-
-
-
-
-%>
-    
-    <div id="article">
-    
-   <table width="100%">
+<form id="frm" action="noticeInsert.do" method="post" >
+<table width="100%">
 		<tr>
 			<td>제목</td>
-			<td><%=nTitle %></td>
+			<td><input type="text" id="title" name="nTitle" /></td>
 		</tr>
 		<tr>
 			<td>내용</td>
 			<td>
-				<div rows="10" cols="30"  name="nContent" style="width:766px; height:412px; "><%=nContent %></div>
+				<textarea rows="10" cols="30" id="ir1" name="nContent" style="width:850px; height:500px; " readonly>
+			${nContent}
+				</textarea>
 			</td>
 		</tr>
 		<tr>
@@ -37,5 +36,52 @@ String nDate=String.valueOf(notice.getNDate());
 			</td>
 		</tr>
 </table>
+</form>
 
-    </div>
+
+</div>
+
+
+<script type="text/javascript">
+var oEditors = [];
+
+$(function(){
+
+					nhn.husky.EZCreator.createInIFrame({
+						oAppRef: oEditors,
+						elPlaceHolder: "ir1",
+						//SmartEditor2Skin.html 파일이 존재하는 경로
+						sSkinURI: "editor/SmartEditor2Skin.html",	
+						htParams : {
+							// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+							bUseToolbar : true,				
+							// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+							bUseVerticalResizer : true,		
+							// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+							bUseModeChanger : true,			
+							fOnBeforeUnload : function(){
+								
+							}
+						}, 
+						fOnAppLoad : function(){
+							//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+							//oEditors.getById["ir1"].exec("PASTE_HTML", ["기존 DB에 저장된 내용을 에디터에 적용할 문구"]);
+						},
+						fCreator: "createSEditor2"
+					});
+					
+					$("#save").click(function(){
+						oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+						$("#frm").submit();
+					})
+					
+					
+});
+
+
+function pasteHTML(filepath){
+	
+    var sHTML = '<img src="<%=request.getContextPath()%>/C:/project/SRcSystem/WebContent/editor/upload/'+filepath+'">';
+    oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);
+}
+</script>

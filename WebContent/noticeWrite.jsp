@@ -16,7 +16,9 @@
 		<tr>
 			<td>내용</td>
 			<td>
-				<textarea rows="10" cols="30" id="ir1" name="nContent" style="width:766px; height:412px; "></textarea>
+				<textarea rows="10" cols="30" id="ir1" name="nContent" style="width:850px; height:500px; ">
+			
+				</textarea>
 			</td>
 		</tr>
 		<tr>
@@ -70,7 +72,11 @@ $(function(){
 
 
 function pasteHTML(filepath){
-    var sHTML = '<img src="<%=request.getContextPath()%>/C:/project/SRcSystem/WebContent/editor/uploads/'+filepath+'">';
+	<%
+	System.out.println("----------------------------------");
+	System.out.println("getContextPath->>>"+request.getContextPath());
+	%>
+    var sHTML = '<img src="<%=request.getContextPath()%>/C:/project/SRcSystem/WebContent/editor/upload/'+filepath+'">';
     oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);
 }
 </script>

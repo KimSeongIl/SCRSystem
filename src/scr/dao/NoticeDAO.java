@@ -19,12 +19,14 @@ public class NoticeDAO {
 	public static NoticeDAO getInstance(){
 		return instance;
 	}
+	
+	
 
 	//공지사항 입력 정보 삽입하기 
 	public void insertNoticeBoard(String nName,String nTitle,String nContent ){
 		try(Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("insert into notice(notice_name,notice_title,notice_content) values(?,?,?)");){
-            nContent="editor/"+nContent;
+            
 			pstmt.setString(1, nName);
 			pstmt.setString(2, nTitle);
 			pstmt.setString(3, nContent);
@@ -35,6 +37,99 @@ public class NoticeDAO {
 		}
 
 
+	}
+	//작성자명 별로 공지사항정보 가져오기
+	public List searchNoticeByName(String value){
+		List noticeList=null;
+		NoticeDTO notice=null;
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select * from notice where notice_name like ?");){
+			
+			pstmt.setString(1,"%"+value+"%");
+			ResultSet rs=pstmt.executeQuery();
+			
+			
+			if(rs.next()){
+			noticeList=new ArrayList();
+			do{
+				notice=new NoticeDTO();
+				notice.setNId(rs.getInt("notice_id"));
+				notice.setNName(rs.getString("notice_name"));
+				notice.setNTitle(rs.getString("notice_title"));
+				notice.setNContent(rs.getString("notice_content"));
+				notice.setNDate(rs.getTimestamp("notice_date"));
+				
+				noticeList.add(notice);
+				
+			}while(rs.next());
+				
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return noticeList;
+	}
+	
+	//공지사항 제목으로 검색 
+	public List searchNoticeByTitle(String value){
+		List noticeList=null;
+		NoticeDTO notice=null;
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select * from notice where notice_title like ? ");){
+			
+			pstmt.setString(1,"%"+value+"%");
+			ResultSet rs=pstmt.executeQuery();
+			
+			if(rs.next()){
+			noticeList=new ArrayList();
+			do{
+				notice=new NoticeDTO();
+				notice.setNId(rs.getInt("notice_id"));
+				notice.setNName(rs.getString("notice_name"));
+				notice.setNTitle(rs.getString("notice_title"));
+				notice.setNContent(rs.getString("notice_content"));
+				notice.setNDate(rs.getTimestamp("notice_date"));
+				
+				noticeList.add(notice);
+				
+			}while(rs.next());
+				
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return noticeList;
+	}
+	
+	//공지사항 내용별로 검색 
+	public List searchNoticeByContent(String value){
+		List noticeList=null;
+		NoticeDTO notice=null;
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select * from notice where notice_content like ? ");){
+			
+			pstmt.setString(1,"%"+value+"%");
+			ResultSet rs=pstmt.executeQuery();
+			
+			if(rs.next()){
+			noticeList=new ArrayList();
+			do{
+				notice=new NoticeDTO();
+				notice.setNId(rs.getInt("notice_id"));
+				notice.setNName(rs.getString("notice_name"));
+				notice.setNTitle(rs.getString("notice_title"));
+				notice.setNContent(rs.getString("notice_content"));
+				notice.setNDate(rs.getTimestamp("notice_date"));
+				
+				noticeList.add(notice);
+				
+			}while(rs.next());
+				
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return noticeList;
 	}
 
 	//공지사항 자료 가져오기
