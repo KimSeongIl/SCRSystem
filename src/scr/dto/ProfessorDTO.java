@@ -1,5 +1,7 @@
 package scr.dto;
 
+import java.util.ArrayList;
+
 public class ProfessorDTO {
 
 	private int professorId;
@@ -7,8 +9,12 @@ public class ProfessorDTO {
 	private int officeNo;
 	private String officeTel;
 	private String phone;
+	private String email;
 	private int departmentId;
 	private String departmentName;
+	private String img;
+	private ArrayList<DepartmentDTO> departmentList;
+	
 	
 	public void setProfessorId(int professorId){
 		this.professorId=professorId;
@@ -40,6 +46,12 @@ public class ProfessorDTO {
 	public String getPhone(){
 		return phone;
 	}
+	public void setEmail(String email){
+		this.email=email;
+	}
+	public String getEmail(){
+		return email;
+	}
 	public void setDepartmentId(int departmentId){
 		this.departmentId=departmentId;
 	}
@@ -51,5 +63,17 @@ public class ProfessorDTO {
 	}
 	public String getDepartmentName(){
 		return departmentName;
+	}
+	public void setImg(String img){
+		this.img=img;
+	}
+	public String getImg(){
+		return img;
+	}
+	public void setDepartmentList(ArrayList<DepartmentDTO> departmentList){
+		this.departmentList=departmentList;
+	}
+	public ArrayList<DepartmentDTO> getDepartmentList(){
+		return departmentList;
 	}
 }

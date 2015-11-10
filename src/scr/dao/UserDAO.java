@@ -37,51 +37,7 @@ public class UserDAO {
 		}
 	    
 	}
-	public void studentInfoAdd(StudentDTO student) {
-
-		String column="student_id,name,email,phone,department_id";
-		String param="?,?,?,?,?,?";
-		String query;
-		int num1=0;
-		int num2=0;
-		if(student.getMinorId()!=0){
-			param+=",?";
-			column+=",minor_id";
-			num1++;
-			
-		}
-			
-		if(student.getDoubleMajorId()!=0){
-			param+=",?";
-			column+=",double_major_id";
-			num2++;
-		}
-		column+=",status";
-		query="insert into student("+column+") values("+param+")";
-		
 	
-		
-		try(
-			Connection conn=Conn.getConnection();
-			
-			PreparedStatement pstmt=conn.prepareStatement(query);){
-
-			AES256Util util=new AES256Util();
-			pstmt.setInt(1, student.getStudentId());
-			pstmt.setString(2,student.getName());
-			pstmt.setString(3, util.encrypt(student.getEmail()));
-			pstmt.setString(4,util.encrypt(student.getPhone()));
-			pstmt.setInt(5,student.getDepartmentId());
-			pstmt.setInt(6, student.getMinorId());
-			pstmt.setInt(7, student.getDoubleMajorId());
-			pstmt.setString(8, student.getStatus());
-			pstmt.executeUpdate();
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}
 	
 	
 	public UserDTO login(UserDTO user){
@@ -136,7 +92,7 @@ public boolean passwordCheck(UserDTO user) {
 		    if(rs.next()){		    	
 		    	check=true;
 		    }else{
-		    	boolean dto ;
+		    	
 		    	check=false;
 		    }
 		} catch (Exception e) {
@@ -145,7 +101,7 @@ public boolean passwordCheck(UserDTO user) {
 		return check;
 	}
 
-	public void userDelete(UserDTO user){
+	public boolean userDelete(UserDTO user){
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("delete from user where user_id=?");){
@@ -153,8 +109,9 @@ public boolean passwordCheck(UserDTO user) {
 			pstmt.setInt(1, user.getUid());
 			pstmt.executeUpdate();
 		}catch(Exception e){
-			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 	
 

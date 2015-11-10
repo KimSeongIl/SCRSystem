@@ -21,6 +21,7 @@ if (ServletFileUpload.isMultipartContent(request)){
 	ServletFileUpload uploadHandler = new ServletFileUpload(new DiskFileItemFactory());
 	uploadHandler.setHeaderEncoding("UTF-8");
 	List<FileItem> items = uploadHandler.parseRequest(request);
+	System.out.print("/1");
 	for (FileItem item : items) {
 		if(item.getFieldName().equals("callback")) {
 			return1 = item.getString("UTF-8");
@@ -46,6 +47,7 @@ if (ServletFileUpload.isMultipartContent(request)){
 			   		
 			   		//파일 기본경로
 		    		String dftFilePath = request.getServletContext().getRealPath("/");
+			   		System.out.print(dftFilePath);
 		    		//파일 기본경로 _ 상세경로
 		    		String filePath = dftFilePath + "editor" + File.separator +"upload" + File.separator;
 		    		
@@ -79,7 +81,7 @@ if (ServletFileUpload.isMultipartContent(request)){
 		    		return3 += "&bNewLine=true";
                                 // img 태그의 title 옵션에 들어갈 원본파일명
 		    		return3 += "&sFileName="+ name;
-		    		return3 += "&sFileURL=/editor/upload/"+realFileNm;
+		    		return3 += "&sFileURL=/editor/uploads/"+realFileNm;
 			   	}
 			}else {
 				  return3 += "&errstr=error";

@@ -6,11 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import scr.action.CommandAction;
+import scr.dao.EmployeeDAO;
+import scr.dao.ProfessorDAO;
 import scr.dao.StudentDAO;
 import scr.dao.UserDAO;
+import scr.dto.EmployeeDTO;
+import scr.dto.ProfessorDTO;
 import scr.dto.StudentDTO;
 import scr.dto.UserDTO;
-
 import scr.util.SendMail;
 
 public class SearchPasswordProAction implements CommandAction{
@@ -21,30 +24,40 @@ public class SearchPasswordProAction implements CommandAction{
 		String auth=request.getParameter("user");
 		int uid=Integer.parseInt(request.getParameter("uid"));
 		String uemail=request.getParameter("uemail");
+		int result=0;
 		if("학생".equals(auth)){
 			StudentDTO student=new StudentDTO();
 			student.setStudentId(uid);
 			student.setEmail(uemail);
 			StudentDAO studentDao=StudentDAO.getInstance();
-			int result=studentDao.matchEmail(student);
+			result=studentDao.matchEmail(student);
 			
-			if(result==2){
-				alert="<script>alert('정보가 맞지 않거나 오류가 발생했습니다');history.back();</script>";
-				request.setAttribute("alert", alert);
-				return "searchPasswordPro.jsp";
-			}
+			
 			
 		}else if("교수".equals(auth)){
+			ProfessorDTO professor=new ProfessorDTO();
+			professor.setProfessorId(uid);
+			professor.setEmail(uemail);
+			ProfessorDAO professorDao=ProfessorDAO.getInstance();
+			result=professorDao.matchEmail(professor);
 			
 		}else if("직원".equals(auth)){
-			
+			EmployeeDTO employee=new EmployeeDTO();
+			employee.setEmployeeId(uid);
+			employee.setEmail(uemail);
+			EmployeeDAO employeeDao=EmployeeDAO.getInstance();
+			result=employeeDao.matchEmail(employee);
 		}
 		
-		
+		if(result==2){
+			alert="<script>alert('정보가 맞지 않거나 오류가 발생했습니다');history.back();</script>";
+			request.setAttribute("alert", alert);
+			return "searchPasswordPro.jsp";
+		}
 		
 
 
-		String tempPassword="";
+		StringBuilder tempPassword=new StringBuilder("");
 
 		for(int i=0;i<10;i++){
 			int num=(int)(Math.random()*3);
@@ -58,11 +71,11 @@ public class SearchPasswordProAction implements CommandAction{
 			}
 
 
-			tempPassword+=c;
+			tempPassword.append(c);
 
 		}
 		String subject = "성공회대학교 상담관리시스템 임시 비밀번호 입니다.";
-		String content = "성공회대학교 상담관리시스템 임시 비밀번호 입니다 "+tempPassword;
+		String content = "성공회대학교 상담관리시스템 임시 비밀번호 입니다 "+tempPassword.toString();
 
 		alert="<script>alert('임시비밀번호를 메일로 발송하였습니다');</script>";
 		
@@ -77,7 +90,7 @@ public class SearchPasswordProAction implements CommandAction{
 		
 		UserDTO user=new UserDTO();
 		user.setUid(uid);
-		user.setPassword(tempPassword);
+		user.setPassword(tempPassword.toString());
 		UserDAO userDao=UserDAO.getInstance();
 		userDao.setTempPassword(user);
 		

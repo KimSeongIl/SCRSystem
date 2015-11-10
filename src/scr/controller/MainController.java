@@ -64,6 +64,7 @@ public class MainController extends HttpServlet {
     		String command=(String)keyIter.next();
     		String className=pr.getProperty(command);
     		try{
+    			//System.out.println(command);
     			Class<?> commandClass=Class.forName(className);
     			
     			Object commandInstance=commandClass.newInstance();

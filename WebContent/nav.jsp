@@ -10,30 +10,32 @@
 	<div id="navContent">
 		<ul>
 			<li onclick="location.href='main.do'">Home</li>
+ 
 			<li>공지사항</li>
 			<li>이용안내</li>
-			<!-- 
+			
+
 			<c:choose>
 				<c:when test="${empty sessionScope.auth || sessionScope.auth eq \"학생\" }">
-					<li>상담신청</li>
+					<li onclick="location.href='noticeView.do'">공지사항</li>
+					<li>이용안내</li>
+					<li onclick="location.href='counselRequest.do'">상담신청</li>
+					<li>자료실</li>
 				</c:when>
-				<c:when test="${sessionScope eq \"교수\" }">
+				<c:when test="${sessionScope.auth eq \"교수\" || sessionScope.auth eq \"직원\"}">
+					<li>공지사항</li>
+					<li>이용안내</li>
 					<li>상담관리</li>
+					<li>자료실</li>
 				</c:when>
-				<c:when test="${sessionScope.auth eq \"직원\" || sessionScope.auth eq \"관리자\" }">
+				<c:when test="${sessionScope.auth eq \"관리자\" }">
 					<li onclick="location.href='userManagement.do'">회원관리</li>
+					<li onclick="location.href='departmentManagement.do'">학과관리</li>
+					<li>상담관리</li>
+					<li>게시판관리</li>
 				</c:when>
 			</c:choose>
-			 -->
-			 <%String auth=(String)session.getAttribute("auth"); %>
-			 <%if(auth==null || "학생".equals(auth)){ %>
-			 	<li>상담신청</li>
-			 <%}else if("교수".equals(auth)){ %>
-			 	<li>상담관리</li>
-			 <%}else{ %>
-			 	<li onclick="location.href='userManagement.do'">회원관리</li>
-			 <%} %>
-			<li>자료실</li>
+
 		</ul>
 	</div>
 	
