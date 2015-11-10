@@ -8,8 +8,6 @@
     
     <c:set var="department" value="${requestScope.department }"/>
     
-
-
 	<div id="article" >
 
 	<br>
