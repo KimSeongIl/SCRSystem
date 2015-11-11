@@ -123,6 +123,7 @@ public class MainController extends HttpServlet {
 		}
 		
 		
+
 		request.setAttribute("article", view);
 		RequestDispatcher dispatcher;
 		if("/SCRsystem/editor/noticeDetail.do".equals(request.getRequestURI())){
@@ -131,7 +132,7 @@ public class MainController extends HttpServlet {
 			dispatcher=request.getRequestDispatcher("template.jsp");
 		}
 		
-		
+	
 		dispatcher.forward(request, response);
 		
 	}

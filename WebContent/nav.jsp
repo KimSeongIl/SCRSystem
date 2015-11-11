@@ -10,7 +10,11 @@
 	<div id="navContent">
 		<ul>
 			<li onclick="location.href='main.do'">Home</li>
+ 
+			<li>공지사항</li>
+			<li>이용안내</li>
 			
+
 			<c:choose>
 				<c:when test="${empty sessionScope.auth || sessionScope.auth eq \"학생\" }">
 					<li onclick="location.href='noticeView.do'">공지사항</li>
@@ -31,8 +35,7 @@
 					<li>게시판관리</li>
 				</c:when>
 			</c:choose>
-			
-			
+
 		</ul>
 	</div>
 	

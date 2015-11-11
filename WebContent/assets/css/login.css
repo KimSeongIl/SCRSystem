@@ -6,8 +6,9 @@
 }
 #loginSubDiv{
 	width:100%;
-	border:1px solid #E3E3E3;
-	border-radius:10px;
+	border:1px solid #83888B;
+	border-radius:5px;
+	
 }
 #loginSubDiv h2{
 	text-align:center;
@@ -16,6 +17,7 @@
 	list-style:none;
 	margin-bottom:10px;
 	margin-left:10px;
+	cursor:pointer;
 }
 #loginContent,#searchPasswordContent{
 	margin-top:100px;

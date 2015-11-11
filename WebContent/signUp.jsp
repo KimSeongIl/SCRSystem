@@ -1,46 +1,11 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="scr.dto.DepartmentDTO"%>
-
 <%@ page import="java.util.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" type="text/css" href="assets/css/signUp.css">
 
 <c:set var="department" value="${requestScope.department }" />
-
-<style>
-#signUpHead{background-color:#2080D0;height:15px;  }
-
-#signUpHead td{border:1px solid #2080D0; }
-
-tr#signUpHead{margin:100px;}
-
-#signUpFooter{background-color:#2080D0;height:15px; }
-
-#signUpFooter td{border:1px solid #2080D0; }
-
-
-
-
-
-td{height:15px;}
-#signUp tr td {
-    padding: 7px;
-}
-.table>thead>tr>th {
-    
-    
-    vertical-align: center;
-   
-}
-table#signUp input{margin-left:30px;} 
-
-table#signUp select{margin-left:30px;}
-
-
-
-</style>
-
 
 <div id="article">
 

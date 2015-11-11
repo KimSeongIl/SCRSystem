@@ -2,3 +2,4 @@ build/classes
 WebContent/WEB-INF/key.properties
 WebContent/WEB-INF/email.properties
 WebContent/WEB-INF/upload.properties
+/build/

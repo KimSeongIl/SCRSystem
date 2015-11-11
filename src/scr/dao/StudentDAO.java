@@ -63,6 +63,50 @@ public class StudentDAO {
 		return 0;
 	}
 	
+	public List<StudentDTO> studentSearchByName(String name){
+List<StudentDTO> list=new ArrayList<>();
+		
+
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select student_id,name,department_id,"
+						+ "ifnull((select department_name from department where department_id=student.department_Id),'없음') \"department\" "
+						
+						+ " from student where name like concat ('%', ?, '%') and student_id!=?  order by department_id,student_id");){
+
+			pstmt.setString(1, name);
+			pstmt.setString(2, name);
+			try(ResultSet rs=pstmt.executeQuery();){
+				
+
+				if(rs.next()){
+					do{
+
+						StudentDTO student=new StudentDTO();
+
+						student.setStudentId(rs.getInt("student_id"));
+						student.setName(rs.getString("name"));
+						
+						student.setDepartmentId(rs.getInt("department_id"));
+						student.setDepartmentName(rs.getString("department"));
+						
+						list.add(student);
+						
+
+					}while(rs.next());
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
 	public List<StudentDTO> studentSearchListByName(int start,int limit,String content){
 		List<StudentDTO> list=new ArrayList<>();
 		

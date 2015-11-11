@@ -1,19 +1,58 @@
-	
-	#signUpTitle{
-	text-align:center;
-	}
-	#signUp{
-	margin-left:auto;
-	margin-right:auto;
-	
-	
-	}
-	
-	#signUp tr td{
-	padding:10px;
+#signUpTitle {
+	text-align: center;
+}
 
-	}
-	
-	#joinBtn{
-	text-align:center;
-	}
+#signUp {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#signUp tr td {
+	padding: 10px;
+}
+
+#joinBtn {
+	text-align: center;
+}
+
+#signUpHead {
+	background-color: #2080D0;
+	height: 15px;
+}
+
+#signUpHead td {
+	border: 1px solid #2080D0;
+}
+
+tr#signUpHead {
+	margin: 100px;
+}
+
+#signUpFooter {
+	background-color: #2080D0;
+	height: 15px;
+}
+
+#signUpFooter td {
+	border: 1px solid #2080D0;
+}
+
+td {
+	height: 15px;
+}
+
+#signUp tr td {
+	padding: 7px;
+}
+
+.table>thead>tr>th {
+	vertical-align: center;
+}
+
+table#signUp input {
+	margin-left: 30px;
+}
+
+table#signUp select {
+	margin-left: 30px;
+}
