@@ -101,6 +101,9 @@ public class MainController extends HttpServlet {
 	private void requestPro(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
 		String view=null;
 		CommandAction com=null;
+		
+		
+		
 		try{//이부분은 요청한 URI에서 명령어를 추출하는 부분이다 .URI를 명령어로 사용하는 예제에서 추가되는 부분은 여기부터 
 			String command=request.getRequestURI();
 			
@@ -121,10 +124,14 @@ public class MainController extends HttpServlet {
 		
 		
 		request.setAttribute("article", view);
+		RequestDispatcher dispatcher;
+		if("/SCRsystem/editor/noticeDetail.do".equals(request.getRequestURI())){
+			dispatcher=request.getRequestDispatcher("../template.jsp");
+		}else{
+			dispatcher=request.getRequestDispatcher("template.jsp");
+		}
 		
 		
-		
-		RequestDispatcher dispatcher=request.getRequestDispatcher("template.jsp");
 		dispatcher.forward(request, response);
 		
 	}
