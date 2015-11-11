@@ -17,7 +17,7 @@
 	</h1>
 	<div style="display:inline-block;width:40%;float:right;margin-top:25px;margin-bottom:10px;text-align:right;">
 			<form id="searchForm">
-			<input type="search" class="form-control" id="searchInput" style="width:50%;display:inline-block;margin-right:10px;" placeholder="이름으로 검색">
+			<input type="search" class="form-control" id="searchInput" style="width:50%;display:inline-block;margin-right:10px;" placeholder="학생 이름으로 검색">
 			<input width="50%" class="btn btn-default"  id="searchBtn" type="submit" value="검색" >
 			</form>
 	</div>

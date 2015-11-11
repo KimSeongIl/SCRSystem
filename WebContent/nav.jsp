@@ -11,8 +11,7 @@
 		<ul>
 			<li onclick="location.href='main.do'">Home</li>
  
-			<li>공지사항</li>
-			<li>이용안내</li>
+			
 			
 
 			<c:choose>

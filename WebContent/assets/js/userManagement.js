@@ -26,7 +26,7 @@ var readImg=function(input){
 var professorAdd=function(data){
 	
 	
-		alert('추가되었습니다');
+		alert('추가되었습니다.');
 		searched=false;
 		requestJsonData("professorList.ajax",{page:thisPage},professorList);
 		
@@ -75,7 +75,7 @@ var employeeDelete=function(data){
 		if(deleted){
 			alert('삭제되었습니다');
 		}else{
-			alert('소속 학과가 있어서 지울수 없습니다');
+			alert('소속 학과가 있어서 지울수 없습니다.');
 		}
 		searched=false;
 		requestJsonData("employeeList.ajax",{page:thisPage},employeeList);
@@ -144,7 +144,7 @@ var studentList=function(data){
 			requestJsonDataGet("studentList.ajax",{page:thisPage,content:content,limit:10},studentList);
 		})
 		$('.studentDelete').click(function(){
-			if(confirm('삭제하시겠습니까')){
+			if(confirm('삭제하시겠습니까?')){
 				var id=$(this).attr('uid');
 				requestJsonData("userDelete.ajax",{uid:id},studentDelete);
 			}
@@ -222,7 +222,7 @@ var professorList=function(data){
 		})
 		
 		$('.professorDelete').click(function(){
-			if(confirm('삭제하시겠습니까')){
+			if(confirm('삭제하시겠습니까?')){
 				var id=$(this).attr('uid');
 				requestJsonData("userDelete.ajax",{uid:id},professorDelete);
 			}
@@ -289,7 +289,7 @@ var employeeList=function(data){
 		})
 		
 		$('.employeeDelete').click(function(){
-			if(confirm('삭제하시겠습니까')){
+			if(confirm('삭제하시겠습니까?')){
 				var id=$(this).attr('uid');
 				requestJsonData("userDelete.ajax",{uid:id},employeeDelete);
 			}
@@ -328,6 +328,7 @@ $(document).ready(function(){
 			search="student";
 			thisPage=1;
 			searched=false;
+			$('#searchInput').attr('placeholder','학생 이름으로 검색');
 			requestJsonData("studentList.ajax",{page:thisPage},studentList);
 			
 			
@@ -342,6 +343,7 @@ $(document).ready(function(){
 			search="professor";
 			thisPage=1;
 			searched=false;
+			$('#searchInput').attr('placeholder','교수 이름으로 검색');
 			requestJsonData("professorList.ajax",{page:thisPage},professorList);
 			
 		}
@@ -354,6 +356,7 @@ $(document).ready(function(){
 			search="employee";
 			thisPage=1;
 			searched=false;
+			$('#searchInput').attr('placeholder','직원 이름으로 검색');
 			requestJsonData("employeeList.ajax",{page:thisPage},employeeList);
 			
 		}
@@ -373,7 +376,7 @@ $(document).ready(function(){
 				return;
 			}
 			if($('#professorAddForm select[name=departmentId').val()==department_id){
-				alert('학과와 중복됩니다');
+				alert('학과와 중복됩니다.');
 				$('#professorAddForm select[name=departmentGroup] option:first-child').attr('selected','true');
 				return;
 			}
