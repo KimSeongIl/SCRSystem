@@ -6,24 +6,45 @@ var professorList=function(data){
 		
 		
 		var str="";
+		str+="<table class='table table-bordered'>";
+		str+="<tr>";
+		str+="<th></th>";
+		str+="<th>교수번호</th>";
+		str+="<th>교수명</th>";
+		str+="<th>학과</th>";
+		str+="<th></th>";
+		str+="</tr>";
 		
+			
 		$.each(list,function(key,value){
 			
+			var subDept=value.departmentList;
+			str+="<tr>";
+			str+="<td rowspan='"+(subDept.length+1)+"'>";
+			str+="<img width='140px' height='140pxs' class='img-rounded' src='assets/img/profile/"+value.img+"' onerror='this.src=\"assets/img/alt.png\"'>";
+			str+="</td>";
+			str+="<td rowspan='"+(subDept.length+1)+"'>"+value.professorId+"</td>";
+			str+="<td rowspan='"+(subDept.length+1)+"'>"+value.professorName+"</td>";
+			str+="<td>"+value.departmentName+"</td>";
+			str+="<td rowspan='"+(subDept.length+1)+"'><input onclick='location.href=\"professorProfile.do?pid="+value.professorId+"\" ' type='button' class='btn btn-primary' value='상담신청'></td>";
 			
-			str+="<div class='col-xs-4 professorListDiv'>";
-			str+="<img width='140px' height='140pxs' class='img-rounded' src='assets/img/profile/"+value.img+"' onerror='this.src=\"assets/img/alt.png\"'><br>";
-			str+="<table>";
-			str+="<tr>";
-			str+="<th>교수번호</th>";
-			str+="<td>"+value.professorId+"</td>";
-			str+="</tr>";
-			str+="<tr>";
-			str+="<th>이름</th>";
-			str+="<td>"+value.professorName+"</td>";
+			
+			
 			str+="</tr>";
 			
-			str+="<tr>";
+			if(subDept!=""){
+				$.each(subDept,function(key1,value1){
+					str+="<tr>";
+					str+="<td>"+value1.departmentName+"</td>";
+					str+="</tr>";
+				})
+			}
+			
+/*
+			
 			if(value.departmentList!=""){
+			
+			
 				var subDept=value.departmentList;
 				str+="<th rowspan='"+(subDept.length+1)+"'>학과</th>";
 				
@@ -34,19 +55,9 @@ var professorList=function(data){
 					str+="<td>"+value1.departmentName+"</td>";
 					str+="</tr>";
 				})
-			}else{
-				
-				str+="<th>학과</th>";
-				str+="<td>"+value.departmentName+"</td>";
-			}
-			str+="</tr>";
-			str+="<tr>";
-			str+="<td colspan='2'><input onclick='location.href=\"professorProfile.do?pid="+value.professorId+"\" ' type='button' class='btn btn-primary' value='상담신청'></td>";
-			str+="</tr>";
-			str+="</table>";
-			str+="</div>";
+			*/
 		})
-		
+		str+="</table>";
 		
 		var pageCount=data.resData[0].pageCount;
 		
