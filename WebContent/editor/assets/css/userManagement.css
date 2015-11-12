@@ -1,0 +1,34 @@
+#userManagementMenu{
+	margin-top:50px;
+}
+
+#userManagementContainer{
+	width:100%;
+	
+	margin-top:50px;	
+}
+
+#addBtnDiv{
+	width:100%;
+	text-align:right;
+	margin:10px;
+	padding-right:30px;
+	
+}
+#departmentList{
+	border:1px solid #ddd;
+	border-radius:4px 4px 0 0;
+}
+#departmentList li{
+	list-style:none;
+	border-bottom:0.5px solid #ddd;
+	height:30px; 
+	width:100%;
+}
+#departmentList span{
+	float:right;
+	cursor:pointer;
+}
+#imgContainer{
+	text-align:center;
+}

@@ -22,6 +22,28 @@ public class NoticeDAO {
 	
 	
 
+	//공지사항 정보 삭제하기 
+	public void deleteNotice(int nId){
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("delete from notice where notice_id=?");){
+			pstmt.setInt(1,nId);
+			
+			pstmt.executeUpdate();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	//공지사항 정보 수정하기
+
+	public void updateNotice(int nId,String nName,String nTitle,String nContent){
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("");){
+			pstmt.setInt(arg0, arg1);
+		}
+		
+	}
+	
 	//공지사항 입력 정보 삽입하기 
 	public void insertNoticeBoard(String nName,String nTitle,String nContent ){
 		try(Connection conn=Conn.getConnection();
@@ -181,6 +203,7 @@ public class NoticeDAO {
 					
 					notice=new NoticeDTO();
 					
+					notice.setNId(rs.getInt("notice_id"));
 					notice.setNName(rs.getString("notice_name"));
 					notice.setNTitle(rs.getString("notice_title"));
 					notice.setNContent(rs.getString("notice_content"));

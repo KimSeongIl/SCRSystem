@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<link rel="stylesheet" type="text/css" href="..assets/css/login.css">
+<link rel="stylesheet" type="text/css" href="assets/css/login.css">
 <div id="article">
 
 	<c:import url="loginMenu.jsp" />
