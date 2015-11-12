@@ -6,12 +6,25 @@
    <%@ page import="java.util.*" %>
   
    
+ 
+  <c:set var="notice" value="${noticeList}" scope="request"/>
+    <c:set var="nId" value="${noticeList.getNId()}"/>
+  <c:set var="nName" value="${noticeList.getNName()}"/>
+  <c:set var="nTitle" value="${noticeList.getNTitle()}"/>
+  <c:set var="nCon" value="${noticeList.getNContent()}"/>
+  <c:set var="nDate" value="${noticeList.getNDate()}"/>
    
-   <c:set var="notice" value="${noticeList}" scope="request"/>
-   <c:set var="nName" value="${noticeList.getNName()}"/>
-   <c:set var="nTitle" value="${noticeList.getNTitle()}"/>
-   <c:set var="nContent" value="${noticeList.getNContent()}"/>
-   <c:set var="nDate" value="${noticeList.getNDate()}"/>
+  <c:set var="string1" value="${nCon}"/>
+   
+  <c:set var="middle" value="src"/>
+  <c:set var="after" value="${fn:substringAfter(string1,middle) }"/>
+  <c:set var="before" value="${fn:substringBefore(string1,middle) }"/>
+    
+    
+   <c:set var="string2" value="${fn:replace(after, 
+                                'upload', 'editor/upload')}" />
+                                
+  <c:set var="nContent" value="${before}${middle}${string2}"/> 
 
 <div id="article" >
 
@@ -30,14 +43,30 @@
 				${nContent}
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="button" id="save" value="저장"/>
-				<input type="button" value="취소"/>
-			</td>
-		</tr>
+		
 </table>
 </form>
+
+
+<div>
+<form action="#" method="post">
+<input type="hidden" name="#" value="#"/>
+<input type="hidden" name="#" value="#"/>
+<input type="submit" value="수정">
+
+
+</form>
+
+
+<form action="noticeDelete.do" method="post">
+<input type="hidden" name="nId" value="${nId}"/>
+<input type="submit" value="삭제" onclick="if(!confirm('정말 삭제 하시겠습니까?')){return false;}">
+</form>
+</div>
+
+
+<!--  공통부분 -->
+<button class="btn btn-default" onclick="history.back()">목록</button>
 
 
 </div>

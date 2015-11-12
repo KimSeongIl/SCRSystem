@@ -1,0 +1,40 @@
+#loginSub{
+	margin-top:100px;
+	float:left;
+	width:25%;
+	padding:10px;
+}
+#loginSubDiv{
+	width:100%;
+	border:1px solid #E3E3E3;
+	border-radius:5px;
+	
+}
+#loginSubDiv h2{
+	text-align:center;
+}
+#loginSubDiv li{
+	list-style:none;
+	margin-bottom:10px;
+	margin-left:10px;
+	cursor:pointer;
+}
+#loginContent,#searchPasswordContent{
+	margin-top:100px;
+	float:left;
+	width:74%;
+	text-align:center;
+	
+}
+
+#loginContent table,#searchPasswordContent table{
+	margin:auto;
+	width:40%;
+	
+}
+#loginContent table td,#searchPasswordContent table td{
+	padding:10px;
+}
+#searchPasswordContent table tr:first-child span{
+	margin-right:10px;
+}

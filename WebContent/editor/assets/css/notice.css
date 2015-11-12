@@ -1,0 +1,12 @@
+#noticeLine {
+	height-min: 500px;
+}
+
+div#noticeLine a:hover {
+	color: #2a6496;
+	text-decoration: underline;
+}
+
+div#noticeLine a{
+	color:black;
+}
