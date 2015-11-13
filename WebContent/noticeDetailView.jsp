@@ -49,11 +49,9 @@
 
 
 <div>
-<form action="#" method="post">
-<input type="hidden" name="#" value="#"/>
-<input type="hidden" name="#" value="#"/>
-<input type="submit" value="수정">
-
+<form action="noticeUpdateBefore.do" method="post">
+<input type="hidden" name="nId" value="${nId}"/>
+<input type="submit"  value="수정" onclick="if(!confirm('정말로 수정하시겠습니까?')){return false;}"/>
 
 </form>
 
@@ -61,6 +59,7 @@
 <form action="noticeDelete.do" method="post">
 <input type="hidden" name="nId" value="${nId}"/>
 <input type="submit" value="삭제" onclick="if(!confirm('정말 삭제 하시겠습니까?')){return false;}">
+
 </form>
 </div>
 
