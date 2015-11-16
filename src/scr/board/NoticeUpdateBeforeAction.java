@@ -5,26 +5,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import scr.action.CommandAction;
 import scr.dao.NoticeDAO;
+import scr.dto.NoticeDTO;
 
-public class NoticeUpdateAction implements CommandAction  {
+//공지사항 수정전에 거치는 단계
+public class NoticeUpdateBeforeAction implements CommandAction  {
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		request.setCharacterEncoding("UTF-8");
-		
-		String id=request.getParameter("nid");
+		String id=request.getParameter("nId");
 		int nId=Integer.parseInt(id);
-		String nTitle=request.getParameter("nTitle");
-		String nContent=request.getParameter("nContent");
+		System.out.println("nId->"+nId);
+		NoticeDTO noticeList=new NoticeDTO();
 		
 		NoticeDAO notice=NoticeDAO.getInstance();
 		
-		notice.updateNotice(nId,nTitle, nContent);
+		noticeList=notice.noticeViewById(nId);
+		System.out.println(noticeList);
 		
-		System.out.println("noticeUpdate");
+		request.setAttribute("noticeList", noticeList);
 		
 		
-		
-		return "noticeUpdate.jsp";
+		return "noticeWrite.jsp";
 		
 	}
-
 }

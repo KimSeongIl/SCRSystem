@@ -1,34 +1,57 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@page import="scr.dto.NoticeDTO,scr.dao.NoticeDAO"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
-<script type="text/javascript" src="editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-<div id="article" >
+<c:set var="noticeList" value="${noticeList}" scope="request" />
 
-<form id="frm" action="noticeInsert.do" method="post" >
-<table width="100%">
-		<tr>
-			<td>제목</td>
-			<td><input type="text" id="title" name="nTitle" /></td>
-		</tr>
-		<tr>
-			<td>내용</td>
-			<td>
-				<textarea rows="10" cols="30" id="ir1" name="nContent" style="width:850px; height:500px; ">
+<c:if test="${ noticeList!=null }">
+     
+    <c:set var="nId" value="${noticeList.getNId()}"/>
+	<c:set var="nTitle" value="${noticeList.getNTitle()}" />
+	<c:set var="nContent" value="${noticeList.getNContent()}" />
+
+
+</c:if>
+
+<script type="text/javascript" src="editor/js/HuskyEZCreator.js"
+	charset="utf-8"></script>
+	
+<div id="article">
+
+   
+		<c:choose>
+			<c:when test="${noticeList==null}">
+				<form id="frm" action="noticeInsert.do" method="post">
+			</c:when>
+		
+			<c:otherwise>
+				<form id="frm" action="noticeUpdate.do?nid=${nId}" method="post">
+			</c:otherwise>
+		</c:choose>
+		
+		<table width="100%">
+			<tr>
+				<td>제목</td>
+				<td><input type="text" id="title" name="nTitle"
+					value="${nTitle}" /></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><textarea rows="10" cols="30" id="ir1" name="nContent"
+						style="width: 850px; height: 500px;">${nContent}
 			
-				</textarea>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="button" id="save" value="저장"/>
-				<input type="button" value="취소"/>
-			</td>
-		</tr>
-</table>
-</form>
+				</textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="button" id="save" value="저장" /> <input
+					type="button" value="취소" /></td>
+			</tr>
+		</table>
+	</form>
 
 
 </div>
@@ -72,11 +95,12 @@ $(function(){
 
 
 function pasteHTML(filepath){
+    var sHTML = '<img src="<%=request.getContextPath()%>/C:/project/SRcSystem/WebContent/editor/uploads/'+filepath+'">';
 	<%
 	System.out.println("----------------------------------");
 	System.out.println("getContextPath->>>"+request.getContextPath());
 	%>
     var sHTML = '<img src="<%=request.getContextPath()%>/C:/project/SRcSystem/WebContent/editor/upload/'+filepath+'">';
-    oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);
-}
-</script>
+     oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);
+ }
+ </script>
