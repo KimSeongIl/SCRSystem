@@ -34,3 +34,21 @@
 #myPagePW table tr:first-child span{
 	margin-right:10px;
 }
+#updateInfo{
+	margin-top:100px;
+	float:left;
+	width:74%;
+	text-align:center;	
+}
+#updateInfo table {
+	margin:auto;
+	width:50%;
+	margin-top:50px;
+}
+#updateInfo table td{
+	padding:5px;
+}
+#updateInfo table tr:first-child span{
+	margin-right:10px;
+}
+
