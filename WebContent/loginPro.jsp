@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- 
+
 <c:set var="user" value="${requestScope.user }" />
 <c:choose>
 	<c:when test="${empty user }">
@@ -27,24 +27,9 @@
 		</script>
 	</c:otherwise>
 </c:choose>
- -->
+
  
- <% UserDTO user=(UserDTO)request.getAttribute("user"); %>
- <%if(user==null){ %>
- 	<script>
- 		alert('아이디 또는 비밀번호가 맞지 않습니다.');
- 		history.back();
- 	</script>
- <%}else{
-	 	session.setAttribute("uid",user.getUid());
-	 	session.setAttribute("name",user.getName());
-	 	session.setAttribute("auth",user.getAuth());
-	 %>
-	 <script>
-	 	location.href="main.do";
-	 </script>
-	 <%} %>
- }
+
  
 
 

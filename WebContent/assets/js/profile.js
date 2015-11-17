@@ -1,5 +1,10 @@
 var groupIndex=-1;
 
+var counselRequestAdd=function(data){
+	alert('신청이 접수되었습니다.');
+	location.href="counselRequest.do";
+}
+
 var studentSearchByName=function(data){
 	var list=data.resData[0].list;
 	
@@ -19,6 +24,49 @@ var studentSearchByName=function(data){
 
 $(document).ready(function(){
 	
+	$('#counselSubmitForm').submit(function(){
+		var reason=$('#reasonDiv').text().trim();
+		if(reason==""){
+			alert('사유를 입력하세요.');
+			$('#reasonDiv').focus();
+			return false;
+		}
+		var division=$('select[name=division]').val();
+		var term=$('select[name=term]').val();
+		var wantDate=$('input[name=want_date]').val();
+		var counselCategory=$('#counselCategory').val();
+		var data=new FormData();
+		data.append("division",division);
+		data.append("term",term);
+		data.append("wantDate",wantDate);
+		data.append("reason",reason);
+		data.append("counselCategory",counselCategory);
+		data.append("professorId",$('#profile').attr("pid"));
+		data.append("file",$('input[type=file]')[0].files[0]);
+		
+		if(counselCategory.trim()=="개인상담"){
+			
+		}else{
+			var groupList="";
+			$('#groupCounselList li').each(function(index){
+				if(index==0)
+					groupList+=$(this).attr('sid');
+				else
+					groupList+=","+$(this).attr('sid');
+			})
+			if(groupList.trim()==""){
+				alert('집단상담 목록을 입력하세요.');
+				return false;
+			}
+			data.append("groupList",groupList);
+			
+		}
+		
+		
+		requestJsonDataFile("counselRequestAdd.ajax",data,counselRequestAdd);
+		return false;
+		
+	})
 	$(document).on('click','#searchList>span',function(){
 		var studentId=$(this).find('span:first-child').text();
 		var studentName=$(this).find('span:nth-child(2)').text();

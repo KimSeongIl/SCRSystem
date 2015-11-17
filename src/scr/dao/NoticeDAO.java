@@ -36,10 +36,16 @@ public class NoticeDAO {
 	}
 	//공지사항 정보 수정하기
 
-	public void updateNotice(int nId,String nName,String nTitle,String nContent){
+	public void updateNotice(int nId,String nTitle,String nContent){
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("");){
-			pstmt.setInt(arg0, arg1);
+				PreparedStatement pstmt=conn.prepareStatement("update notice set notice_title=?,notice_content=? where notice_id=?");){
+			
+			pstmt.setString(1,nTitle);
+			pstmt.setString(2,nContent);
+			pstmt.setInt(3,nId);
+			pstmt.executeUpdate();
+		}catch (Exception e){
+			e.printStackTrace();
 		}
 		
 	}

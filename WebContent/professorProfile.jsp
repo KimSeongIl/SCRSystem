@@ -8,7 +8,7 @@
  <c:set var="professor" value="${requestScope.professor }"/>
  <c:set var="department" value="${professor.departmentList }" />
   
-	<div id="profile">
+	<div id="profile" pid="${param.pid }">
 	
 		<table class="table table-bordered">
 			<tr>
@@ -48,11 +48,11 @@
 	<div id="counselContainer">
 		<h2>상담신청</h2>
 		<hr>
-		<form>
+		<form id="counselSubmitForm" action="aa.do">
 		<table class="table">
 			<tr>
 				<th>상담구분</th>
-				<td><select class="form-control">
+				<td><select name="division" class="form-control">
 						<option>진로상담</option>
 						<option>휴학상담</option>
 						<option>학습상담</option>
@@ -61,17 +61,24 @@
 					</select>
 				</td>
 			</tr>
-			
+			<tr>
+				<th>학기</th>
+				<td><select name="term" class="form-control">
+						<option value="1">1학기</option>
+						<option value="2">2학기</option>
+					</select>
+				</td>
+			</tr>
 			<tr>
 				<th>상담요청시간</th>
-				<td><input type="text" class="form-control" required></td>
+				<td><input name="want_date" type="text" class="form-control" required></td>
 			</tr>
 			<tr>
 				<th>상담사유</th>
-				<td><div contenteditable="true"></div></td>
+				<td><div contenteditable="true" id="reasonDiv"></div></td>
 			</tr>
 			<tr>
-				<th>참고자료</th>
+				<th>첨부자료</th>
 				<td><input type="file" class="form-control"></td>
 			</tr>
 			<tr>
