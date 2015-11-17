@@ -23,7 +23,7 @@
 #counselContainer table tr:last-child{
 	text-align:center;
 }
-#counselContainer table tr:nth-child(3){
+#counselContainer table tr:nth-child(4){
 	height:100px;
 }
 #counselContainer div[contenteditable]{
