@@ -137,4 +137,8 @@
 		background-size:100%;
 	}
 	
+	textarea[name=content]{
+		min-height:150px;
+	}
+	
 	

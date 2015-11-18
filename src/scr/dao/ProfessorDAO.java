@@ -156,6 +156,46 @@ public class ProfessorDAO {
 		return list;
 	}
 
+	public List<ProfessorDTO> professorSearchListByDepartment(int departmentId){
+		List<ProfessorDTO> list=new ArrayList<>();
+		
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name"
+						
+						+ " from professor where department_id in (select department_id from department where department_id=?) or professor_id in (select professor_id from pro_dept where department_id=?) order by professor_id");){
+
+		
+			pstmt.setInt(1, departmentId);
+			pstmt.setInt(2, departmentId);
+			
+			try(ResultSet rs=pstmt.executeQuery();){
+				
+
+				if(rs.next()){
+					do{
+
+						ProfessorDTO professor=new ProfessorDTO();
+
+						professor.setProfessorId(rs.getInt("professor_id"));
+						professor.setProfessorName(rs.getString("professor_name"));
+						
+						
+						list.add(professor);
+
+					}while(rs.next());
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 	public List<ProfessorDTO> professorSearchListByDepartment(int start,int limit,String content){
 		List<ProfessorDTO> list=new ArrayList<>();
 
