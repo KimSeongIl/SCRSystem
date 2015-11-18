@@ -36,9 +36,12 @@ public class QuestionDAO {
 	
 	//질문 삽입하기 
 	public void insertQuestion(String qName,String qTitle,String qContent){
+		   System.out.println("insert1");
+		System.out.println("qName->"+qName+"/"+"qTitle->"+qTitle+"qContent->"+qContent);
 		try(Connection conn=Conn.getConnection();
+			
 				PreparedStatement pstmt=conn.prepareStatement("insert into question(question_name,question_title,question_content) values(?,?,?)");){
-            
+            System.out.println("insert2");
 			pstmt.setString(1,qName);
 			pstmt.setString(2,qTitle);
 			pstmt.setString(3,qContent);

@@ -19,7 +19,7 @@ public class NoticeDetailView implements CommandAction {
 		NoticeDTO noticeList=null;
 		NoticeDAO notice=NoticeDAO.getInstance();
 		
-		noticeList=notice.noticeViewById(nId); //List형 
+		noticeList=notice.noticeViewById(nId); //NoticeDTO형 
 		
 		
 		request.setAttribute("noticeList", noticeList);

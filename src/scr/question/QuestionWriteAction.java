@@ -12,7 +12,7 @@ public class QuestionWriteAction implements CommandAction {
 	
 		
 		
-		return "qeustionWrite.jsp";
+		return "questionWrite.jsp";
 	}
 
 }

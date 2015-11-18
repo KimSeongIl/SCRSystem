@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="scr.dto.NoticeDTO,scr.dao.NoticeDAO"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
 <c:set var="noticeList" value="${noticeList}" scope="request" />
