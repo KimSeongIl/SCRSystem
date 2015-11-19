@@ -1,14 +1,33 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.*,scr.dto.NoticeDTO" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
+
+
 <div id="category">
 	<div id="notice">
-		
 		<div id="noticeTitle">
 		</div>
+		<%
+	List noticeList=(List)request.getAttribute("noticeList");
+	if(noticeList !=null){
+		out.println("<ul>");
+		for(int i=0;i<4;i++){
+			NoticeDTO notice=(NoticeDTO)noticeList.get(i);
+			
+			
+		
+			out.println("<li><a href='noticeDetail.do?nid="+notice.getNId()+"'>"+notice.getNTitle()+"</a></li>");
+	
+			
+		}
+		out.println("</ul>");
+	}
+	
+	%>
 	</div>
 	<c:choose>
 		<c:when test="${empty sessionScope.auth || \"학생\" eq sessionScope.auth }">

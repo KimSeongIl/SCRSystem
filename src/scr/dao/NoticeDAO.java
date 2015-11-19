@@ -71,7 +71,7 @@ public class NoticeDAO {
 		List noticeList=null;
 		NoticeDTO notice=null;
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from notice where notice_name like ?");){
+				PreparedStatement pstmt=conn.prepareStatement("select * from notice where notice_name like ? order by notice_id desc");){
 			
 			pstmt.setString(1,"%"+value+"%");
 			ResultSet rs=pstmt.executeQuery();
@@ -103,7 +103,7 @@ public class NoticeDAO {
 		List noticeList=null;
 		NoticeDTO notice=null;
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from notice where notice_title like ? ");){
+				PreparedStatement pstmt=conn.prepareStatement("select * from notice where notice_title like ? order by notice_id desc ");){
 			
 			pstmt.setString(1,"%"+value+"%");
 			ResultSet rs=pstmt.executeQuery();
@@ -134,7 +134,7 @@ public class NoticeDAO {
 		List noticeList=null;
 		NoticeDTO notice=null;
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from notice where notice_content like ? ");){
+				PreparedStatement pstmt=conn.prepareStatement("select * from notice  where notice_content like ? order by notice_id desc ");){
 			
 			pstmt.setString(1,"%"+value+"%");
 			ResultSet rs=pstmt.executeQuery();
@@ -166,7 +166,7 @@ public class NoticeDAO {
 		NoticeDTO notice=null;
 
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from notice");
+				PreparedStatement pstmt=conn.prepareStatement("select * from notice order by notice_id desc");
 				ResultSet rs=pstmt.executeQuery();){ //rs->resultSet
 			if(rs.next()){
 				noticeList=new ArrayList();
