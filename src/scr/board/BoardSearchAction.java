@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import scr.action.CommandAction;
-import scr.dao.NoticeDAO;
-import scr.dto.NoticeDTO;
+import scr.dao.BoardDAO;
+import scr.dto.BoardDTO;
 
-public class NoticeSearchAction implements CommandAction {
+public class BoardSearchAction implements CommandAction {
 
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 
@@ -18,29 +18,26 @@ public class NoticeSearchAction implements CommandAction {
 		String value= request.getParameter("value");
 		//1  name 2 title 3 content
 
-		NoticeDAO notice=NoticeDAO.getInstance();
+		BoardDAO board=BoardDAO.getInstance();
 		
-		List noticeList=null;
+		List boardList=null;
 		
-		System.out.println("select->"+select);
-
-		System.out.println("value->"+value);
 		
 		if(select==1){
-			noticeList=notice.searchNoticeByName(value);
+			boardList=board.searchBoardByName(value);
 			
 		}else if(select==2){
-			noticeList=notice.searchNoticeByTitle(value);
+			boardList=board.searchBoardByTitle(value);
 			
 		}else if(select==3){
-			noticeList=notice.searchNoticeByContent(value);
+			boardList=board.searchBoardByContent(value);
 			
 		}
 
-		request.setAttribute("noticeList", noticeList);
+		request.setAttribute("boardList", boardList);
 		
 		
-		return "noticeView.jsp";
+		return "boardView.jsp";
 
 	}
 

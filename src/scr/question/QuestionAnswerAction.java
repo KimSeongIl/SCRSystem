@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import scr.action.AjaxAction;
-import scr.dao.NoticeDAO;
+import scr.dao.BoardDAO;
 import scr.dao.QuestionDAO;
 import scr.dto.QuestionDTO;
 import scr.util.JsonUtil;

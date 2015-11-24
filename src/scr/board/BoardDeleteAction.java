@@ -5,21 +5,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 import scr.action.CommandAction;
-import scr.dao.NoticeDAO;
+import scr.dao.BoardDAO;
 
-public class NoticeDeleteAction implements CommandAction {
+public class BoardDeleteAction implements CommandAction {
 
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
-		String id=request.getParameter("nId");
+		String id=request.getParameter("bId");
 		System.out.println("nId->"+id);
-		int nId=Integer.parseInt(id);
-		NoticeDAO notice=NoticeDAO.getInstance();
+		int bId=Integer.parseInt(id);
+		BoardDAO board=BoardDAO.getInstance();
 		System.out.println("a");
-		notice.deleteNotice(nId);
+		board.deleteBoard(bId);
 		System.out.println("b");
 
 
-		return "noticeDelete.jsp";
+		return "boardDelete.jsp";
 
 
 	}

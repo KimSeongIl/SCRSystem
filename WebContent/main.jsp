@@ -1,6 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.*,scr.dto.NoticeDTO" %>
+    <%@ page import="java.util.*,scr.dto.BoardDTO" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <link rel="stylesheet" type="text/css" href="assets/css/main.css">
@@ -12,15 +12,15 @@
 		<div id="noticeTitle">
 		</div>
 		<%
-	List noticeList=(List)request.getAttribute("noticeList");
-	if(noticeList !=null){
+	List boardList=(List)request.getAttribute("boardList");
+	if(boardList !=null){
 		out.println("<ul>");
 		for(int i=0;i<4;i++){
-			NoticeDTO notice=(NoticeDTO)noticeList.get(i);
+			BoardDTO board=(BoardDTO)boardList.get(i);
 			
 			
 		
-			out.println("<li><a href='noticeDetail.do?nid="+notice.getNId()+"'>"+notice.getNTitle()+"</a></li>");
+			out.println("<li><a href='boardDetail.do?bid="+board.getBId()+"'>"+board.getBTitle()+"</a></li>");
 	
 			
 		}

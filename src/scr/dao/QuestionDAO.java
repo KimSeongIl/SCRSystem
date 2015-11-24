@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.*;
 
-import scr.dto.NoticeDTO;
+import scr.dto.BoardDTO;
 import scr.dto.QuestionDTO;
 import scr.action.CommandAction;
 import scr.conn.Conn;

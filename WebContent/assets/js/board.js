@@ -18,7 +18,7 @@ function boardSearch(){
 	if(value==''){
 		alert("한글자이상부터 검색 가능합니다");
 	}else{
-		location.href="noticeSearch.do?select="+select+"&value="+value;
+		location.href="boardSearch.do?select="+select+"&value="+value;
 	}
 	
 	

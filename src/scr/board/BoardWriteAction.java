@@ -5,10 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import scr.action.CommandAction;
 
-public class NoticeWriteAction implements CommandAction{
+public class BoardWriteAction implements CommandAction{
 
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		
-		return "noticeWrite.jsp";
+		return "boardWrite.jsp";
 	}
 }

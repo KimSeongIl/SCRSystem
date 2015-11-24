@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="scr.dto.NoticeDTO"%>
-<%@ page import="scr.dao.NoticeDAO"%>
+<%@ page import="scr.dto.BoardDTO"%>
+<%@ page import="scr.dao.BoardDAO"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<link rel="stylesheet" type="text/css" href="assets/css/notice.css"> 
+<link rel="stylesheet" type="text/css" href="assets/css/board.css"> 
 
 
 
@@ -22,18 +22,18 @@
 				<th>작성일</th>
 			</tr>
 			<%
-	List noticeList=(List)request.getAttribute("noticeList");
+	List boardList=(List)request.getAttribute("boardList");
 	
-	if(noticeList !=null){
+	if(boardList !=null){
 		
-		for(int i=0;i<noticeList.size();i++){
-			NoticeDTO notice=(NoticeDTO)noticeList.get(i);
+		for(int i=0;i<boardList.size();i++){
+			BoardDTO board=(BoardDTO)boardList.get(i);
 			
 			out.println("<tr>");
-			out.println("<td>"+notice.getNId()+"</td>");
-			out.println("<td>"+notice.getNName()+"</td>");
-			out.println("<td><a href='noticeDetail.do?nid="+notice.getNId()+"'>"+notice.getNTitle()+"</a></td>");
-			out.println("<td>"+notice.getNDate()+"</td>");
+			out.println("<td>"+board.getBId()+"</td>");
+			out.println("<td>"+board.getBName()+"</td>");
+			out.println("<td><a href='boardDetail.do?bid="+board.getBId()+"'>"+board.getBTitle()+"</a></td>");
+			out.println("<td>"+board.getBDate()+"</td>");
 			
 			out.println("</tr>");
 		}
@@ -59,11 +59,11 @@
 	 
 	 
 	 </center>
-	 <button onclick="location.href='noticeWrite.do'">글쓰기</button>
+	 <button onclick="location.href='boardWrite.do'">글쓰기</button>
 
 
 </div>
 
-<script src="assets/js/notice.js"></script>
+<script src="assets/js/board.js"></script>
 
 

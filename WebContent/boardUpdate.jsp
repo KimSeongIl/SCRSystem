@@ -6,5 +6,5 @@
     
 <%
 out.println("<script>alert('정상적으로 수정되었습니다')</script>");
-out.println("<script>location.href='noticeView.do'</script>");
+out.println("<script>location.href='boardView.do'</script>");
 %>

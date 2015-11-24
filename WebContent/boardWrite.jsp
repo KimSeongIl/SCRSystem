@@ -1,18 +1,18 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="scr.dto.NoticeDTO,scr.dao.NoticeDAO"%>
+<%@page import="scr.dto.BoardDTO,scr.dao.BoardDAO"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
-<c:set var="noticeList" value="${noticeList}" scope="request" />
+<c:set var="boardList" value="${boardList}" scope="request" />
 
-<c:if test="${ noticeList!=null }">
+<c:if test="${ boardList!=null }">
      
-    <c:set var="nId" value="${noticeList.getNId()}"/>
-	<c:set var="nTitle" value="${noticeList.getNTitle()}" />
-	<c:set var="nContent" value="${noticeList.getNContent()}" />
+    <c:set var="bId" value="${boardList.getBId()}"/>
+	<c:set var="bTitle" value="${boardList.getBTitle()}" />
+	<c:set var="bContent" value="${boardList.getBContent()}" />
 
 
 </c:if>
@@ -24,25 +24,25 @@
 
    
 		<c:choose>
-			<c:when test="${noticeList==null}">
-				<form id="frm" action="noticeInsert.do" method="post">
+			<c:when test="${boardList==null}">
+				<form id="frm" action="boardInsert.do" method="post">
 			</c:when>
 		
 			<c:otherwise>
-				<form id="frm" action="noticeUpdate.do?nid=${nId}" method="post">
+				<form id="frm" action="boardUpdate.do?bid=${bId}" method="post">
 			</c:otherwise>
 		</c:choose>
 		
 		<table width="100%">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" id="title" name="nTitle"
-					value="${nTitle}" /></td>
+				<td><input type="text" id="title" name="bTitle"
+					value="${bTitle}" /></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="10" cols="30" id="ir1" name="nContent"
-						style="width: 850px; height: 500px;">${nContent}
+				<td><textarea rows="10" cols="30" id="ir1" name="bContent"
+						style="width: 850px; height: 500px;">${bContent}
 			
 				</textarea></td>
 			</tr>

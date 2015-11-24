@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import scr.dao.DepartmentDAO;
 import scr.dto.DepartmentDTO;
 
-import scr.dao.NoticeDAO;
-import scr.dto.NoticeDTO;
+import scr.dao.BoardDAO;
+import scr.dto.BoardDTO;
 
 public class MainAction implements CommandAction {
 
@@ -18,10 +18,10 @@ public class MainAction implements CommandAction {
 		DepartmentDAO departmentDao=DepartmentDAO.getInstance();
 		List<DepartmentDTO> department=departmentDao.departmentList();
 		
-		NoticeDAO notice=NoticeDAO.getInstance();
-		List<NoticeDTO> noticeList=notice.viewNoticeBoard();
+		BoardDAO board=BoardDAO.getInstance();
+		List<BoardDTO> boardList=board.viewBoard();
 		
-		request.setAttribute("noticeList", noticeList);
+		request.setAttribute("boardList", boardList);
 		request.setAttribute("department", department);
 		return "main.jsp";
 	}
