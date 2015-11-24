@@ -14,10 +14,11 @@ public class BoardViewAction implements CommandAction{
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		
 		BoardDAO board=BoardDAO.getInstance();//BoardDAO 객체 생성 
+		String category=request.getParameter("category");
 		
-	    List boardList=board.viewBoard();//공지사항 받아온 정보를 List에 넣기 
+	    List boardList=board.viewBoard(category);//공지사항 받아온 정보를 List에 넣기 
 	    
-	    
+	    request.setAttribute("category", category);
 	    request.setAttribute("boardList", boardList);
 	   
 		

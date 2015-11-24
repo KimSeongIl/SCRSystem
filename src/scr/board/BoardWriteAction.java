@@ -9,6 +9,10 @@ public class BoardWriteAction implements CommandAction{
 
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		
+		String category=request.getParameter("category");
+		
+		request.setAttribute("category", category);
+		
 		return "boardWrite.jsp";
 	}
 }

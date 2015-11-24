@@ -5,8 +5,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-
+<c:set var="category" value="${category}" scope="request" />
 <c:set var="boardList" value="${boardList}" scope="request" />
+
+
 
 <c:if test="${ boardList!=null }">
      
@@ -37,7 +39,9 @@
 			<tr>
 				<td>제목</td>
 				<td><input type="text" id="title" name="bTitle"
-					value="${bTitle}" /></td>
+					value="${bTitle}" />
+					<input type="hidden" value="${category}" name="category"/>
+					</td>
 			</tr>
 			<tr>
 				<td>내용</td>

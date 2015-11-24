@@ -7,10 +7,12 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" type="text/css" href="assets/css/board.css"> 
 
-
+<c:set var="category" value="${category}" scope="request" />
 
 <div id="article">
 	<div id="noticeLine">
+	
+	cate->>>${category}
 
 		<h1>공 지 사 항</h1>
 
@@ -59,7 +61,7 @@
 	 
 	 
 	 </center>
-	 <button onclick="location.href='boardWrite.do'">글쓰기</button>
+	 <button onclick="location.href='boardWrite.do?category=${category}'">글쓰기</button>
 
 
 </div>
