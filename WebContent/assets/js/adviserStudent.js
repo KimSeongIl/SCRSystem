@@ -1,3 +1,7 @@
+var updateAdviser=function(data){
+	alert('저장되었습니다.');
+	requestJsonData("studentListByDepartment.ajax",{departmentId:$('#studentContainer').attr('did')},studentList);
+}
 
 var studentList=function(data){
 	
@@ -23,9 +27,9 @@ var studentList=function(data){
 			
 			str+="<tr>";
 			if($('#studentContainer').attr('pid')==value.professorId)
-				str+="<td><input type='checkbox' checked style='width:15px;height:15px;'></td>";
+				str+="<td><input type='checkbox' name='adviserCheck' checked value="+value.studentId+" style='width:15px;height:15px;'></td>";
 			else
-				str+="<td><input type='checkbox' style='width:15px;height:15px;'></td>";
+				str+="<td><input type='checkbox' name='adviserCheck' value="+value.studentId+" style='width:15px;height:15px;'></td>";
 			str+="<td>"+value.studentId+"</td>";
 			str+="<td>"+value.name+"</td>";
 			str+="<td>"+value.phone+"</td>";
@@ -57,4 +61,19 @@ var studentList=function(data){
 $(document).ready(function(){
 
 	requestJsonData("studentListByDepartment.ajax",{departmentId:$('#studentContainer').attr('did')},studentList);
+	
+	$('#updateAdviserBtn').click(function(){
+		
+		if(confirm('정말 저장하시겠습니까?')){
+			var str="";
+			$('input[name="adviserCheck"]:checked').each(function(key,value){
+				if(key==$('input[name="adviserCheck"]:checked').length-1)
+					str+=value.value;
+				else
+					str+=value.value+",";
+			});
+			var professorId=$('#studentContainer').attr('pid');
+			requestJsonData("updateAdviser.ajax",{professorId:professorId,studentList:str},updateAdviser);
+		}
+	})
 })

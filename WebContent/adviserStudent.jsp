@@ -12,7 +12,7 @@
 	</div>
 	
 	<div id="btnDiv" style="text-align:center;margin-top:50px;">
-		<input type="button" class="btn btn-primary" value="저장">
+		<input type="button" id="updateAdviserBtn" class="btn btn-primary" value="저장">
 		<input type="button" class="btn btn-default" value="돌아가기" onclick="history.back()">
 	</div>
 </div>

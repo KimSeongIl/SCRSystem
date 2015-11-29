@@ -328,8 +328,29 @@ List<StudentDTO> list=new ArrayList<>();
 		return list;
 	}
 	
-	
-
+	public void deleteAdviser(int professorId){
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("update student set professor_id=null where professor_id=?");){
+			
+			pstmt.setInt(1, professorId);
+			pstmt.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	public void updateAdviser(String student,int professorId){
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("update student set professor_id=? where student_id in ("+student+")");){
+			
+			pstmt.setInt(1, professorId);
+			
+			pstmt.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	
 }
