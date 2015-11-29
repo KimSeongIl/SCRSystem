@@ -1,20 +1,29 @@
 var questionAnswer=function(data){
-	alert("answer comment success!")
+	
+var getaContent
+	
+	
+	getaContent=$('[name=aContent]').val();
+	
+	$('#answer').append("<p>"+getaContent+"</p>")
+	
 }
 
 function answerWrite(qId){
 
 	alert(qId);
 	
-	var getqId,getaContent,getqName;
+	var getqId,getaContent,getaId;
 	
 	getqId=qId;
-	getaName=$('[name=answerName]').val();
+	getaId=$('[name=aid]').val();
 	getaContent=$('[name=aContent]').val();
+	
+	
 	
 	requestJsonData('questionAnswer.ajax',{
 		qid:getqId,
-		aName:getaName,
+		aid:getaId,
 		aContent:getaContent},questionAnswer)
 	
 	

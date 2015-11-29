@@ -23,3 +23,10 @@ function boardSearch(){
 	
 	
 }
+
+function fileDownLoad(){
+	
+	$('#downloadForm').submit();
+	
+	
+}

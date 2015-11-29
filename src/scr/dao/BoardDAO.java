@@ -51,14 +51,16 @@ public class BoardDAO {
 	}
 
 	//공지사항 입력 정보 삽입하기 
-	public void insertBoard(String bName,String bTitle,String bContent,String category ){
+	public void insertBoard(int uId,String bTitle,String bContent,String category,String fileName ){
+		System.out.println("bTitle"+bTitle);
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("insert into board(board_name,board_title,board_content,board_category) values(?,?,?,?)");){
+				PreparedStatement pstmt=conn.prepareStatement("insert into board(user_id,board_title,board_content,board_category,board_file) values(?,?,?,?,?)");){
 
-			pstmt.setString(1, bName);
+			pstmt.setInt(1,uId);
 			pstmt.setString(2, bTitle);
 			pstmt.setString(3, bContent);
 			pstmt.setString(4, category);
+			pstmt.setString(5, fileName);
 
 			pstmt.executeUpdate();
 		}catch(Exception e){
@@ -72,7 +74,7 @@ public class BoardDAO {
 		List boardList=null;
 		BoardDTO board=null;
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from board where board_name like ? order by board_id desc");){
+				PreparedStatement pstmt=conn.prepareStatement("select * from board where user_id like ? order by board_id desc");){
 
 			pstmt.setString(1,"%"+value+"%");
 			ResultSet rs=pstmt.executeQuery();
@@ -83,7 +85,7 @@ public class BoardDAO {
 				do{
 					board=new BoardDTO();
 					board.setBId(rs.getInt("board_id"));
-					board.setBName(rs.getString("board_name"));
+					board.setBName(rs.getString("user_id"));
 					board.setBTitle(rs.getString("board_title"));
 					board.setBContent(rs.getString("board_content"));
 					board.setBDate(rs.getTimestamp("board_date"));
@@ -114,7 +116,7 @@ public class BoardDAO {
 				do{
 					board=new BoardDTO();
 					board.setBId(rs.getInt("board_id"));
-					board.setBName(rs.getString("board_name"));
+					board.setBName(rs.getString("user_id"));
 					board.setBTitle(rs.getString("board_title"));
 					board.setBContent(rs.getString("board_content"));
 					board.setBDate(rs.getTimestamp("board_date"));
@@ -145,7 +147,7 @@ public class BoardDAO {
 				do{
 					board=new BoardDTO();
 					board.setBId(rs.getInt("board_id"));
-					board.setBName(rs.getString("board_name"));
+					board.setBName(rs.getString("user_id"));
 					board.setBTitle(rs.getString("board_title"));
 					board.setBContent(rs.getString("board_content"));
 					board.setBDate(rs.getTimestamp("board_date"));
@@ -178,7 +180,7 @@ public class BoardDAO {
 
 						board=new BoardDTO();
 						board.setBId(rs.getInt("board_id")); //getInt(디비에 저장된 칼럼 명)
-						board.setBName(rs.getString("board_name"));
+						board.setBName(rs.getString("user_id"));
 						board.setBTitle(rs.getString("board_title"));
 						board.setBContent(rs.getString("board_content"));
 						board.setBDate(rs.getTimestamp("board_date"));
@@ -217,10 +219,11 @@ public class BoardDAO {
 					board=new BoardDTO();
 
 					board.setBId(rs.getInt("board_id"));
-					board.setBName(rs.getString("board_name"));
+					board.setBName(rs.getString("user_id"));
 					board.setBTitle(rs.getString("board_title"));
 					board.setBContent(rs.getString("board_content"));
 					board.setBDate(rs.getTimestamp("board_date"));
+					board.setbFile(rs.getString("board_file"));
 
 
 

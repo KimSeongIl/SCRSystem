@@ -35,14 +35,14 @@ public class QuestionDAO {
 	}
 	
 	//질문 삽입하기 
-	public void insertQuestion(String qName,String qTitle,String qContent){
+	public void insertQuestion(int uid,String qTitle,String qContent){
 		   System.out.println("insert1");
-		System.out.println("qName->"+qName+"/"+"qTitle->"+qTitle+"qContent->"+qContent);
+		System.out.println("qName->"+uid+"/"+"qTitle->"+qTitle+"qContent->"+qContent);
 		try(Connection conn=Conn.getConnection();
 			
-				PreparedStatement pstmt=conn.prepareStatement("insert into question(question_name,question_title,question_content) values(?,?,?)");){
+				PreparedStatement pstmt=conn.prepareStatement("insert into question(user_id,question_title,question_content) values(?,?,?)");){
             System.out.println("insert2");
-			pstmt.setString(1,qName);
+			pstmt.setInt(1,uid);
 			pstmt.setString(2,qTitle);
 			pstmt.setString(3,qContent);
 
@@ -54,11 +54,11 @@ public class QuestionDAO {
 	
 	
 	// 답변 삽입하기 
-	public void insertAnswer(int qid,String qAnswer,String qAnswerContent){
+	public void insertAnswer(int qid,int aid,String qAnswerContent){
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("update question set question_answer=?,question_answer_content=? where question_id=?");){
+				PreparedStatement pstmt=conn.prepareStatement("update question set answer_id=?,question_answer_content=? where question_id=?");){
             
-			pstmt.setString(1,qAnswer);
+			pstmt.setInt(1,aid);
 			pstmt.setString(2,qAnswerContent);
 			pstmt.setInt(3,qid);
 
@@ -85,11 +85,11 @@ public class QuestionDAO {
 					question=new QuestionDTO();
 					
 					question.setQid(rs.getInt("question_id")); //getInt(디비에 저장된 칼럼 명)
-					question.setqName(rs.getString("question_name"));
+					question.setUid(rs.getInt("user_id"));
 					question.setqTitle(rs.getString("question_title"));
 					question.setqContent(rs.getString("question_content"));
 					question.setqDates(rs.getTimestamp("question_dates"));
-					question.setqAnswer(rs.getString("question_answer"));
+					question.setAid(rs.getInt("answer_id"));
 					question.setqAnswerContent(rs.getString("question_answer_content"));
 				}
 
@@ -119,11 +119,11 @@ public class QuestionDAO {
 
 					question=new QuestionDTO();
 					question.setQid(rs.getInt("question_id")); //getInt(디비에 저장된 칼럼 명)
-					question.setqName(rs.getString("question_name"));
+					question.setUid(rs.getInt("user_id"));
 					question.setqTitle(rs.getString("question_title"));
 					question.setqContent(rs.getString("question_content"));
 					question.setqDates(rs.getTimestamp("question_dates"));
-					question.setqAnswer(rs.getString("question_answer"));
+					question.setAid(rs.getInt("answer_id"));
 					question.setqAnswerContent(rs.getString("question_answer_content"));
 
 					questionList.add(question);

@@ -33,7 +33,7 @@
 			
 			out.println("<tr>");
 			out.println("<td>"+question.getQid()+"</td>");
-			out.println("<td>"+question.getqName()+"</td>");
+			out.println("<td>"+question.getUid()+"</td>");
 			out.println("<td><a href='questionDetail.do?qid="+question.getQid()+"'>"+question.getqTitle()+"</a></td>");
 			out.println("<td>"+question.getqDates()+"</td>");
 			

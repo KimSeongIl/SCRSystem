@@ -22,7 +22,6 @@ public class MainAction implements CommandAction {
 		//List<BoardDTO> boardList=board.viewBoard();
 		
 		//request.setAttribute("boardList", boardList);
-		//잠시 테스트
 		request.setAttribute("department", department);
 		return "main.jsp";
 	}

@@ -24,24 +24,31 @@
 	
 <div id="article">
 
-   
+
 		<c:choose>
 			<c:when test="${boardList==null}">
-				<form id="frm" action="boardInsert.do" method="post">
+			${category }
+				<form id="frm" action="boardInsert.do?category=${category}" method="post" enctype="multipart/form-data">
 			</c:when>
 		
 			<c:otherwise>
-				<form id="frm" action="boardUpdate.do?bid=${bId}" method="post">
+				<form id="frm" action="boardUpdate.do?bid=${bId}" method="post" >
 			</c:otherwise>
 		</c:choose>
 		
 		<table width="100%">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" id="title" name="bTitle"
+				<td><input type="text" id="title" name="bTitle" class="form-control"
 					value="${bTitle}" />
 					<input type="hidden" value="${category}" name="category"/>
 					</td>
+			</tr>
+			<tr>
+			<td>첨부파일</td>
+			<td>
+			<input type="file" class="form-control" name="boardFile" >
+			</td>
 			</tr>
 			<tr>
 				<td>내용</td>

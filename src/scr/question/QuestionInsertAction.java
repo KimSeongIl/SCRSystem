@@ -15,17 +15,15 @@ public class QuestionInsertAction implements CommandAction {
 		request.setCharacterEncoding("utf-8");
 
 		HttpSession session=request.getSession();
-		String qName=(String)session.getAttribute("name");//아이디 이름 
+		int uid=(int)session.getAttribute("uid");//아이디 이름 
 	 
-		//String qName=request.getParameter("qName");
+		
 		String qTitle=request.getParameter("qTitle");
 		String qContent=request.getParameter("qContent");
 		
-		System.out.println("qName->"+qName+"/"+"qTitle->"+qTitle+"qContent->"+qContent);
-		
 		QuestionDAO question=QuestionDAO.getInstance();
 		
-		question.insertQuestion(qName,qTitle,qContent);
+		question.insertQuestion(uid,qTitle,qContent);
 		
 		
 		return "questionInsert.jsp";

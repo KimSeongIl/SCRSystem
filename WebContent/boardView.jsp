@@ -5,16 +5,26 @@
 <%@ page import="scr.dao.BoardDAO"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<link rel="stylesheet" type="text/css" href="assets/css/board.css"> 
+<link rel="stylesheet" type="text/css" href="assets/css/board.css">
 
 <c:set var="category" value="${category}" scope="request" />
 
 <div id="article">
 	<div id="noticeLine">
-	
-	cate->>>${category}
 
-		<h1>공 지 사 항</h1>
+		
+
+		<c:choose>
+			<c:when test="${category=='notice'}">
+				<h1>공 지 사 항</h1>
+			</c:when>
+			<c:when test="${ category=='reference'}">
+				<h1>자 료 실</h1>
+			</c:when>
+		
+
+		</c:choose>
+		
 
 		<table class="table">
 			<tr>
@@ -45,23 +55,22 @@
 
 
 		</table>
-		
+
 
 	</div>
 	<center>
-	
-	 <select id="searchSelect">
-	 <option>작성자</option>
-	 <option>제목</option>
-	 <option>내용</option>
-	 </select>
-	 <input type="search" id="searchValue">
-	 <input type="button" value="검색" onclick="boardSearch()">
-	 
-	 
-	 
-	 </center>
-	 <button onclick="location.href='boardWrite.do?category=${category}'">글쓰기</button>
+
+		<select id="searchSelect">
+			<option>작성자</option>
+			<option>제목</option>
+			<option>내용</option>
+		</select> <input type="search" id="searchValue"> <input type="button"
+			value="검색" onclick="boardSearch()">
+
+
+
+	</center>
+	<button onclick="location.href='boardWrite.do?category=${category}'">글쓰기</button>
 
 
 </div>

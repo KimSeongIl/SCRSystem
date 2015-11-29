@@ -13,6 +13,7 @@
   <c:set var="bTitle" value="${boardList.getBTitle()}"/>
   <c:set var="bCon" value="${boardList.getBContent()}"/>
   <c:set var="bDate" value="${boardList.getBDate()}"/>
+  <c:set var="bFile" value="${boardList.getbFile()}"/>
    
   <c:set var="string1" value="${bCon}"/>
    
@@ -25,14 +26,32 @@
                                 'upload', 'editor/upload')}" />
                                 
   <c:set var="bContent" value="${before}${middle}${string2}"/> 
+  
+  
+  
+  <c:if test="${bFile==null}">
+  
+  </c:if>
+  <c:if test="${bFile!=null}">
+  
+   <form id="downloadForm" action="fileDownload.ajax" method="post">
+   <input type="hidden" value="${bFile}" name="bFile">
+   </form>
+   
+  </c:if>
 
 <div id="article" >
 
 <form id="frm" action="boardInsert.do" method="post" >
 <table width="100%">
+
 		<tr>
 			<td>力格</td>
 			<td>${bTitle}</td>
+		</tr>
+		<tr>
+		<td>梅何颇老</td>
+		<td><a onclick="fileDownLoad()">${bFile}</a></td>
 		</tr>
 		<tr>
 		
@@ -79,7 +98,7 @@
 <!--  傍烹何盒 -->
 <button class="btn btn-default" onclick="history.back()">格废</button>
 
+<script src="assets/js/board.js"></script>
 
 </div>
-
 

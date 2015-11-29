@@ -19,13 +19,15 @@ public class QuestionAnswerAction implements AjaxAction {
 		
 		String id=request.getParameter("qid");
 		int qId=Integer.parseInt(id);
-		String aName=request.getParameter("aName");
+		
+		id=request.getParameter("aid");
+		int aId=Integer.parseInt(id);
 		String aContent=request.getParameter("aContent");
 		
 		QuestionDAO question=QuestionDAO.getInstance();
 		
 		
-		question.insertAnswer(qId, aName, aContent);
+		question.insertAnswer(qId, aId, aContent);
 		
 	
 		

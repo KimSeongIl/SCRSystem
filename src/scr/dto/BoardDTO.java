@@ -9,6 +9,26 @@ public class BoardDTO {
 	private String bTitle;
 	private String bContent;
 	private Timestamp bDate;
+	private String category;
+	private String bFile;
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	
+	public String getbFile() {
+		return bFile;
+	}
+	public void setbFile(String bFile) {
+		this.bFile = bFile;
+	}
+	
+	
+	
 	
 	public int getBId() {
 		return bId;
