@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import scr.dao.DepartmentDAO;
 import scr.dto.DepartmentDTO;
 
+import scr.dao.BoardDAO;
+import scr.dto.BoardDTO;
+
 public class MainAction implements CommandAction {
 
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
@@ -15,6 +18,10 @@ public class MainAction implements CommandAction {
 		DepartmentDAO departmentDao=DepartmentDAO.getInstance();
 		List<DepartmentDTO> department=departmentDao.departmentList();
 		
+		BoardDAO board=BoardDAO.getInstance();
+		//List<BoardDTO> boardList=board.viewBoard();
+		
+		//request.setAttribute("boardList", boardList);
 		request.setAttribute("department", department);
 		return "main.jsp";
 	}

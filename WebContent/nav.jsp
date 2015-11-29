@@ -16,11 +16,12 @@
 
 			<c:choose>
 				<c:when test="${empty sessionScope.auth || sessionScope.auth eq \"학생\" }">
-					<li onclick="location.href='noticeView.do'">공지사항</li>
+					<li onclick="location.href='boardView.do?category=notice'">공지사항</li>
 					<li>이용안내</li>
 					<li onclick="location.href='counselRequest.do'">상담신청</li>
-					<li>자료실</li>
+					<li onclick="location.href='boardView.do?category=reference'">자료실</li>
 				</c:when>
+
 				<c:when test="${sessionScope.auth eq \"직원\"}">
 					<li>공지사항</li>
 					<li>이용안내</li>
@@ -32,6 +33,7 @@
 					<li>이용안내</li>
 					<li onclick="location.href='counselManagement.do'">상담관리</li>
 					<li>자료실</li>
+
 				</c:when>
 				<c:when test="${sessionScope.auth eq \"관리자\" }">
 					<li onclick="location.href='userManagement.do'">회원관리</li>

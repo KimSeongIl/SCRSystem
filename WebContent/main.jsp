@@ -1,14 +1,33 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.*,scr.dto.BoardDTO" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
+
+
 <div id="category">
 	<div id="notice">
-		
 		<div id="noticeTitle">
 		</div>
+		<%
+	List boardList=(List)request.getAttribute("boardList");
+	if(boardList !=null){
+		out.println("<ul>");
+		for(int i=0;i<4;i++){
+			BoardDTO board=(BoardDTO)boardList.get(i);
+			
+			
+		
+			out.println("<li><a href='boardDetail.do?bid="+board.getBId()+"'>"+board.getBTitle()+"</a></li>");
+	
+			
+		}
+		out.println("</ul>");
+	}
+	
+	%>
 	</div>
 	<c:choose>
 		<c:when test="${empty sessionScope.auth || \"학생\" eq sessionScope.auth }">
