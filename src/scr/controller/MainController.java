@@ -127,7 +127,7 @@ public class MainController extends HttpServlet {
 		request.setAttribute("article", view);
 		RequestDispatcher dispatcher;
 	
-			System.out.println("2");
+			
 			dispatcher=request.getRequestDispatcher("template.jsp");
 		
 		

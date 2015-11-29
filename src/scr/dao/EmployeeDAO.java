@@ -41,6 +41,8 @@ public class EmployeeDAO {
 		return 0;
 	}
 	
+	
+	
 	public double employeeSearchCountByName(String content){
 
 		try(
@@ -213,6 +215,8 @@ public class EmployeeDAO {
 			return 2;
 		}
 	}
+	
+	
 	
 	
 }

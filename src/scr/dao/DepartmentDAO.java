@@ -12,20 +12,20 @@ import scr.util.AES256Util;
 public class DepartmentDAO {
 
 	private static DepartmentDAO instance=new DepartmentDAO();
-	
+
 	private DepartmentDAO(){
-		
+
 	}
 	public static DepartmentDAO getInstance(){
 		return instance;
 	}
-	
+
 	public void departmentAdd(DepartmentDTO department){
-		
+
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("insert into department values(?,?,?,?,?)");){
-			
+
 			AES256Util util=new AES256Util();
 			pstmt.setInt(1, department.getDepartmentId());
 			pstmt.setString(2, department.getDepartmentName());
@@ -37,16 +37,16 @@ public class DepartmentDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<DepartmentDTO> departmentList(){
 		List<DepartmentDTO> list=new ArrayList<DepartmentDTO>();
-		
-		
+
+
 		try(Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select department_id,department_name,office_no,office_tel,employee_id,(select employee_name from employee where employee_id=department.employee_id) \"employee_name\" from department order by department_id;");){
 
 			try( ResultSet rs=pstmt.executeQuery(); ){
-				
+
 				if(rs.next()){
 					AES256Util util=new AES256Util();
 					do{
@@ -58,14 +58,14 @@ public class DepartmentDAO {
 						department.setEmployeeId(rs.getInt("employee_id"));
 						department.setEmployeeName(rs.getString("employee_name"));
 						list.add(department);
-						
+
 					}while(rs.next());
 				}
-					
-					
 
 
-				
+
+
+
 			}catch(Exception ee){}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -73,13 +73,13 @@ public class DepartmentDAO {
 
 		return list;
 	}
-			
+
 	public boolean departmentModify(int originId,DepartmentDTO department){
-		
+
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("update department set department_id=?,department_name=?,office_no=?,office_tel=?,employee_id=? where department_id=?");){
-			
+
 			AES256Util util=new AES256Util();
 			pstmt.setInt(1, department.getDepartmentId());
 			pstmt.setString(2, department.getDepartmentName());
@@ -88,7 +88,7 @@ public class DepartmentDAO {
 			pstmt.setInt(5, department.getEmployeeId());
 			pstmt.setInt(6, originId);
 			pstmt.executeUpdate();
-			
+
 		}catch(Exception e){
 			return false;
 		}
@@ -96,22 +96,43 @@ public class DepartmentDAO {
 	}
 
 	public void departmentDelete(DepartmentDTO department){
-		
+
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("delete from department where department_id=?");){
-			
+
 			pstmt.setInt(1, department.getDepartmentId());
 			pstmt.executeUpdate();
-			
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
+
+
+	public List<DepartmentDTO> departmentListByEmployee(int employeeId){
+		List<DepartmentDTO> list=new ArrayList<>();
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select department_id,department_name from department where employee_id=?");){
 			
-			
-	
-	
-	
-	
+			pstmt.setInt(1, employeeId);
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					do{
+						DepartmentDTO department=new DepartmentDTO();
+						department.setDepartmentId(rs.getInt("department_id"));
+						department.setDepartmentName(rs.getString("department_name"));
+						list.add(department);
+					}while(rs.next());
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+
 }
