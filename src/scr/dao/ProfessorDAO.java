@@ -77,7 +77,7 @@ public class ProfessorDAO {
 			pstmt.setString(2, content);
 
 			try(ResultSet rs=pstmt.executeQuery();){
-
+				
 				if(rs.next()){
 					return rs.getInt("count");
 				}
@@ -91,6 +91,40 @@ public class ProfessorDAO {
 		return 0;
 	}
 	
+	public List<ProfessorDTO> professorListByDepartment(int departmentId){
+		List<ProfessorDTO> list=new ArrayList<>();
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select professor_id,professor_name,phone,email,img "
+						+ "from professor where department_id=? or professor_id in (select professor_id from pro_dept where department_id=?)");){
+			
+			pstmt.setInt(1, departmentId);
+			pstmt.setInt(2, departmentId);
+			
+			try(ResultSet rs=pstmt.executeQuery();){
+				
+				if(rs.next()){
+					AES256Util util=new AES256Util();
+					do{
+						ProfessorDTO professor=new ProfessorDTO();
+						professor.setProfessorId(rs.getInt("professor_id"));
+						professor.setProfessorName(rs.getString("professor_name"));
+						professor.setPhone(util.decrypt(rs.getString("phone")));
+						
+						professor.setEmail(util.decrypt(rs.getString("email")));
+						professor.setImg(rs.getString("img"));
+						list.add(professor);
+					}while(rs.next());
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	public List<ProfessorDTO> professorSearchListByProfessor(int start,int limit,String content){
 		List<ProfessorDTO> list=new ArrayList<>();
@@ -465,7 +499,26 @@ public class ProfessorDAO {
 			e.printStackTrace();
 		}
 	}
-
+	public String selectProfessorName(int professorId){
+		
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select professor_name from professor where professor_id=?");){
+			
+			pstmt.setInt(1, professorId);
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					
+					return rs.getString("professor_name");
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public int matchEmail(ProfessorDTO professor){
 

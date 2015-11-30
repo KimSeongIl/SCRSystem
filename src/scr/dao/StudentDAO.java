@@ -63,6 +63,7 @@ public class StudentDAO {
 		return 0;
 	}
 	
+	
 	public List<StudentDTO> studentSearchByName(String name){
 List<StudentDTO> list=new ArrayList<>();
 		
@@ -236,6 +237,48 @@ List<StudentDTO> list=new ArrayList<>();
 		}
 	}
 	
+	public List<StudentDTO> studentListByDepartment(int departmentId){
+List<StudentDTO> list=new ArrayList<>();
+		
+		
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select student_id,name,email,phone,"
+						+ "status,professor_id,"
+						+ "ifnull((select professor_name from professor where professor_id=student.professor_Id),'없음') \"professor_name\" from student where department_id=? order by student_id");){
+			pstmt.setInt(1, departmentId);
+			
+			
+			try(ResultSet rs=pstmt.executeQuery();){
+				AES256Util util=new AES256Util();
+				
+				if(rs.next()){
+					do{
+						
+						StudentDTO student=new StudentDTO();
+						
+						student.setStudentId(rs.getInt("student_id"));
+						student.setName(rs.getString("name"));
+						student.setEmail(util.decrypt(rs.getString("email")));
+						student.setPhone(util.decrypt(rs.getString("phone")));
+						student.setStatus(rs.getString("status"));
+						student.setProfessorId(rs.getInt("professor_Id"));
+						student.setProfessorName(rs.getString("professor_name"));
+						list.add(student);
+						
+					}while(rs.next());
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	public List<StudentDTO> studentList(int start,int limit){
 		List<StudentDTO> list=new ArrayList<>();
 		
@@ -285,8 +328,29 @@ List<StudentDTO> list=new ArrayList<>();
 		return list;
 	}
 	
-	
-
+	public void deleteAdviser(int professorId){
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("update student set professor_id=null where professor_id=?");){
+			
+			pstmt.setInt(1, professorId);
+			pstmt.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	public void updateAdviser(String student,int professorId){
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("update student set professor_id=? where student_id in ("+student+")");){
+			
+			pstmt.setInt(1, professorId);
+			
+			pstmt.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	
 }

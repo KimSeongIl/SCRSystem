@@ -21,7 +21,7 @@ var professorList=function(data){
 			var subDept=value.departmentList;
 			str+="<tr>";
 			str+="<td rowspan='"+(subDept.length+1)+"'>";
-			str+="<img width='140px' height='140pxs' class='img-rounded' src='assets/img/profile/"+value.img+"' onerror='this.src=\"assets/img/alt.png\"'>";
+			str+="<img width='140px' height='140px' class='img-rounded' src='assets/img/profile/"+value.img+"' onerror='this.src=\"assets/img/alt.png\"'>";
 			str+="</td>";
 			str+="<td rowspan='"+(subDept.length+1)+"'>"+value.professorId+"</td>";
 			str+="<td rowspan='"+(subDept.length+1)+"'>"+value.professorName+"</td>";

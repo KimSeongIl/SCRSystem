@@ -61,14 +61,7 @@
 					</select>
 				</td>
 			</tr>
-			<tr>
-				<th>학기</th>
-				<td><select name="term" class="form-control">
-						<option value="1">1학기</option>
-						<option value="2">2학기</option>
-					</select>
-				</td>
-			</tr>
+			
 			<tr>
 				<th>상담요청시간</th>
 				<td><input name="want_date" type="text" class="form-control" required></td>
