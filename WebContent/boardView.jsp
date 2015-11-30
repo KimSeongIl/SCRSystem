@@ -59,6 +59,19 @@
 
 	</div>
 	<center>
+	<div id="page">
+	<%
+			List paging = (List) request.getAttribute("paging");
+
+			for (int i = 0; i < paging.size(); i++) {
+				out.print(paging.get(i));
+			}
+		%>
+	</div>
+	</center>
+	
+	
+	<center>
 
 		<select id="searchSelect">
 			<option>작성자</option>

@@ -44,6 +44,7 @@
 	
 	
 	<!--  교수일때만  -->
+	<c:if test="${aContent==null}">
 	<div id="answerBorder">
 
 		<table>
@@ -55,7 +56,7 @@
 		</table>
 
 	</div>
-
+</c:if>
 
 	<button class="btn btn-default" onclick="history.back()">목록</button>
 </div>
