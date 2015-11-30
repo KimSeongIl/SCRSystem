@@ -41,7 +41,7 @@
 			<div id="chargeBtnDiv" onclick="location.href='adviserManagement.do'">
 				담당교수관리
 			</div>
-			<div id="studentBtnDiv">
+			<div id="studentBtnDiv" onclick="location.href='counselListEmp.do'">
 				학생상담목록
 			</div>
 		</div>
