@@ -16,7 +16,6 @@
 	<table id="signUp" class="table">
 		<tr id="signUpHead" >
 			<td colspan="3"><div></div></td>
-			
 		</tr>
 		<tr>
 		<td colspan="3"></td>
@@ -54,7 +53,6 @@
 					<c:forEach var="i" items="${ department }">
 						<option value="${i.departmentId }">${ i.departmentName }</option>
 					</c:forEach>
-
 			</select></td>
 			<td></td>
 		</tr>

@@ -40,10 +40,9 @@
 	width:74%;
 	text-align:center;	
 }
-#updateInfo table {
-	margin:auto;
+#updateInfo table {	
 	width:50%;
-	margin-top:50px;
+	
 }
 #updateInfo table td{
 	padding:5px;
@@ -51,4 +50,9 @@
 #updateInfo table tr:first-child span{
 	margin-right:10px;
 }
-
+#updateBtn {
+	margin-top: 30px;
+}
+#updateTable {
+	margin-right:80px;
+}
