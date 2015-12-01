@@ -38,7 +38,21 @@ public class UserDAO {
 	    
 	}
 	
+	public void userUpdate(UserDTO user) {
+		
+		try (
+			Connection conn=Conn.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement("update user set name=?,password=? where user_id=?");){			
+		    pstmt.setString(1,user.getName());
+			pstmt.setString(2, Sha256.encrypt(user.getPassword()));
+		    pstmt.setInt(3, user.getUid());
 	
+		    pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    
+	}
 	
 	public UserDTO login(UserDTO user){
 		UserDTO dto=null;
@@ -92,7 +106,7 @@ public boolean passwordCheck(UserDTO user) {
 		    if(rs.next()){		    	
 		    	check=true;
 		    }else{
-		    	
+	    	
 		    	check=false;
 		    }
 		} catch (Exception e) {
@@ -115,6 +129,4 @@ public boolean passwordCheck(UserDTO user) {
 	}
 	
 
-	
-	
 }

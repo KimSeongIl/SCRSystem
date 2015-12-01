@@ -11,7 +11,7 @@ $(document).ready(function(){
 		if ($('input[name=password]').val()!=$('input[name=passwordConfirm]').val())
 		{
 			
-			$('input[name=passwordConfirm]').get(0).setCustomValidity('비밀번호가 일치하지 않습니다');
+			$('input[name=passwordConfirm]').get(0).setCustomValidity('비밀번호가 일치하지 않습니다.');
 		
 		}else{
 			$('input[name=passwordConfirm]').get(0).setCustomValidity('');
@@ -27,7 +27,7 @@ $(document).ready(function(){
 
 	
 	
-		alert("회원가입을 축하드립니다")
+		alert("회원가입을 축하드립니다.")
 	
 			
 	})

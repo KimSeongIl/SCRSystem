@@ -8,7 +8,7 @@ import scr.dao.StudentDAO;
 import scr.dao.UserDAO;
 import scr.dto.*;
 
-public class StudentAddAction implements CommandAction{
+public class StudentUpdateProAction implements CommandAction{
 	
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		request.setCharacterEncoding("UTF-8");
@@ -21,7 +21,6 @@ public class StudentAddAction implements CommandAction{
 			int department=Integer.parseInt(request.getParameter("department"));
 			student.setDepartmentId(department);
 		}
-		
 		
 		if(!"없음".equals(request.getParameter("minor"))){//없음이 아닌상태
 			int minor=Integer.parseInt(request.getParameter("minor"));
@@ -40,23 +39,20 @@ public class StudentAddAction implements CommandAction{
 		user.setName(name);
 		user.setPassword(password);
 		user.setAuth("학생");
-		
-		
+				
 		student.setStudentId(uid);
 		student.setName(name);
 		student.setPhone(phone);
-		student.setEmail(email);
-		
-		
-		
-		
+		student.setEmail(email);	
 		
 		student.setStatus(status);
 		
 		UserDAO dao=UserDAO.getInstance();
-		dao.userAdd(user);
+		
+		dao.userUpdate(user);
+		
 		StudentDAO studentDao=StudentDAO.getInstance();
-		studentDao.studentAdd(student);
+		studentDao.studentUpdate(student);
 		return "main.jsp";
 	}
 }

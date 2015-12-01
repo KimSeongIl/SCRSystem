@@ -7,7 +7,9 @@ import java.util.*;
 
 import scr.conn.Conn;
 import scr.dto.StudentDTO;
+import scr.dto.UserDTO;
 import scr.util.AES256Util;
+import scr.util.Sha256;
 
 public class StudentDAO {
 
@@ -212,6 +214,8 @@ List<StudentDTO> list=new ArrayList<>();
 		
 	}
 	
+	
+	
 	public int matchEmail(StudentDTO student){
 		
 		try(
@@ -230,8 +234,7 @@ List<StudentDTO> list=new ArrayList<>();
 			}catch(Exception e){
 				return 2;
 			}
-			
-			
+						
 		}catch(Exception e){
 			return 2;
 		}
@@ -282,7 +285,6 @@ List<StudentDTO> list=new ArrayList<>();
 	public List<StudentDTO> studentList(int start,int limit){
 		List<StudentDTO> list=new ArrayList<>();
 		
-		
 		try(
 				Connection conn=Conn.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement("select student_id,name,email,phone,department_id,"
@@ -319,15 +321,89 @@ List<StudentDTO> list=new ArrayList<>();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			
-			
+					
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
 		return list;
 	}
+	public StudentDTO studentUpdateInfo(StudentDTO studentdto) {
+		StudentDTO student=new StudentDTO();
+		try (
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement("select student_id,name,email,phone,department_id,minor_id,double_major_id,status from student where student_id=?");){
+				pstmt.setInt(1, studentdto.getStudentId());
+			    
+			    try(ResultSet rs=pstmt.executeQuery();){	
+			    	AES256Util util=new AES256Util();
+			    	if(rs.next()){		    	
+			    		do{						
+			    					
+			    			student.setStudentId(rs.getInt("student_id"));
+			    			student.setName(rs.getString("name"));
+			    			student.setEmail(util.decrypt(rs.getString("email")));
+			    			student.setPhone(util.decrypt(rs.getString("phone")));
+			    			student.setDepartmentId(rs.getInt("department_id"));		    			
+			    			student.setMinorId(rs.getInt("minor_id"));
+			    			student.setDoubleMajorId(rs.getInt("double_major_id"));		    			
+			    			student.setStatus(rs.getString("status"));
+																
+			    		}while(rs.next());
+			    	}
+			    	}catch(Exception e){
+			    		e.printStackTrace();
+			    	}				
+			}catch(Exception e){
+				e.printStackTrace();
+			}						
+		return student;
+	}
 	
+
+	public void studentUpdate(StudentDTO student) {
+
+		
+		String query="UPDATE student SET name=?,email=?,phone=?,department_id=?,status=?";
+		
+		int num1=0;
+		int num2=0;
+		if(student.getMinorId()!=0){
+			query+=",minor_id=?";
+			num1++;		
+		}			
+		if(student.getDoubleMajorId()!=0){
+			query+=",double_major_id=?";
+			num2++;
+		}
+		
+		query+=" where student_id=?";
+		System.out.println(query);	
+		try(
+			Connection conn=Conn.getConnection();
+			
+			PreparedStatement pstmt=conn.prepareStatement(query);){
+			
+			AES256Util util=new AES256Util();
+			
+			pstmt.setString(1,student.getName());
+			pstmt.setString(2, util.encrypt(student.getEmail()));
+			pstmt.setString(3,util.encrypt(student.getPhone()));
+			pstmt.setInt(4,student.getDepartmentId());
+			pstmt.setString(5, student.getStatus());
+			pstmt.setInt(6, student.getStudentId());
+			if(student.getMinorId()!=0){
+				pstmt.setInt(6+num1, student.getMinorId());
+			}
+			if(student.getDoubleMajorId()!=0){
+				pstmt.setInt(6+num1+num2, student.getDoubleMajorId());
+			}			
+			pstmt.executeUpdate();			
+		}catch(Exception e){
+			e.printStackTrace();
+		}	
+	}
+
 	public void deleteAdviser(int professorId){
 		try(
 				Connection conn=Conn.getConnection();
@@ -409,4 +485,5 @@ List<StudentDTO> list=new ArrayList<>();
 		return 0;
 	}
 	
+
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import scr.conn.Conn;
 import scr.dto.EmployeeDTO;
+import scr.dto.StudentDTO;
 import scr.util.AES256Util;
 
 public class EmployeeDAO {
@@ -216,6 +217,62 @@ public class EmployeeDAO {
 		}
 	}
 	
+	public EmployeeDTO employeeUpdateInfo(EmployeeDTO employeedto) {
+		EmployeeDTO employee=new EmployeeDTO();
+		try (
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement("select employee_id,employee_name,email,phone from employee where employee_id=?");){
+				pstmt.setInt(1, employeedto.getEmployeeId());
+			    
+			    try(ResultSet rs=pstmt.executeQuery();){	
+			    	AES256Util util=new AES256Util();
+			    	if(rs.next()){		    	
+			    		do{						
+			    					
+			    			employee.setEmployeeId(rs.getInt("employee_id"));
+			    			employee.setEmployeeName(rs.getString("Employee_name"));
+			    			employee.setEmail(util.decrypt(rs.getString("email")));
+			    			employee.setPhone(util.decrypt(rs.getString("phone")));
+			    			
+			    		}while(rs.next());
+			    	}
+			    	}catch(Exception e){
+			    		e.printStackTrace();
+			    	}				
+			}catch(Exception e){
+				e.printStackTrace();
+			}						
+		return employee;
+	}
+	
+	
+	public void employeeUpdate(EmployeeDTO employee) {
+
+		String column="employee_id,employee_name,email,phone";
+		
+		String param="?,?,?,?";
+		String query="UPDATE employee SET employee_name=?,email=?,phone=?";
+		
+		
+		query+=" where employee_id=?";
+		System.out.println(query);	
+		try(
+			Connection conn=Conn.getConnection();
+			
+			PreparedStatement pstmt=conn.prepareStatement(query);){
+			
+			AES256Util util=new AES256Util();
+			
+			pstmt.setString(1,employee.getEmployeeName());
+			pstmt.setString(2, util.encrypt(employee.getEmail()));
+			pstmt.setString(3,util.encrypt(employee.getPhone()));			
+			pstmt.setInt(4, employee.getEmployeeId());
+			
+			pstmt.executeUpdate();			
+		}catch(Exception e){
+			e.printStackTrace();
+		}	
+	}
 	
 	
 	

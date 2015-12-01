@@ -23,8 +23,6 @@ public class MyPageCheckAction implements CommandAction{
 		boolean check=dao.passwordCheck(dto);
 		request.setAttribute("check", check);
 		
-		
-		
 		return "myPagePro.jsp" ;
 		
 		
