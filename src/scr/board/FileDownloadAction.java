@@ -18,7 +18,7 @@ public class FileDownloadAction implements AjaxAction {
 	public Map<String,Object> responseBody(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 
 
-		System.out.println("Ajax practice ");
+		
 		request.setCharacterEncoding("UTF-8");
 		// 다운받을 파일의 이름을 가져옴
 		String bFile=request.getParameter("bFile");

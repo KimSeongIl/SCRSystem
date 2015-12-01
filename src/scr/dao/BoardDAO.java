@@ -159,7 +159,7 @@ public class BoardDAO {
 	}
 
 
-	//작성자명 별로 공지사항정보 가져오기
+	//작성자명 별로 공지사항정보 가져오기->>보류
 	public List searchBoardByName(String value){
 		List boardList=null;
 		BoardDTO board=null;
