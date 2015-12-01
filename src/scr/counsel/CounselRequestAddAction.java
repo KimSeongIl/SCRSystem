@@ -33,7 +33,6 @@ public class CounselRequestAddAction implements AjaxAction{
 		HttpSession session=request.getSession();
 		int uid=(int)session.getAttribute("uid");
 		String division=multi.getParameter("division");
-		int term=Integer.parseInt(multi.getParameter("term"));
 		String wantDate=multi.getParameter("wantDate");
 		String reason=multi.getParameter("reason");
 		String counselCategory=multi.getParameter("counselCategory");
@@ -46,7 +45,6 @@ public class CounselRequestAddAction implements AjaxAction{
 		counsel.setStudentId(uid);
 		counsel.setProfessorId(pid);
 		counsel.setCounselDivision(division);
-		counsel.setTerm(term);
 		counsel.setWantDate(wantDate);
 		counsel.setReason(reason);
 		counsel.setCounselCategory(counselCategory);

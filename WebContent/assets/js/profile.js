@@ -32,12 +32,10 @@ $(document).ready(function(){
 			return false;
 		}
 		var division=$('select[name=division]').val();
-		var term=$('select[name=term]').val();
 		var wantDate=$('input[name=want_date]').val();
 		var counselCategory=$('#counselCategory').val();
 		var data=new FormData();
 		data.append("division",division);
-		data.append("term",term);
 		data.append("wantDate",wantDate);
 		data.append("reason",reason);
 		data.append("counselCategory",counselCategory);

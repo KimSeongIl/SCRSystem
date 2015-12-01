@@ -53,6 +53,7 @@ var requestJsonData=function (requestUrl, requestParam, successFunction) {
 		success : function(data){
 			
 			if(data.result=="success"){
+				
 				successFunction(data);
 			}else{
 				alert("오류 코드: " + data.resData[0].errorCd + "\n오류 메시지: " + data.resData[0].errorMsg);

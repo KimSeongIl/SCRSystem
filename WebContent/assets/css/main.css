@@ -39,6 +39,31 @@
 		height:100%;
 		
 	}
+	#notice ul{
+	
+	margin-right:30px;
+	}
+	
+	
+	
+	#notice ul li a{
+	text-decoration: none;
+
+	color:#656565;
+	}
+	
+	#notice ul li {
+	margin-right: 4px;
+    overflow: hidden;
+    padding:0px 10px 5px 5px;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 300px;
+    line-height: 20px;
+    height: 35px;
+	}
+	
 	#noticeTitle,#onlineTitle,#linkTitle,#downloadTitle{
 		clear:both;
 		text-align:center;
@@ -135,6 +160,10 @@
 		background-image:url(../img/mainImage.jpg);
 		background-repeat:no-repeat;
 		background-size:100%;
+	}
+	
+	textarea[name=content]{
+		min-height:150px;
 	}
 	
 	

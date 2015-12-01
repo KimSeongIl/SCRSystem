@@ -13,6 +13,8 @@ public class StudentDTO {
 	private int doubleMajorId;
 	private String doubleMajorName;
 	private String status;
+	private int professorId;
+	private String professorName;
 	
 	public void setStudentId(int studentId){
 		this.studentId=studentId;
@@ -79,5 +81,17 @@ public class StudentDTO {
 	}
 	public String getStatus(){
 		return status;
+	}
+	public void setProfessorId(int professorId){
+		this.professorId=professorId;
+	}
+	public int getProfessorId(){
+		return professorId;
+	}
+	public void setProfessorName(String professorName){
+		this.professorName=professorName;
+	}
+	public String getProfessorName(){
+		return professorName;
 	}
 }

@@ -1,20 +1,26 @@
 package scr.dto;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class CounselDTO {
 
 	private int counselId;
 	private String counselDivision;
 	private String counselCategory;
-	private int term;
 	private int studentId;
+	private String studentName;
 	private int professorId;
+	private String professorName;
 	private String wantDate;
 	private String reason;
 	private String file;
-	private Timestamp counselDate;
+	private String counselDate;
 	private String status;
+	private String year;
+	private int term;
+	private int count;
+	private int success;
 	
 	
 	public void setCounselId(int counselId){
@@ -38,12 +44,6 @@ public class CounselDTO {
 		return counselCategory;
 	}
 	
-	public void setTerm(int term){
-		this.term=term;
-	}
-	public int getTerm(){
-		return term;
-	}
 	
 	public void setStudentId(int studentId){
 		this.studentId=studentId;
@@ -51,12 +51,24 @@ public class CounselDTO {
 	public int getStudentId(){
 		return studentId;
 	}
+	public void setStudentName(String studentName){
+		this.studentName=studentName;
+	}
+	public String getStudentName(){
+		return studentName;
+	}
 	
 	public void setProfessorId(int professorId){
 		this.professorId=professorId;
 	}
 	public int getProfessorId(){
 		return professorId;
+	}
+	public void setProfessorName(String professorName){
+		this.professorName=professorName;
+	}
+	public String getProfessorName(){
+		return professorName;
 	}
 	
 	public void setWantDate(String wantDate){
@@ -80,7 +92,10 @@ public class CounselDTO {
 		return file;
 	}
 	
-	public Timestamp getCounselDate(){
+	public void setCounselDate(String counselDate){
+		this.counselDate=counselDate;
+	}
+	public String getCounselDate(){
 		return counselDate;
 	}
 	
@@ -89,5 +104,29 @@ public class CounselDTO {
 	}
 	public String getStatus(){
 		return status;
+	}
+	public void setYear(String year){
+		this.year=year;
+	}
+	public String getYear(){
+		return year;
+	}
+	public void setTerm(int term){
+		this.term=term;
+	}
+	public int getTerm(){
+		return term;
+	}
+	public void setCount(int count){
+		this.count=count;
+	}
+	public int getCount(){
+		return count;
+	}
+	public void setSuccess(int success){
+		this.success=success;
+	}
+	public int getSuccess(){
+		return success;
 	}
 }
