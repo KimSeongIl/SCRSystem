@@ -14,14 +14,18 @@ public class BoardSearchAction implements CommandAction {
 
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 
+		System.out.println(10);
 		String category=request.getParameter("category");
 		String s= request.getParameter("select");
 		int select=Integer.parseInt(s);
 		String value= request.getParameter("value");
+		
+		System.out.println("category->>"+category+"select->>"+select+"value->>"+value);
 		//1  name 2 title 3 content
 		int pageNum;
 		if(request.getParameter("pageNum")!=null){
 			pageNum=Integer.parseInt(request.getParameter("pageNum"));
+			System.out.println("pageNum->>"+pageNum);
 		}else{
 			pageNum=1;
 		}
@@ -42,11 +46,16 @@ public class BoardSearchAction implements CommandAction {
 			boardList=board.searchBoardByName(value);
 			
 		}else if(select==2){
+			System.out.println("select2");
 			count=board.getSearchTitleCount(category, value);
+			System.out.println("count->>"+count);
 			boardList=board.searchBoardByTitle(category,value,start,end);
+			System.out.println("start->"+start+"end->"+end);
 			
 		}else if(select==3){
+			
 			count=board.getSearchContentCount(category, value);
+			System.out.println("select3  count"+count);
 			boardList=board.searchBoardByContent(category,value,start,end);
 			
 		}
@@ -56,12 +65,16 @@ public class BoardSearchAction implements CommandAction {
 		
 		double temp=Math.ceil(count/VIEW);
 		int page=(int)temp;
+		System.out.println("page->"+page);
 		double pageNumTemp=pageNum;
 		temp=Math.ceil(pageNumTemp/PAGEVIEW);
 		temp=temp-1;
+		System.out.println("temp->>"+temp);
 		
 		int pre=(int)temp*5;
+		System.out.println("pre->>"+pre);
 		int next=((int)temp+1)*5;
+		System.out.println("next->>"+next);
 		
 		List paging=new ArrayList();
 		
@@ -84,6 +97,8 @@ public class BoardSearchAction implements CommandAction {
 		
 		paging.add("<a href=boardSearch.do?category="+category+"&search="+select+"&value="+value+"&pnum="+page+">마지막</a> &nbsp;");
 
+		request.setAttribute("category", category);
+		request.setAttribute("paging", paging);
 		request.setAttribute("boardList", boardList);
 		
 		

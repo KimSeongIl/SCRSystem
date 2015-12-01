@@ -1,5 +1,7 @@
 function boardSearch(){
 	var value=$('#searchValue').val().trim();
+	var category=$('#searchCategory').val();
+	alert(category);
 	var select;
 	
 	
@@ -18,7 +20,7 @@ function boardSearch(){
 	if(value==''){
 		alert("한글자이상부터 검색 가능합니다");
 	}else{
-		location.href="boardSearch.do?select="+select+"&value="+value;
+		location.href="boardSearch.do?category="+category+"&select="+select+"&value="+value;
 	}
 	
 	

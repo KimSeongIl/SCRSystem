@@ -117,7 +117,7 @@ public class BoardDAO {
 		int count=0;
 
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select count(*) from board  where category=? and board_title like ?")){
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) from board  where board_category=? and board_title like ?")){
 
 			pstmt.setString(1, category);
 			pstmt.setString(2, "%"+value+"%");
@@ -139,7 +139,7 @@ public class BoardDAO {
 	public int getSearchContentCount(String category,String value){
 		int count=0;
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select count(*) from board where category=? and board_title like ?")){
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) from board where board_category=? and board_content like ?")){
 
 			pstmt.setString(1, category);
 			pstmt.setString(2, "%"+value+"%");
@@ -191,14 +191,19 @@ public class BoardDAO {
 		return boardList;
 	}
 
-	//공지사항 제목으로 검색 
-	public List searchBoardByTitle(String value){
+	//board 제목으로 검색 
+	public List searchBoardByTitle(String category,String value,int start,int end){
 		List boardList=null;
 		BoardDTO board=null;
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from board where board_title like ? order by board_id desc ");){
+				PreparedStatement pstmt=conn.prepareStatement("select * from board where board_category=? and board_title like ? order by board_id desc limit ?,? ");){
 
-			pstmt.setString(1,"%"+value+"%");
+			pstmt.setString(1, category);
+			pstmt.setString(2,"%"+value+"%");
+			pstmt.setInt(3,start);
+			pstmt.setInt(4,end);
+			
+			
 			ResultSet rs=pstmt.executeQuery();
 
 			if(rs.next()){
@@ -223,13 +228,16 @@ public class BoardDAO {
 	}
 
 	//공지사항 내용별로 검색 
-	public List searchBoardByContent(String value){
+	public List searchBoardByContent(String category,String value,int start,int end){
 		List boardList=null;
 		BoardDTO board=null;
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from board  where board_content like ? order by board_id desc ");){
+				PreparedStatement pstmt=conn.prepareStatement("select * from board where board_category=? and board_content like ? order by board_id desc limit ?,? ");){
 
-			pstmt.setString(1,"%"+value+"%");
+			pstmt.setString(1, category);
+			pstmt.setString(2,"%"+value+"%");
+			pstmt.setInt(3, start);
+			pstmt.setInt(4,end);
 			ResultSet rs=pstmt.executeQuery();
 
 			if(rs.next()){

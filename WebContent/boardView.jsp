@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="assets/css/board.css">
 
 <c:set var="category" value="${category}" scope="request" />
+${category }
 
 <div id="article">
 	<div id="noticeLine">
@@ -77,7 +78,8 @@
 			<option>작성자</option>
 			<option>제목</option>
 			<option>내용</option>
-		</select> <input type="search" id="searchValue"> <input type="button"
+		</select>
+		 <input type="search" id="searchValue" ><input type="hidden" id="searchCategory" value="${category}"> <input type="button"
 			value="검색" onclick="boardSearch()">
 
 
