@@ -17,8 +17,20 @@ public class BoardSearchAction implements CommandAction {
 		int select=Integer.parseInt(s);
 		String value= request.getParameter("value");
 		//1  name 2 title 3 content
+		int pageNum;
+		if(request.getParameter("pageNum")!=null){
+			pageNum=Integer.parseInt(request.getParameter("pageNum"));
+		}else{
+			pageNum=1;
+		}
 
 		BoardDAO board=BoardDAO.getInstance();
+		
+		final int VIEW=10;
+		final int PAGEVIEW=5;
+		int start=(pageNum-1)*VIEW;
+		int end=VIEW;
+		double count=0;
 		
 		List boardList=null;
 		

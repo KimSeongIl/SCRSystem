@@ -20,6 +20,26 @@ public class BoardDAO {
 		return instance;
 	}
 
+	//board의 count 수 
+	public int getBoardCount(String category){
+		int count=0;
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) from board where board_category=?");){
+			pstmt.setString(1, category);
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					count=rs.getInt(1);
+				}
+			}catch(Exception ee){
+				ee.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+
 
 
 	//공지사항 정보 삭제하기 
@@ -69,6 +89,76 @@ public class BoardDAO {
 
 
 	}
+	//작성자명으로 검색할때 paging처리하기위해 ->작성자 별은 보류 
+	public int getSearchNameCount(String category,String value){
+		int count=0;
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) from board where board_category=? and user_id like ? order by board_id desc ")){
+
+			pstmt.setString(1, category);
+			pstmt.setString(2, "%"+value+"%");
+
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					count=rs.getInt(1);
+				}
+
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return count;
+	}
+	//제목별로 검색할때 paging처리하기위해 
+	public int getSearchTitleCount(String category,String value){
+		int count=0;
+
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) from board  where category=? and board_title like ?")){
+
+			pstmt.setString(1, category);
+			pstmt.setString(2, "%"+value+"%");
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					count=rs.getInt(1);
+				}
+
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return count;
+	}
+	//내용별로 검색할때 paging처리하기위해 
+	public int getSearchContentCount(String category,String value){
+		int count=0;
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) from board where category=? and board_title like ?")){
+
+			pstmt.setString(1, category);
+			pstmt.setString(2, "%"+value+"%");
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					count=rs.getInt(1);
+				}
+			}catch(Exception ee){
+				ee.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return count;
+
+	}
+
+
 	//작성자명 별로 공지사항정보 가져오기
 	public List searchBoardByName(String value){
 		List boardList=null;
@@ -164,14 +254,16 @@ public class BoardDAO {
 	}
 
 	//공지사항 자료 가져오기
-	public List viewBoard(String category){
+	public List viewBoard(String category,int start,int end){
 		List boardList=null;
 		BoardDTO board=null;
 
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from board where board_category=? order by board_id desc");){ //rs->resultSet
+				PreparedStatement pstmt=conn.prepareStatement("select * from board where board_category=? order by board_id desc limit ?,?");){ //rs->resultSet
 
 			pstmt.setString(1, category);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			try(ResultSet rs=pstmt.executeQuery();){
 
 				if(rs.next()){

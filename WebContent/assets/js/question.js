@@ -26,11 +26,7 @@ function answerWrite(qId){
 		aid:getaId,
 		aContent:getaContent},questionAnswer)
 	
-	
-	
-	
-	
-	
+
 	
 	
 }
