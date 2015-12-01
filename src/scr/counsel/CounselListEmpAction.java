@@ -1,14 +1,13 @@
 package scr.counsel;
 
-import java.util.List;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import scr.action.CommandAction;
-import scr.dao.CounselDAO;
-import scr.dto.CounselDTO;
+
 
 public class CounselListEmpAction implements CommandAction{
 

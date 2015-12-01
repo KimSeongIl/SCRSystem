@@ -13,9 +13,14 @@
 				<div id="chart-first-title">
 				</div>
 				<div id="doughnutChart"> </div>
+				
 			</div>
 			<div id="chart-second">
 				<div id="chart-second-title">
+					<div id="selectDiv">
+						
+					</div>
+					
 				</div>
 				<div id="char-second-bar">
 				<canvas id="barChart" width="400"></canvas>
@@ -26,15 +31,7 @@
 			<div id="list-title">
 			</div>
 			<div id="list-content">
-				<li>dd</li>
-				<li>aa</li>
-				<li>bb</li>
-				<li>dd</li>
-				<li>aa</li>
-				<li>bb</li>
-				<li>dd</li>
-				<li>aa</li>
-				<li>bb</li>
+				
 			</div>
 		</div>
 		<div id="btnDiv">
@@ -48,7 +45,7 @@
 	</div>
 </div>
 
-<script src="assets/js/Chart.min.js"></script>
+<script src="assets/js/Chart.js"></script>
 <script src="assets/js/doughnutit.js"></script>
 <!-- Folha de estilos -->
 <link rel="stylesheet" type="text/css" href="assets/css/doughnutit.css">

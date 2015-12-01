@@ -1,5 +1,6 @@
 package scr.counsel;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,16 +12,29 @@ import javax.servlet.http.HttpSession;
 import scr.action.AjaxAction;
 import scr.dao.CounselDAO;
 import scr.dao.DepartmentDAO;
-import scr.dto.CounselDTO;
+import scr.dao.StudentDAO;
 import scr.dto.DepartmentDTO;
 import scr.util.JsonUtil;
 
-public class CounselListByDateAction implements AjaxAction{
+public class CounselCountAction implements AjaxAction{
+	@SuppressWarnings("deprecation")
 	public Map<String,Object> responseBody(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 
 		request.setCharacterEncoding("UTF-8");
 		if(!"POST".equals(request.getMethod())){
-			return JsonUtil.putFailJsonContainer("CounselListByDateAction NotPost 001", "비정상적인 접근방식입니다");
+			return JsonUtil.putFailJsonContainer("CounselCountAction NotPost 001", "비정상적인 접근방식입니다");
+		}
+		
+		CounselDAO counselDao=CounselDAO.getInstance();
+		Date date=new Date();
+		
+		String year=String.valueOf(date.getYear()+1900);
+		int month=date.getMonth()+1;
+		int term;
+		if(month<=6){
+			term=1;
+		}else{
+			term=2;
 		}
 		HttpSession session=request.getSession();
 		int employeeId=(int)session.getAttribute("uid");
@@ -34,30 +48,14 @@ public class CounselListByDateAction implements AjaxAction{
 				str+=departmentList.get(i).getDepartmentId();
 			}
 		}
-		
-		
-		CounselDAO counselDao=CounselDAO.getInstance();
-		String year=request.getParameter("year");
-		int term=Integer.parseInt(request.getParameter("term"));
-		
-		int page=Integer.parseInt(request.getParameter("page"));
-		double count =0;
-		int limit;
-		if(request.getParameter("limit")==null)
-			limit=10;
-		else
-			limit=Integer.parseInt(request.getParameter("limit"));
-		
-		count=counselDao.counselCountByDate(year,term,str);
-		
-		
-		List<CounselDTO> list=counselDao.counselListByDate((page-1)*limit,limit,year, term,str);
+		StudentDAO studentDao=StudentDAO.getInstance();
+		int count=studentDao.studentCountByDepartment(str);
+		int success=counselDao.counselSuccessCountByDate(year, term, str);
 		
 		Map<String,Object> param=new HashMap<>();
-		double pageCount=count/limit;
-		param.put("pageCount", Math.ceil(pageCount));
-		param.put("counselList", list);
+		param.put("count", count);
+		param.put("successCount", success);
+		
 		return JsonUtil.putSuccessJsonContainer(param);
 	}
-
 }
