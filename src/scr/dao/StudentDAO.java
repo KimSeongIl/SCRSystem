@@ -351,6 +351,62 @@ List<StudentDTO> list=new ArrayList<>();
 			e.printStackTrace();
 		}
 	}
-	
+	public List<StudentDTO> notSuccessStudentListByProfessor(int professorId,int departmentId,String year,int term){
+		List<StudentDTO> list=new ArrayList<>();
+		String comp="";
+		if(term==1){
+			comp="<=";
+		}else{
+			comp=">";
+		}
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select student_id,name,phone,email from student where student_id not in (select student_id from counsel where status='완료' and professor_id=? and date_format(counsel_date,'%m')"+comp+"6 and date_format(counsel_date,'%Y')=?) and professor_id=? and (department_id=? or minor_id=? or double_major_id=?) and status='재학생';")){
+			pstmt.setInt(1, professorId);
+			pstmt.setString(2, year);
+			pstmt.setInt(3, professorId);
+			pstmt.setInt(4, departmentId);
+			pstmt.setInt(5, departmentId);
+			pstmt.setInt(6, departmentId);
+			
+			
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					AES256Util util=new AES256Util();
+					do{
+						StudentDTO student=new StudentDTO();
+						student.setStudentId(rs.getInt("student_id"));
+						student.setName(rs.getString("name"));
+						student.setPhone(util.decrypt(rs.getString("phone")));
+						student.setEmail(util.decrypt(rs.getString("email")));
+						list.add(student);
+					}while(rs.next());
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	public int studentCountByDepartment(String department){
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) \"count\" from student where (department_id in("+department+") or minor_id in ("+department+") or double_major_id in ("+department+")) and status='재학생'");){
+			
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					return rs.getInt("count");
+				}
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return 0;
+	}
 	
 }

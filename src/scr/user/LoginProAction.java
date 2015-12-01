@@ -22,6 +22,7 @@ public class LoginProAction implements CommandAction {
 		dto.setPassword(password);
 		UserDAO dao=UserDAO.getInstance();
 		UserDTO user=dao.login(dto);
+		
 		request.setAttribute("user", user);
 		
 		return "loginPro.jsp";

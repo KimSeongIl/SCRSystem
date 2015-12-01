@@ -1,10 +1,13 @@
 package scr.counsel;
 
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import scr.action.CommandAction;
+
 
 public class CounselManagementEmpAction implements CommandAction{
 
@@ -15,6 +18,8 @@ public class CounselManagementEmpAction implements CommandAction{
 		if(!"직원".equals(auth)){
 			return "permission.jsp";
 		}
+		
+		
 		return "counselManagementEmployee.jsp";
 	}
 }

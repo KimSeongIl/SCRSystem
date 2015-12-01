@@ -76,13 +76,14 @@ var getYearList=function(data){
 	}
 	str+="</select>";
 	str+="</form>";
+	
 	$('#dateContainer').html(str);
 	requestJsonData("counselListByDate.ajax",{page:thisPage,year:year,term:term},counselListByDate);
 	$('select[name=year]').change(function(){
 		requestJsonData("counselListByDate.ajax",{page:thisPage,year:$(this).val(),term:$('select[name=term]').val()},counselListByDate);
 	})
 	$('select[name=term]').change(function(){
-		requestJsonData("counselListByDate.ajax",{page:thisPage,year:$('select[name=term]').val(),term:$(this).val()},counselListByDate);
+		requestJsonData("counselListByDate.ajax",{page:thisPage,year:$('select[name=year]').val(),term:$(this).val()},counselListByDate);
 	})
 	
 }

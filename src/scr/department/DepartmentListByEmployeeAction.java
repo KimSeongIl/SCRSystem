@@ -21,7 +21,7 @@ public class DepartmentListByEmployeeAction implements AjaxAction{
 		if(!"직원".equals(auth)){
 			return JsonUtil.putFailJsonContainer("ProfessorListAction NoSession", "권한이 없습니다.");
 		}
-		int employeeId=Integer.parseInt(request.getParameter("uid"));
+		int employeeId=(int)session.getAttribute("uid");
 		DepartmentDAO departmentDao=DepartmentDAO.getInstance();
 		List<DepartmentDTO> list=departmentDao.departmentListByEmployee(employeeId);
 		

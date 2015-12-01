@@ -19,6 +19,8 @@ public class CounselDTO {
 	private String status;
 	private String year;
 	private int term;
+	private int count;
+	private int success;
 	
 	
 	public void setCounselId(int counselId){
@@ -114,5 +116,17 @@ public class CounselDTO {
 	}
 	public int getTerm(){
 		return term;
+	}
+	public void setCount(int count){
+		this.count=count;
+	}
+	public int getCount(){
+		return count;
+	}
+	public void setSuccess(int success){
+		this.success=success;
+	}
+	public int getSuccess(){
+		return success;
 	}
 }
