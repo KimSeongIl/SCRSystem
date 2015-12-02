@@ -134,7 +134,7 @@
 							<label class="col-sm-3 control-label">교수 이미지</label>
 							<div class="col-sm-8">
 								<input type="file" class="form-control" name="professorImg"
-									placeholder="File.." onchange="readImg(this)">
+									placeholder="File.." onchange="readImg(this)" >
 							</div>
 						</div>
 						<div class="form-group">
