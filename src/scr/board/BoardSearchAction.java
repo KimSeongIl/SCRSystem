@@ -43,19 +43,22 @@ public class BoardSearchAction implements CommandAction {
 		
 		if(select==1){
 			count=board.getSearchNameCount(category, value);
-			boardList=board.searchBoardByName(value);
+		
+			boardList=board.searchBoardByName(category,value,start,end);
+		
+		
 			
 		}else if(select==2){
-			System.out.println("select2");
+		
 			count=board.getSearchTitleCount(category, value);
-			System.out.println("count->>"+count);
+			
 			boardList=board.searchBoardByTitle(category,value,start,end);
-			System.out.println("start->"+start+"end->"+end);
+		
 			
 		}else if(select==3){
 			
 			count=board.getSearchContentCount(category, value);
-			System.out.println("select3  count"+count);
+		
 			boardList=board.searchBoardByContent(category,value,start,end);
 			
 		}

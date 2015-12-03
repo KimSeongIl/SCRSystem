@@ -93,7 +93,7 @@ public class BoardDAO {
 	public int getSearchNameCount(String category,String value){
 		int count=0;
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select count(*) from board where board_category=? and user_id like ? order by board_id desc ")){
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) from board b join user u on b.user_id=u.user_id where board_category=? and name like ? ")){
 
 			pstmt.setString(1, category);
 			pstmt.setString(2, "%"+value+"%");
@@ -159,44 +159,12 @@ public class BoardDAO {
 	}
 
 
-	//작성자명 별로 공지사항정보 가져오기->>보류
-	public List searchBoardByName(String value){
+	//작성자명 별로 공지사항정보 가져오기
+	public List searchBoardByName(String category,String value,int start,int end){
 		List boardList=null;
 		BoardDTO board=null;
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from board where user_id like ? order by board_id desc");){
-
-			pstmt.setString(1,"%"+value+"%");
-			ResultSet rs=pstmt.executeQuery();
-
-
-			if(rs.next()){
-				boardList=new ArrayList();
-				do{
-					board=new BoardDTO();
-					board.setBId(rs.getInt("board_id"));
-					board.setBName(rs.getString("user_id"));
-					board.setBTitle(rs.getString("board_title"));
-					board.setBContent(rs.getString("board_content"));
-					board.setBDate(rs.getTimestamp("board_date"));
-
-					boardList.add(board);
-
-				}while(rs.next());
-
-			}
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return boardList;
-	}
-
-	//board 제목으로 검색 
-	public List searchBoardByTitle(String category,String value,int start,int end){
-		List boardList=null;
-		BoardDTO board=null;
-		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from board where board_category=? and board_title like ? order by board_id desc limit ?,? ");){
+				PreparedStatement pstmt=conn.prepareStatement("select board_id, name, board_title, board_content, board_date from board b join user u on b.user_id=u.user_id where board_category=? and u.name like ? order by board_id desc limit ?,? ");){
 
 			pstmt.setString(1, category);
 			pstmt.setString(2,"%"+value+"%");
@@ -211,7 +179,7 @@ public class BoardDAO {
 				do{
 					board=new BoardDTO();
 					board.setBId(rs.getInt("board_id"));
-					board.setBName(rs.getString("user_id"));
+					board.setBName(rs.getString("name"));
 					board.setBTitle(rs.getString("board_title"));
 					board.setBContent(rs.getString("board_content"));
 					board.setBDate(rs.getTimestamp("board_date"));
@@ -224,6 +192,44 @@ public class BoardDAO {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
+		System.out.println("DAO->>"+boardList);
+		return boardList;
+	}
+
+	//board 제목으로 검색 
+	public List searchBoardByTitle(String category,String value,int start,int end){
+		List boardList=null;
+		BoardDTO board=null;
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select board_id, name, board_title, board_content, board_date from board b join user u on b.user_id=u.user_id where board_category=? and board_title like ? order by board_id desc limit ?,? ");){
+
+			pstmt.setString(1, category);
+			pstmt.setString(2,"%"+value+"%");
+			pstmt.setInt(3,start);
+			pstmt.setInt(4,end);
+			
+			
+			ResultSet rs=pstmt.executeQuery();
+
+			if(rs.next()){
+				boardList=new ArrayList();
+				do{
+					board=new BoardDTO();
+					board.setBId(rs.getInt("board_id"));
+					board.setBName(rs.getString("name"));
+					board.setBTitle(rs.getString("board_title"));
+					board.setBContent(rs.getString("board_content"));
+					board.setBDate(rs.getTimestamp("board_date"));
+
+					boardList.add(board);
+
+				}while(rs.next());
+
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		System.out.println("DAO->>"+boardList);
 		return boardList;
 	}
 
@@ -232,7 +238,7 @@ public class BoardDAO {
 		List boardList=null;
 		BoardDTO board=null;
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from board where board_category=? and board_content like ? order by board_id desc limit ?,? ");){
+				PreparedStatement pstmt=conn.prepareStatement("select board_id, name, board_title, board_content, board_date from board b join user u on b.user_id=u.user_id where board_category=? and board_content like ? order by board_id desc limit ?,? ");){
 
 			pstmt.setString(1, category);
 			pstmt.setString(2,"%"+value+"%");
@@ -245,7 +251,7 @@ public class BoardDAO {
 				do{
 					board=new BoardDTO();
 					board.setBId(rs.getInt("board_id"));
-					board.setBName(rs.getString("user_id"));
+					board.setBName(rs.getString("name"));
 					board.setBTitle(rs.getString("board_title"));
 					board.setBContent(rs.getString("board_content"));
 					board.setBDate(rs.getTimestamp("board_date"));
