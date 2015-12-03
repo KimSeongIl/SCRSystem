@@ -6,11 +6,21 @@ public class QuestionDTO {
 	
 	private int qid;
 	private int uid;
+	private String qName;
 	private String qTitle;
 	private String qContent;
 	private Timestamp qDates;
 	private int aid;
 	private String qAnswerContent;
+	
+	
+	public String getqName() {
+		return qName;
+	}
+	public void setqName(String qName) {
+		this.qName = qName;
+	}
+	
 	
 	public int getUid() {
 		return uid;

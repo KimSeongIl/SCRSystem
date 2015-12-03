@@ -267,7 +267,7 @@ public class BoardDAO {
 		BoardDTO board=null;
 
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from board where board_category=? order by board_id desc limit ?,?");){ //rs->resultSet
+				PreparedStatement pstmt=conn.prepareStatement("select board_id,name,board_title,board_content,board_date from board b join user u on b.user_id=u.user_id where board_category=? order by board_id desc limit ?,?");){ //rs->resultSet
 
 			pstmt.setString(1, category);
 			pstmt.setInt(2, start);
@@ -280,7 +280,7 @@ public class BoardDAO {
 
 						board=new BoardDTO();
 						board.setBId(rs.getInt("board_id")); //getInt(디비에 저장된 칼럼 명)
-						board.setBName(rs.getString("user_id"));
+						board.setBName(rs.getString("name"));
 						board.setBTitle(rs.getString("board_title"));
 						board.setBContent(rs.getString("board_content"));
 						board.setBDate(rs.getTimestamp("board_date"));

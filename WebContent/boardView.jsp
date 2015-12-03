@@ -8,7 +8,6 @@
 <link rel="stylesheet" type="text/css" href="assets/css/board.css">
 
 <c:set var="category" value="${category}" scope="request" />
-${category }
 
 <div id="article">
 	<div id="noticeLine">
