@@ -19,9 +19,12 @@ public class MainAction implements CommandAction {
 		List<DepartmentDTO> department=departmentDao.departmentList();
 		
 		BoardDAO board=BoardDAO.getInstance();
-		//List<BoardDTO> boardList=board.viewBoard();
+		String category="notice";
 		
-		//request.setAttribute("boardList", boardList);
+		
+		List<BoardDTO> boardList=board.mainViewBoard(category);
+		
+		request.setAttribute("boardList", boardList);
 		request.setAttribute("department", department);
 		return "main.jsp";
 	}

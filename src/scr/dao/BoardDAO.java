@@ -308,6 +308,44 @@ public class BoardDAO {
 		return boardList;
 
 	}
+	//메인 페이지용 공지사항 자료 가져오기 
+	public List mainViewBoard(String category){
+		List boardList=null;
+		BoardDTO board=null;
+
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select board_title from board where board_category=? order by board_id desc");){ //rs->resultSet
+
+			pstmt.setString(1, category);
+			
+			try(ResultSet rs=pstmt.executeQuery();){
+
+				if(rs.next()){
+					boardList=new ArrayList();
+					do{
+
+						board=new BoardDTO();
+						
+						board.setBTitle(rs.getString("board_title"));
+						
+
+						boardList.add(board);
+
+
+
+					}while(rs.next());
+
+				}
+			}catch(Exception ee){
+				ee.printStackTrace();
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return boardList;
+
+	}
 
 	//공지사항 게시판 nid기준으로 자료가져오기
 	public BoardDTO BoardViewById(int bId){
