@@ -12,7 +12,7 @@
 <div id="article">
 	<div id="noticeLine">
 
-		
+
 
 		<c:choose>
 			<c:when test="${category=='notice'}">
@@ -21,10 +21,15 @@
 			<c:when test="${ category=='reference'}">
 				<h1>자 료 실</h1>
 			</c:when>
-		
+			<c:otherwise>
+				<h1>게시판 관리</h1>
+				<hr>
+				<button id="boardManagementWrite" class="btn btn-primary">게시판 작성하기</button>
+			</c:otherwise>
+
 
 		</c:choose>
-		
+
 
 		<table class="table">
 			<tr>
@@ -59,33 +64,44 @@
 
 	</div>
 	<center>
-	<div id="page">
-	<%
+		<div id="page">
+			<%
 			List paging = (List) request.getAttribute("paging");
 
 			for (int i = 0; i < paging.size(); i++) {
 				out.print(paging.get(i));
 			}
 		%>
-	</div>
+		</div>
 	</center>
-	
-	
+
+<c:if test="${ category=='notice'||category=='reference'}">
 	<center>
 
 		<select id="searchSelect">
 			<option>작성자</option>
 			<option>제목</option>
 			<option>내용</option>
-		</select>
-		 <input type="search" id="searchValue" ><input type="hidden" id="searchCategory" value="${category}"> <input type="button"
+		</select> <input type="search" id="searchValue"><input type="hidden"
+			id="searchCategory" value="${category}"> <input type="button"
 			value="검색" onclick="boardSearch()">
 
 
 
 	</center>
-	<button onclick="location.href='boardWrite.do?category=${category}'">글쓰기</button>
+</c:if>
 
+	<c:choose>
+
+		<c:when test="${sessionScope.auth=='학생'||sessionScope.auth==''}">
+
+		</c:when>
+
+		<c:otherwise>
+			<button class="btn btn-default"
+				onclick="location.href='boardWrite.do?category=${category}'">글쓰기</button>
+		</c:otherwise>
+	</c:choose>
 
 </div>
 

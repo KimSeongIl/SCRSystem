@@ -38,6 +38,24 @@ public class BoardDAO {
 		}
 		return count;
 	}
+//게시판 관리용 count
+	public int getBoardManagementCount(){
+		int count=0;
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) from board");){
+		
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					count=rs.getInt(1);
+				}
+			}catch(Exception ee){
+				ee.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return count;
+	}
 
 
 
@@ -308,6 +326,48 @@ public class BoardDAO {
 		return boardList;
 
 	}
+	//게시판 관리 게시판 자료가져오기
+	public List viewBoardManagement(int start,int end){
+		List boardList=null;
+		BoardDTO board=null;
+
+		try(Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select board_id,name,board_title,board_content,board_date from board b join user u on b.user_id=u.user_id order by board_id desc limit ?,?");){ //rs->resultSet
+
+		
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			try(ResultSet rs=pstmt.executeQuery();){
+
+				if(rs.next()){
+					boardList=new ArrayList();
+					do{
+
+						board=new BoardDTO();
+						board.setBId(rs.getInt("board_id")); //getInt(디비에 저장된 칼럼 명)
+						board.setBName(rs.getString("name"));
+						board.setBTitle(rs.getString("board_title"));
+						board.setBContent(rs.getString("board_content"));
+						board.setBDate(rs.getTimestamp("board_date"));
+
+						boardList.add(board);
+
+
+
+					}while(rs.next());
+
+				}
+			}catch(Exception ee){
+				ee.printStackTrace();
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return boardList;
+
+	}
+	
 	//메인 페이지용 공지사항 자료 가져오기 
 	public List mainViewBoard(String category){
 		List boardList=null;

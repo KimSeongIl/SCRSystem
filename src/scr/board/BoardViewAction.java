@@ -24,10 +24,10 @@ public class BoardViewAction implements CommandAction{
 		
 		if(request.getParameter("pageNum")!=null){
 			pageNum=Integer.parseInt(request.getParameter("pageNum"));
-			//System.out.println("pageNum1->>"+pageNum);
+		
 		}else{
 			pageNum=1;
-			//System.out.println("pageNum2->>"+pageNum);
+		
 		}
 		
 		double count=board.getBoardCount(category);
