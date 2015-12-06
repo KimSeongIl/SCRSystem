@@ -485,5 +485,58 @@ List<StudentDTO> list=new ArrayList<>();
 		return 0;
 	}
 	
+	public int studentCountByProfessor(int professorId){
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select count(*) \"count\" from student where professor_id=?");){
+			pstmt.setInt(1, professorId);
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					return rs.getInt("count");
+				}
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public StudentDTO studentInfo(int counselId) {
+		StudentDTO student=new StudentDTO();
+		try (
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement("select student_id,name,email,phone,(select department_name from department where department_id=student.department_Id) \"department\","
+						+ "ifnull((select department_name from department where department_id=minor_id),'없음') \"minor\","
+						+ "ifnull((select department_name from department where department_id=double_major_Id),'없음') \"double_major\",status from student where student_id=(select student_id from counsel where counsel_id=?)");){
+				pstmt.setInt(1, counselId);
+			    
+			    try(ResultSet rs=pstmt.executeQuery();){	
+			    	AES256Util util=new AES256Util();
+			    	if(rs.next()){		    	
+			    		do{						
+			    					
+			    			student.setStudentId(rs.getInt("student_id"));
+			    			student.setName(rs.getString("name"));
+			    			student.setEmail(util.decrypt(rs.getString("email")));
+			    			student.setPhone(util.decrypt(rs.getString("phone")));
+			    			student.setDepartmentName(rs.getString("department"));		    			
+			    			student.setMinorName(rs.getString("minor"));
+			    			student.setDoubleMajorName(rs.getString("double_major"));		    			
+			    			student.setStatus(rs.getString("status"));
+																
+			    		}while(rs.next());
+			    	}
+			    	}catch(Exception e){
+			    		e.printStackTrace();
+			    	}				
+			}catch(Exception e){
+				e.printStackTrace();
+			}						
+		return student;
+	}
+	
 
 }

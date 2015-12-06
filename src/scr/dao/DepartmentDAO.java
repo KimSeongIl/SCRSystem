@@ -132,6 +132,32 @@ public class DepartmentDAO {
 		}
 		return list;
 	}
+	
+	public List<DepartmentDTO> departmentListByProfessor(int professorId){
+		List<DepartmentDTO> list=new ArrayList<>();
+		try(
+				Connection conn=Conn.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement("select department_id,department_name from department where department_id=(select department_id from professor where professor_id=?) or department_id in (select department_id from pro_dept where professor_id=?)");){
+			
+			pstmt.setInt(1, professorId);
+			pstmt.setInt(2, professorId);
+			try(ResultSet rs=pstmt.executeQuery();){
+				if(rs.next()){
+					do{
+						DepartmentDTO department=new DepartmentDTO();
+						department.setDepartmentId(rs.getInt("department_id"));
+						department.setDepartmentName(rs.getString("department_name"));
+						list.add(department);
+					}while(rs.next());
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
 
 
 

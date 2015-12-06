@@ -54,9 +54,14 @@ public class StudentAddAction implements CommandAction{
 		student.setStatus(status);
 		
 		UserDAO dao=UserDAO.getInstance();
-		dao.userAdd(user);
-		StudentDAO studentDao=StudentDAO.getInstance();
-		studentDao.studentAdd(student);
-		return "main.jsp";
+		if(!dao.overlapCheck(user)){
+			dao.userAdd(user);
+			StudentDAO studentDao=StudentDAO.getInstance();
+			studentDao.studentAdd(student);
+		}else{
+			request.setAttribute("error", "overlap");
+		}
+		
+		return "signUpPro.jsp";
 	}
 }

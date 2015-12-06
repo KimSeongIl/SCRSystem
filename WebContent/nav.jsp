@@ -31,15 +31,15 @@
 				<c:when test="${sessionScope.auth eq \"교수\"}">
 					<li>공지사항</li>
 					<li>이용안내</li>
-					<li onclick="location.href='counselManagement.do'">상담관리</li>
+					<li onclick="location.href='counselManagementPro.do'">상담관리</li>
 					<li>자료실</li>
 
 				</c:when>
 				<c:when test="${sessionScope.auth eq \"관리자\" }">
 					<li onclick="location.href='userManagement.do'">회원관리</li>
 					<li onclick="location.href='departmentManagement.do'">학과관리</li>
-					<li onclick="location.href='counselManagement.do'">상담관리</li>
 					<li>게시판관리</li>
+					<li >Q&A관리</li>
 				</c:when>
 			</c:choose>
 

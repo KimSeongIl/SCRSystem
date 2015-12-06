@@ -3,7 +3,7 @@
 	margin-top:50px;
 	
 }
-#profile table,#counselContainer{
+#profile ,#counselContainer{
 	width:80%;
 	margin:auto;
 }
@@ -13,10 +13,11 @@
 #counselContainer{
 	margin-top:50px;
 }
-#counselContainer h2{
+#counselContainer h2,#profile h2{
 	text-align:left;
 	
 }
+
 #counselContainer table{
 	width:100%;
 }

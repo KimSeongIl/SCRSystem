@@ -67,24 +67,29 @@ public class ProfessorAddAction implements AjaxAction{
 		user.setPassword(String.valueOf(professorId));
 		user.setAuth("교수");
 		UserDAO userDao=UserDAO.getInstance();
-		userDao.userAdd(user);
+		if(!userDao.overlapCheck(user)){
+			userDao.userAdd(user);
 
-		ProfessorDTO professor=new ProfessorDTO();
-		professor.setProfessorId(professorId);
-		professor.setProfessorName(professorName);
-		professor.setOfficeNo(officeNo);
-		professor.setOfficeTel(officeTel);
-		professor.setPhone(phone);
-		professor.setEmail(email);
-		professor.setDepartmentId(departmentId);
-		professor.setImg(img);
+			ProfessorDTO professor=new ProfessorDTO();
+			professor.setProfessorId(professorId);
+			professor.setProfessorName(professorName);
+			professor.setOfficeNo(officeNo);
+			professor.setOfficeTel(officeTel);
+			professor.setPhone(phone);
+			professor.setEmail(email);
+			professor.setDepartmentId(departmentId);
+			professor.setImg(img);
 
-		ProfessorDAO professorDao=ProfessorDAO.getInstance();
-		professorDao.professorAdd(professor);
-		for(int i=0;i<arr.length;i++){
-			if(!arr[i].equals(""))
-				professorDao.professorDepartmentAdd(professorId,Integer.parseInt(arr[i]));
+			ProfessorDAO professorDao=ProfessorDAO.getInstance();
+			professorDao.professorAdd(professor);
+			for(int i=0;i<arr.length;i++){
+				if(!arr[i].equals(""))
+					professorDao.professorDepartmentAdd(professorId,Integer.parseInt(arr[i]));
+			}
+		}else{
+			return JsonUtil.putFailJsonContainer("ProfessorAddAction OverLapId", "교수번호가 중복됩니다.");
 		}
+		
 
 		return JsonUtil.putSuccessJsonContainer(null);
 

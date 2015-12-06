@@ -14,9 +14,9 @@ var notSuccessStudentListByProfessor=function(data){
 	$('#list-content').html(str);
 }
 
-var groupByProfessorListAndCount=function(data){
-	var professorList=data.resData[0].professorList;
-	if(professorList.length!=0){
+var groupByDepartmentListAndCount=function(data){
+	var departmentList=data.resData[0].departmentList;
+	if(departmentList.length!=0){
 		$('#char-second-bar').html('<canvas id="barChart" width="400"></canvas>');
 	var ctx = document.getElementById("barChart").getContext("2d");
 	var data = {
@@ -78,13 +78,14 @@ var groupByProfessorListAndCount=function(data){
 
 		}
 	var myBarChart = new Chart(ctx).Bar(data,option);
-	$.each(professorList,function(key,value){
-		myBarChart.addData([value.count, value.success], value.professorName,value.professorId);
+	$.each(departmentList,function(key,value){
+		myBarChart.addData([value.count, value.success], value.departmentName,value.departmentId);
 	})
 	
 	$("#barChart").click(function(e) {
 		   var activeBars = myBarChart.getBarsAtEvent(e); 
-		   requestJsonData("notSuccessStudentListByProfessor.ajax",{professorId:activeBars[0].userId,departmentId:$('#chart-second-title #selectDiv select').val()},notSuccessStudentListByProfessor);
+		   
+		   requestJsonData("notSuccessStudentListByProfessor.ajax",{departmentId:activeBars[0].userId},notSuccessStudentListByProfessor);
 		});
 	$("#barChart").mouseover(function(){
 		$(this).css('cursor','pointer');
@@ -94,25 +95,6 @@ var groupByProfessorListAndCount=function(data){
 	}
 
 	
-}
-
-var departmentListByEmployee=function(data){
-	var departmentList=data.resData[0].department
-	var str="";
-	
-	str+="<select>";
-	$.each(departmentList,function(key,value){
-		str+="<option value="+value.departmentId+">"+value.departmentName+"</option>";
-	})
-	str+="</select>";
-	
-	
-	$('#chart-second-title #selectDiv').html(str);
-	requestJsonData("groupByProfessorListAndCount.ajax",{departmentId:$('#chart-second-title #selectDiv select').val()},groupByProfessorListAndCount);
-	$('#chart-second-title #selectDiv select').change(function(){
-		requestJsonData("groupByProfessorListAndCount.ajax",{departmentId:$(this).val()},groupByProfessorListAndCount);
-		$('#list-content').html('');
-	})
 }
 
 var counselCount=function(data){
@@ -224,16 +206,7 @@ $(document).ready(function(){
 
 	
 
-	requestJsonData("counselCount.ajax",{},counselCount);
-	requestJsonData("departmentListByEmployee.ajax",{},departmentListByEmployee);
-	
+	requestJsonData("counselCountPro.ajax",{},counselCount);
+	requestJsonData("groupByDepartmentListAndCount.ajax",{},groupByDepartmentListAndCount);
 	
 })
-
-
-
-
-
-
-
-

@@ -2256,7 +2256,7 @@
 
 			this.scale = new this.ScaleClass(scaleOptions);
 		},
-		addData : function(valuesArray,label,professorId){
+		addData : function(valuesArray,label,userId){
 			var firstHighlight="rgba(220,220,220,0.75)";
 			var firstHighlightStroke="rgba(220,220,220,1)";
 			var secondHighlight= "rgba(151,187,205,0.75)";
@@ -2277,7 +2277,7 @@
 						fillColor : this.datasets[datasetIndex].fillColor,
 						highlightFill: firstHighlight,
 			            highlightStroke: firstHighlightStroke,
-						professorId:professorId
+						userId:userId
 					}));
 				}else{
 					this.datasets[datasetIndex].bars.push(new this.BarClass({
@@ -2291,7 +2291,7 @@
 						fillColor : this.datasets[datasetIndex].fillColor,
 						highlightFill: secondHighlight,
 			            highlightStroke: secondHighlightStroke,
-						professorId:professorId
+						userId:userId
 					}));
 				}
 				

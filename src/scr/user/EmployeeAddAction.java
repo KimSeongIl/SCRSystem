@@ -37,16 +37,21 @@ public class EmployeeAddAction implements AjaxAction{
 		user.setPassword(String.valueOf(employeeId));
 		user.setAuth("직원");
 		UserDAO userDao=UserDAO.getInstance();
-		userDao.userAdd(user);
+		if(!userDao.overlapCheck(user)){
+			userDao.userAdd(user);
+			
+			EmployeeDTO employee=new EmployeeDTO();
+			employee.setEmployeeId(employeeId);
+			employee.setEmployeeName(employeeName);
+			employee.setPhone(phone);
+			employee.setEmail(email);
+			
+			EmployeeDAO employeeDao=EmployeeDAO.getInstance();
+			employeeDao.employeeAdd(employee);
+		}else{
+			return JsonUtil.putFailJsonContainer("EmployeeAddAction OverLapId", "직원번호가 중복됩니다.");
+		}
 		
-		EmployeeDTO employee=new EmployeeDTO();
-		employee.setEmployeeId(employeeId);
-		employee.setEmployeeName(employeeName);
-		employee.setPhone(phone);
-		employee.setEmail(email);
-		
-		EmployeeDAO employeeDao=EmployeeDAO.getInstance();
-		employeeDao.employeeAdd(employee);
 		
 		return JsonUtil.putSuccessJsonContainer(null);
 	}
