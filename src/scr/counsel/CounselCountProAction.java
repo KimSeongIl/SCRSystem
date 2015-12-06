@@ -10,30 +10,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import scr.action.AjaxAction;
+import scr.dao.CounselDAO;
+import scr.dao.DepartmentDAO;
 import scr.dao.StudentDAO;
-import scr.dto.StudentDTO;
+import scr.dto.DepartmentDTO;
 import scr.util.JsonUtil;
 
-public class NotSuccessStudentListByProfessorAction implements AjaxAction{
+public class CounselCountProAction implements AjaxAction{
 
+	@SuppressWarnings("deprecation")
 	public Map<String,Object> responseBody(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 
 		request.setCharacterEncoding("UTF-8");
 		if(!"POST".equals(request.getMethod())){
-			return JsonUtil.putFailJsonContainer("NotSuccessStudentListByProfessorAction NotPost 001", "비정상적인 접근방식입니다");
-		}
-		int professorId;
-		if(request.getParameter("professorId")!=null){
-			professorId=Integer.parseInt(request.getParameter("professorId"));
-		}else{
-			HttpSession session=request.getSession();
-			professorId=(int)session.getAttribute("uid");
+			return JsonUtil.putFailJsonContainer("CounselCountAction NotPost 001", "비정상적인 접근방식입니다");
 		}
 		
-
-		int departmentId=Integer.parseInt(request.getParameter("departmentId"));
+		CounselDAO counselDao=CounselDAO.getInstance();
 		Date date=new Date();
-
+		
 		String year=String.valueOf(date.getYear()+1900);
 		int month=date.getMonth()+1;
 		int term;
@@ -42,14 +37,19 @@ public class NotSuccessStudentListByProfessorAction implements AjaxAction{
 		}else{
 			term=2;
 		}
-
+		HttpSession session=request.getSession();
+		int professorId=(int)session.getAttribute("uid");
+		
+		
+		
 		StudentDAO studentDao=StudentDAO.getInstance();
-
-		List<StudentDTO> list=studentDao.notSuccessStudentListByProfessor(professorId,departmentId, year, term);
-
+		int count=studentDao.studentCountByProfessor(professorId);
+		int success=counselDao.counselSuccessCountByProfessor(year, term, professorId);
+		
 		Map<String,Object> param=new HashMap<>();
-		param.put("professorList", list);
-
+		param.put("count", count);
+		param.put("successCount", success);
+		
 		return JsonUtil.putSuccessJsonContainer(param);
 	}
 }

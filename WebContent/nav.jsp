@@ -31,7 +31,7 @@
 				<c:when test="${sessionScope.auth eq \"교수\"}">
 					<li>공지사항</li>
 					<li>이용안내</li>
-					<li onclick="location.href='counselManagement.do'">상담관리</li>
+					<li onclick="location.href='counselManagementPro.do'">상담관리</li>
 					<li>자료실</li>
 
 				</c:when>

@@ -21,6 +21,8 @@ public class CounselDTO {
 	private int term;
 	private int count;
 	private int success;
+	private int departmentId;
+	private String departmentName;
 	
 	
 	public void setCounselId(int counselId){
@@ -129,4 +131,17 @@ public class CounselDTO {
 	public int getSuccess(){
 		return success;
 	}
+	public void setDepartmentId(int departmentId){
+		this.departmentId=departmentId;
+	}
+	public int getDepartmentId(){
+		return departmentId;
+	}
+	public void setDepartmentName(String departmentName){
+		this.departmentName=departmentName;
+	}
+	public String getDepartmentName(){
+		return departmentName;
+	}
+	
 }
