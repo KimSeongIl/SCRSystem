@@ -4,6 +4,7 @@
    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
    <%@ page import="scr.dto.BoardDTO" %>
    <%@ page import="java.util.*" %>
+   <link rel="stylesheet" type="text/css" href="assets/css/board.css">
   
    
  
@@ -43,19 +44,19 @@
 <div id="article" >
 
 <form id="frm" action="boardInsert.do" method="post" >
-<table width="100%">
+<table width="100%" class="table">
 
 		<tr>
-			<td>제목</td>
+			<th>제목</th>
 			<td>${bTitle}</td>
 		</tr>
 		<tr>
-		<td>첨부파일</td>
+		<th>첨부파일</th>
 		<td><a onclick="fileDownLoad()">${bFile}</a></td>
 		</tr>
-		<tr>
+		<tr id="boardContent">
 		
-			<td>내용</td>
+			<th>내용</th>
 			
 			
 	<c:if test="${ after=='' }">
@@ -75,21 +76,26 @@
 		
 		</tr>
 		
+		<tr>
+		<td></td>
+		<td></td>
+		</tr>
+		
 </table>
 </form>
 
 
 <div>
-<form action="boardUpdateBefore.do" method="post">
+<form class="boardDetail" action="boardUpdateBefore.do"  method="post">
 <input type="hidden" name="bId" value="${bId}"/>
-<input type="submit"  value="수정" onclick="if(!confirm('정말로 수정하시겠습니까?')){return false;}"/>
+<input type="submit"  class="btn btn-primary" value="수정" onclick="if(!confirm('정말로 수정하시겠습니까?')){return false;}"/>
 
 </form>
 
 
-<form action="boardDelete.do" method="post">
+<form class="boardDetail" action="boardDelete.do"  method="post">
 <input type="hidden" name="bId" value="${bId}"/>
-<input type="submit" value="삭제" onclick="if(!confirm('정말 삭제 하시겠습니까?')){return false;}">
+<input type="submit" class="btn btn-default" value="삭제" onclick="if(!confirm('정말 삭제 하시겠습니까?')){return false;}">
 
 </form>
 </div>

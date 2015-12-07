@@ -5,7 +5,7 @@
     <%@ page import="scr.dao.QuestionDAO"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
+    <link rel="stylesheet" type="text/css" href="assets/css/question.css">
     
     
     
@@ -48,9 +48,9 @@
 		
 
 	</div>
-	
-	<button onclick="location.href='questionWrite.do'">글쓰기</button>
-    
+	<c:if test="${sessionScope.auth=='학생'}">
+	<button id="questionWrite" class="btn btn-default" onclick="location.href='questionWrite.do'">글쓰기</button>
+    </c:if>
     
     
     

@@ -10,3 +10,22 @@ div#noticeLine a:hover {
 div#noticeLine a{
 	color:black;
 }
+
+tr th{
+	 font-weight: 900;
+	 width:80px;
+}
+form.boardDetail{
+	float:right;
+	margin-left:10px;
+}
+
+tr#boardContent td img{
+	width:500px;
+	height:500px;
+}
+#boardManagementWrite{
+	float:right;
+	margin-top:10px;
+	margin-bottom:10px;
+}
