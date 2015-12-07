@@ -14,17 +14,21 @@
 
 
 
-		<c:choose>
-			<c:when test="${category=='notice'}">
-				<h1>공 지 사 항</h1>
-			</c:when>
-			<c:when test="${ category=='reference'}">
-				<h1>자 료 실</h1>
-			</c:when>
-			
+		
+				<h1>게시판 관리</h1>
+				<hr>
+				<button id="boardManagementWrite" class="btn btn-primary">게시판
+					작성하기</button>
+				<ul class="nav nav-tabs" id="boardManagementMenu">
+					<li role="presentation" class="active" id="studentList"><a href="#">공지사항</a></li>
+					<li role="presentation" id="professorList"><a href="#">자료실</a></li>
+					
+
+				</ul>
+		
 
 
-		</c:choose>
+
 
 
 		<table class="table">
@@ -33,7 +37,7 @@
 				<th>작성자</th>
 				<th>제목</th>
 				<th>작성일</th>
-				
+				<th></th>
 			</tr>
 			<%
 				List boardList = (List) request.getAttribute("boardList");
@@ -49,7 +53,7 @@
 						out.println("<td><a href='boardDetail.do?bid=" + board.getBId() + "'>" + board.getBTitle()
 								+ "</a></td>");
 						out.println("<td>" + board.getBDate() + "</td>");
-						
+						out.println("<td><button class='btn btn-default'>삭제</button></td>");
 
 						out.println("</tr>");
 					}

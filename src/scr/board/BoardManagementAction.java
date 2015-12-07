@@ -16,8 +16,13 @@ public class BoardManagementAction implements CommandAction{
 		BoardDAO board=BoardDAO.getInstance();//BoardDAO 객체 생성 
 
 		int pageNum;
-
-
+		String category;
+		
+	category=request.getParameter("category");
+	  if(category==null){
+		category="notice";  
+	  }
+System.out.println(category);
 
 		if(request.getParameter("pageNum")!=null){
 			pageNum=Integer.parseInt(request.getParameter("pageNum"));
@@ -82,7 +87,7 @@ public class BoardManagementAction implements CommandAction{
 		    request.setAttribute("paging", paging);
 		    request.setAttribute("count", count);
 		    
-		    return "boardView.jsp";
+		    return "boardManagement.jsp";
 			
 			
 	}
