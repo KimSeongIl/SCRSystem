@@ -1,3 +1,7 @@
+var fileDownload=function(data){
+	
+}
+
 var counselSuccess=function(data){
 	alert('완료되었습니다.');
 	location.href="counselListPro.do";
@@ -34,6 +38,10 @@ $(document).ready(function(){
 		var cid=$('h1').attr('cid');
 		var counselDate=$('#counselDate').val();
 		requestJsonData('counselSuccess.ajax',{cid:cid,content:content,counselDate:counselDate},counselSuccess);
+		return false;
+	})
+	$('#fileDownload').click(function(){
+		$('#downloadForm').submit();
 		return false;
 	})
 })

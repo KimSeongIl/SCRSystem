@@ -58,7 +58,7 @@
 	<div id="counselContainer">
 		<h2>상담정보</h2>
 		<hr>
-		<form id="counselSubmitForm" action="aa.do">
+		
 		<table class="table">
 			<tr>
 				<th>상담구분</th>
@@ -72,8 +72,14 @@
 			
 			<tr>
 				<th>첨부자료</th>
-				<td>${counsel.file }</td>
+				<td>
+					<form method="POST" id="downloadForm" action="counselFileDownload.ajax">
+					<span id="fileDownload"><a href="#">${counsel.file }</a></span>
+					<input type="hidden" name="fileName" value="${counsel.file }">
+					</form>
+				</td>
 			</tr>
+			
 			<tr>
 				<th>상담사유</th>
 				<td>${counsel.reason }</td>
@@ -122,7 +128,7 @@
 				
 			</tr>
 		</table>
-		</form>
+		
 	</div>
 </div>
 
