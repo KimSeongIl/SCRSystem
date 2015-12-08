@@ -14,16 +14,18 @@ public class BoardDetailView implements CommandAction {
 	
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 
+		
 		int bId=Integer.parseInt(request.getParameter("bid"));
-		
-		
+		String category=request.getParameter("category");
+		String management=request.getParameter("management");
 		
 		BoardDTO boardList=null;
 		BoardDAO board=BoardDAO.getInstance();
 		
 		boardList=board.BoardViewById(bId); //BoardDTO형 
 		
-		
+		request.setAttribute("management", management);
+		request.setAttribute("category", category);
 		request.setAttribute("boardList", boardList);
 		
 		

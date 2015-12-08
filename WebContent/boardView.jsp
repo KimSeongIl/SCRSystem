@@ -46,7 +46,7 @@
 						out.println("<tr>");
 						out.println("<td>" + board.getBId() + "</td>");
 						out.println("<td>" + board.getBName() + "</td>");
-						out.println("<td><a href='boardDetail.do?bid=" + board.getBId() + "'>" + board.getBTitle()
+						out.println("<td><a href='boardDetail.do?category=" + board.getCategory() + "&bid="+board.getBId()+"'>" + board.getBTitle()
 								+ "</a></td>");
 						out.println("<td>" + board.getBDate() + "</td>");
 						

@@ -29,10 +29,10 @@
 					<li>자료실</li>
 				</c:when>
 				<c:when test="${sessionScope.auth eq \"교수\"}">
-					<li>공지사항</li>
+					<li onclick="location.href='boardView.do?category=notice'">공지사항</li>
 					<li>이용안내</li>
 					<li onclick="location.href='counselManagementPro.do'">상담관리</li>
-					<li>자료실</li>
+					<li onclick="location.href='boardView.do?category=reference'">자료실</li>
 
 				</c:when>
 				<c:when test="${sessionScope.auth eq \"관리자\" }">

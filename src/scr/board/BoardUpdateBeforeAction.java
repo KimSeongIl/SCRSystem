@@ -11,8 +11,12 @@ import scr.dto.BoardDTO;
 public class BoardUpdateBeforeAction implements CommandAction  {
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		request.setCharacterEncoding("UTF-8");
+		String category=request.getParameter("category");
+		String management=request.getParameter("management");
 		String id=request.getParameter("bId");
 		int bId=Integer.parseInt(id);
+		
+		System.out.println("management->>before->>"+management);
 		
 		BoardDTO boardList=new BoardDTO();
 		
@@ -20,7 +24,8 @@ public class BoardUpdateBeforeAction implements CommandAction  {
 		
 		boardList=board.BoardViewById(bId);
 		
-		
+		request.setAttribute("category", category);
+		request.setAttribute("management", management);
 		request.setAttribute("boardList", boardList);
 		
 		

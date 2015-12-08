@@ -291,7 +291,7 @@ public class BoardDAO {
 		BoardDTO board=null;
 
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select board_id,name,board_title,board_content,board_date from board b join user u on b.user_id=u.user_id where board_category=? order by board_id desc limit ?,?");){ //rs->resultSet
+				PreparedStatement pstmt=conn.prepareStatement("select board_id,name,board_title,board_content,board_category,board_date from board b join user u on b.user_id=u.user_id where board_category=? order by board_id desc limit ?,?");){ //rs->resultSet
 
 			pstmt.setString(1, category);
 			pstmt.setInt(2, start);
@@ -307,6 +307,7 @@ public class BoardDAO {
 						board.setBName(rs.getString("name"));
 						board.setBTitle(rs.getString("board_title"));
 						board.setBContent(rs.getString("board_content"));
+						board.setCategory(rs.getString("board_category"));
 						board.setBDate(rs.getTimestamp("board_date"));
 
 						boardList.add(board);

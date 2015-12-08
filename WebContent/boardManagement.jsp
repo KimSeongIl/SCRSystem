@@ -9,6 +9,7 @@
 
 <c:set var="category" value="${category}" scope="request" />
 
+
 <div id="article">
 	<div id="noticeLine">
 
@@ -20,8 +21,8 @@
 				<button id="boardManagementWrite" class="btn btn-primary">게시판
 					작성하기</button>
 				<ul class="nav nav-tabs" id="boardManagementMenu">
-					<li role="presentation" class="active" id="studentList"><a href="#">공지사항</a></li>
-					<li role="presentation" id="professorList"><a href="#">자료실</a></li>
+					<li role="presentation" class="active" id="studentList" onclick="location.href='boardManagement.do?category=notice'"><a href="#">공지사항</a></li>
+					<li role="presentation" id="professorList" onclick="location.href='boardManagement.do?category=reference'"><a href="#">자료실</a></li>
 					
 
 				</ul>
@@ -41,6 +42,7 @@
 			</tr>
 			<%
 				List boardList = (List) request.getAttribute("boardList");
+			    String management="management";
 
 				if (boardList != null) {
 
@@ -50,10 +52,12 @@
 						out.println("<tr>");
 						out.println("<td>" + board.getBId() + "</td>");
 						out.println("<td>" + board.getBName() + "</td>");
-						out.println("<td><a href='boardDetail.do?bid=" + board.getBId() + "'>" + board.getBTitle()
+						out.println("<td><a href='boardDetail.do?bid=" + board.getBId() + "&category="+board.getCategory()+"&management="+management+"'>" + board.getBTitle()
 								+ "</a></td>");
 						out.println("<td>" + board.getBDate() + "</td>");
-						out.println("<td><button class='btn btn-default'>삭제</button></td>");
+						
+						
+						out.println("<td><form class='' action='boardDelete.do'  method='post'><input type='hidden' name='bId' value='"+board.getBId()+"'/><input type='hidden' name='category' value='"+board.getCategory()+"'/><input type='hidden' name='management' value='management'/><input type='submit' class='btn btn-default' value='삭제' onclick='if(!confirm('정말 삭제 하시겠습니까?')){return false;}'></form></td>");
 
 						out.println("</tr>");
 					}
@@ -101,7 +105,7 @@
 
 		<c:otherwise>
 			<button class="btn btn-default"
-				onclick="location.href='boardWrite.do?category=${category}'">글쓰기</button>
+				onclick="location.href='boardWrite.do?category=${category}'">게시판 작성 </button>
 		</c:otherwise>
 	</c:choose>
 

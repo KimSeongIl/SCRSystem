@@ -6,6 +6,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <c:set var="category" value="${category}" scope="request" />
+<c:set var="management" value="${management }" scope="request"/>
 <c:set var="boardList" value="${boardList}" scope="request" />
 
 
@@ -23,18 +24,26 @@
 	charset="utf-8"></script>
 	
 <div id="article">
+${management}
+${category }
 
 
-		<c:choose>
-			<c:when test="${boardList==null}">
-			${category }
+			<c:if test="${boardList==null}">
+			
 				<form id="frm" action="boardInsert.do?category=${category}" method="post" enctype="multipart/form-data">
-			</c:when>
+			</c:if>
 		
-			<c:otherwise>
-				<form id="frm" action="boardUpdate.do?bid=${bId}" method="post" >
-			</c:otherwise>
-		</c:choose>
+		
+			
+			<c:if test="${boardList!=null&&management=='management'}">
+				<form id="frm" action="boardUpdate.do?bid=${bId}&category=${category}&management=${management}" method="post" >
+			
+			</c:if>
+			
+			<c:if test="${boardList!=null&&management=='' }">
+			
+			</c:if>
+	
 		
 		<table width="100%">
 			<tr>

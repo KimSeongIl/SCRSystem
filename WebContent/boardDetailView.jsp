@@ -6,8 +6,8 @@
    <%@ page import="java.util.*" %>
    <link rel="stylesheet" type="text/css" href="assets/css/board.css">
   
-   
- 
+   <c:set var="management" value="${management }" scope="request"/>
+ <c:set var="category" value="${category}" scope="request" />
   <c:set var="board" value="${boardList}" scope="request"/>
     <c:set var="bId" value="${boardList.getBId()}"/>
   <c:set var="bName" value="${boardList.getBName()}"/>
@@ -87,17 +87,22 @@
 
 <div>
 <form class="boardDetail" action="boardUpdateBefore.do"  method="post">
+<input type="hidden" name="management" value="${management}"/>
 <input type="hidden" name="bId" value="${bId}"/>
+<input type="hidden" name="category" value="${category}"/>
 <input type="submit"  class="btn btn-primary" value="수정" onclick="if(!confirm('정말로 수정하시겠습니까?')){return false;}"/>
 
 </form>
 
-
+<c:if test="${sessionScope.auth!='관리자' }">
 <form class="boardDetail" action="boardDelete.do"  method="post">
 <input type="hidden" name="bId" value="${bId}"/>
+<input type="hidden" name="category" value="${category}"/>
 <input type="submit" class="btn btn-default" value="삭제" onclick="if(!confirm('정말 삭제 하시겠습니까?')){return false;}">
 
 </form>
+</c:if>
+
 </div>
 
 
