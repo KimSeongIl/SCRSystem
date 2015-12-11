@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="assets/css/board.css">
 
 <c:set var="category" value="${category}" scope="request" />
+<c:set var="management" value="management"/>
 
 
 <div id="article">
@@ -18,7 +19,7 @@
 		
 				<h1>게시판 관리</h1>
 				<hr>
-				<button id="boardManagementWrite" class="btn btn-primary">게시판
+				<button id="boardManagementWrite" class="btn btn-primary" onclick="location.href='boardWrite.do?category=${category}&management=${management}'">게시판
 					작성하기</button>
 				<ul class="nav nav-tabs" id="boardManagementMenu">
 					<li role="presentation" class="active" id="studentList" onclick="location.href='boardManagement.do?category=notice'"><a href="#">공지사항</a></li>
@@ -96,7 +97,9 @@
 
 		</center>
 	</c:if>
-
+	
+	
+<!--  
 	<c:choose>
 
 		<c:when test="${sessionScope.auth=='학생'||sessionScope.auth==''}">
@@ -108,6 +111,8 @@
 				onclick="location.href='boardWrite.do?category=${category}'">게시판 작성 </button>
 		</c:otherwise>
 	</c:choose>
+-->
+
 
 </div>
 

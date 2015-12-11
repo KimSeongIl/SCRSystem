@@ -18,6 +18,8 @@ public class BoardInsertAction implements CommandAction {
 	public String requestPro(HttpServletRequest request,HttpServletResponse response)throws Throwable{
 		request.setCharacterEncoding("utf-8");
 		
+		String management=request.getParameter("management");
+		
 		String category="";
 		String bTitle="";
         String bContent="";
@@ -61,9 +63,18 @@ public class BoardInsertAction implements CommandAction {
 		board.insertBoard(uId, bTitle, bContent,category,fileName);
 		request.setAttribute("category", category);
 		
+
+		if(management!=null){
+			System.out.println("c");
+			return "boardManagementInsert.jsp";
+		}else{
+			System.out.println("d");
+			return "boardInsert.jsp";
+		}
+
 		
 		
-		return "boardInsert.jsp";
+		
 	}
 
 }

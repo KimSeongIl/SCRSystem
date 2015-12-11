@@ -28,11 +28,16 @@ ${management}
 ${category }
 
 
-			<c:if test="${boardList==null}">
+			<c:if test="${boardList==null&&management=='management'}">
 			
-				<form id="frm" action="boardInsert.do?category=${category}" method="post" enctype="multipart/form-data">
+				<form id="frm" action="boardInsert.do?category=${category}&management=${management}" method="post" enctype="multipart/form-data">
 			</c:if>
 		
+		    <c:if test="${boardList!=null&&management=='' }">
+			
+			<form id="frm" action="boardInsert.do?category=${category}" method="post" enctype="multipart/form-data">
+			</c:if>
+	
 		
 			
 			<c:if test="${boardList!=null&&management=='management'}">

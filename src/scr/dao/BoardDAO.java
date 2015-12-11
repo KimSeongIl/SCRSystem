@@ -414,7 +414,7 @@ public class BoardDAO {
 
 		BoardDTO board=null;
 		try(Connection conn=Conn.getConnection();
-				PreparedStatement pstmt=conn.prepareStatement("select * from board where board_id=?");){
+				PreparedStatement pstmt=conn.prepareStatement("select board_id,board_title,board_content,board_date,board_file,name from board b join user u on b.user_id=u.user_id where board_id=?");){
 
 			pstmt.setInt(1, bId);
 
@@ -424,7 +424,7 @@ public class BoardDAO {
 					board=new BoardDTO();
 
 					board.setBId(rs.getInt("board_id"));
-					board.setBName(rs.getString("user_id"));
+					board.setBName(rs.getString("name"));
 					board.setBTitle(rs.getString("board_title"));
 					board.setBContent(rs.getString("board_content"));
 					board.setBDate(rs.getTimestamp("board_date"));

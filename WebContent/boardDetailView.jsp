@@ -86,6 +86,7 @@
 
 
 <div>
+<c:if test="${sessionScope.name==bName }">
 <form class="boardDetail" action="boardUpdateBefore.do"  method="post">
 <input type="hidden" name="management" value="${management}"/>
 <input type="hidden" name="bId" value="${bId}"/>
@@ -93,6 +94,7 @@
 <input type="submit"  class="btn btn-primary" value="수정" onclick="if(!confirm('정말로 수정하시겠습니까?')){return false;}"/>
 
 </form>
+</c:if>
 
 <c:if test="${sessionScope.auth!='관리자' }">
 <form class="boardDetail" action="boardDelete.do"  method="post">
