@@ -21,6 +21,27 @@ public class QuestionDAO {
 		return instance;
 	}
 	
+	
+	
+	
+	//question의 count 수 
+		public int getQuestionCount(){
+			int count=0;
+			try(Connection conn=Conn.getConnection();
+					PreparedStatement pstmt=conn.prepareStatement("select count(*) from question");){
+				try(ResultSet rs=pstmt.executeQuery();){
+					if(rs.next()){
+						count=rs.getInt(1);
+					}
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return count;
+		}
+	
 	//질의 응답 id 로 삭제하기 
 	public  void deleteQuestion(int qid){
 		try(Connection conn=Conn.getConnection();

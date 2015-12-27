@@ -24,8 +24,6 @@
 	charset="utf-8"></script>
 	
 <div id="article">
-${management}
-${category }
 
 
 			<c:if test="${boardList==null&&management=='management'}">

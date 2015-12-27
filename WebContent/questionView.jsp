@@ -12,10 +12,49 @@
     <div id="article">
     
   <div id="questionLine">
+  
+  <c:if test="${sessionScope.auth=='관리자'}">
+  <h1>Q & A 관리</h1>
+  <hr>
+  
+  		<table class="table">
+			<tr>
+				<th>no</th>
+				<th>작성자</th>
+				<th>제목</th>
+				<th>작성일</th>
+				<th></th>
+			</tr>
+			<%
+	List questionList=(List)request.getAttribute("questionList");
+	
+			
+	if(questionList!=null){
+		int size=questionList.size();
+		for(int i=0;i<size;i++){
+			QuestionDTO question=(QuestionDTO)questionList.get(i);
+			
+			out.println("<tr>");
+			out.println("<td>"+question.getQid()+"</td>");
+			out.println("<td>"+question.getqName()+"</td>");
+			out.println("<td><a href='questionDetail.do?qid="+question.getQid()+"'>"+question.getqTitle()+"</a></td>");
+			out.println("<td>"+question.getqDates()+"</td>");
+	
+			out.println("<td><form class='' action='questionDelete.do'  method='post'><input type='hidden' name='qid' value='"+question.getQid()+"'/><input type='submit' class='btn btn-default' value='삭제' onclick='if(!confirm('정말 삭제 하시겠습니까?')){return false;}'></form></td>");
+			
+			out.println("</tr>");
+		}
+	}
+	%>
 
-		<h1>Q & A</h1>
-
-		<table class="table">
+		</table>
+  </c:if>
+  
+  <c:if test="${sessionScope.auth!='관리자'}">
+  <h1>Q & A</h1>
+  <hr>
+  
+  		<table class="table">
 			<tr>
 				<th>no</th>
 				<th>작성자</th>
@@ -36,18 +75,34 @@
 			out.println("<td>"+question.getqName()+"</td>");
 			out.println("<td><a href='questionDetail.do?qid="+question.getQid()+"'>"+question.getqTitle()+"</a></td>");
 			out.println("<td>"+question.getqDates()+"</td>");
-			
 			out.println("</tr>");
 		}
 	}
-	
 	%>
 
-
 		</table>
+  </c:if>
+
+		
 		
 
 	</div>
+	
+	
+	<!-- 페이지 기법 부분  -->
+		<center>
+		<div id="page">
+			<%
+				List paging = (List) request.getAttribute("paging");
+
+				for (int i = 0; i < paging.size(); i++) {
+					out.print(paging.get(i));
+				}
+			%>
+		</div>
+	</center>
+	
+	
 	<c:if test="${sessionScope.auth=='학생'}">
 	<button id="questionWrite" class="btn btn-default" onclick="location.href='questionWrite.do'">글쓰기</button>
     </c:if>

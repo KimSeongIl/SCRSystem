@@ -1,8 +1,10 @@
 #question td {
 	
-	padding:10px;
+	 text-align:left;
 	
-	
+}
+#question th{
+	width:80px;
 }
 
 #answer{

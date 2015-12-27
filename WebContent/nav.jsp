@@ -39,7 +39,7 @@
 					<li onclick="location.href='userManagement.do'">회원관리</li>
 					<li onclick="location.href='departmentManagement.do'">학과관리</li>
 					<li onclick="location.href='boardManagement.do'">게시판관리</li>
-					<li >Q&A관리</li>
+					<li onclick="location.href='questionView.do'">Q&A관리</li>
 				</c:when>
 			</c:choose>
 

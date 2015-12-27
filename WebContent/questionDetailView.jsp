@@ -25,7 +25,6 @@
 			<tr>
 				<th>제목</th>
 				<td>${qTitle}</td>
-				
 			</tr>
 			<tr>
 			    <th>작성자</th>

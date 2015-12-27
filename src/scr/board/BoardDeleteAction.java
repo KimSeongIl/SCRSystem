@@ -14,14 +14,12 @@ public class BoardDeleteAction implements CommandAction {
 		String management=request.getParameter("management");
 		String category=request.getParameter("category");
 		
-		System.out.println("category->>"+category);
-		System.out.println("nId->"+id);
-		System.out.println("mana->>"+management);
+	
 		int bId=Integer.parseInt(id);
 		BoardDAO board=BoardDAO.getInstance();
-		System.out.println("a");
+	
 		board.deleteBoard(bId);
-		System.out.println("b");
+	
 
 		
 		request.setAttribute("category", category);

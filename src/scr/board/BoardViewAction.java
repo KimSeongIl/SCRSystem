@@ -59,6 +59,8 @@ public class BoardViewAction implements CommandAction{
 		
 		
 	    List boardList=board.viewBoard(category,start,end);//공지사항 받아온 정보를 List에 넣기 
+	    
+	    
 	    List paging=new ArrayList();
 	    paging.add("<ul class='pagination'>");
 		paging.add("<li><a href=boardView.do?category="+category+">처음</a></li>");
