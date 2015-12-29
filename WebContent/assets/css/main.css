@@ -39,31 +39,39 @@
 		height:100%;
 		
 	}
-	#notice ul{
-	
-	margin-right:30px;
-	}
 	
 	
 	
-	#notice ul li a{
+	#notice li a{
 	text-decoration: none;
-
 	color:#656565;
 	}
 	
-	#notice ul li {
-	margin-right: 4px;
-    overflow: hidden;
-    padding:0px 10px 5px 5px;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-    white-space: nowrap;
-    width: 300px;
-    line-height: 20px;
-    height: 35px;
+		#noticeList li a{
+	text-decoration: none;
+	color:#656565;
 	}
 	
+	#noticeList li:nth-child(1){
+	padding-top:20px;
+	}
+	
+	#noticeList li{
+	padding-left:20px;
+	padding-bottom:5px;
+	padding-top:5px;
+	width: 270px; 
+	white-space: nowrap; 
+	overflow: hidden;
+	white-space: nowrap; 
+    text-overflow: ellipsis;
+    list-style-position:inside;
+    
+    
+	}
+	
+	
+
 	#noticeTitle,#onlineTitle,#linkTitle,#downloadTitle{
 		clear:both;
 		text-align:center;
@@ -73,6 +81,38 @@
 		
 		
 	}
+	
+	#downloadList li a{
+	text-decoration: none;
+	color:#656565;
+	}
+	
+	#downloadList li:nth-child(1){
+	padding-top:20px;
+	}
+	
+	#downloadList li{
+	padding-left:20px;
+	padding-bottom:5px;
+	padding-top:5px;
+	width: 270px; 
+	white-space: nowrap; 
+	overflow: hidden;
+	white-space: nowrap; 
+    text-overflow: ellipsis;
+    list-style-position:inside;
+    
+    
+	}
+	
+
+
+	
+
+	
+	
+	
+	
 	#noticeTitle{
 		margin-top:2px;
 		margin-left:5px;

@@ -27,23 +27,26 @@
 
 
 			<c:if test="${boardList==null&&management=='management'}">
-			
+			ss1
 				<form id="frm" action="boardInsert.do?category=${category}&management=${management}" method="post" enctype="multipart/form-data">
 			</c:if>
 		
-		    <c:if test="${boardList!=null&&management=='' }">
-			
+		    <c:if test="${boardList==null}">
+			ss2
 			<form id="frm" action="boardInsert.do?category=${category}" method="post" enctype="multipart/form-data">
 			</c:if>
 	
 		
 			
 			<c:if test="${boardList!=null&&management=='management'}">
+			ss3
 				<form id="frm" action="boardUpdate.do?bid=${bId}&category=${category}&management=${management}" method="post" >
 			
 			</c:if>
 			
-			<c:if test="${boardList!=null&&management=='' }">
+			<c:if test="${boardList!=null}">
+			
+		<form id="frm" action="boardUpdate.do?bid=${bId}&category=${category}" method="post" >
 			
 			</c:if>
 	

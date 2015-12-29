@@ -10,10 +10,12 @@
 <div id="category">
 	<div id="notice">
 		<div id="noticeTitle"></div>
+		<div id="noticeList">
+		
 		<%
 	List noticeList=(List)request.getAttribute("noticeList");
 	if(noticeList !=null){
-		out.println("<ul>");
+		
 		for(int i=0;i<4;i++){
 			BoardDTO board=(BoardDTO)noticeList.get(i);
 			
@@ -23,10 +25,11 @@
 	
 			
 		}
-		out.println("</ul>");
+		
 	}
 	
 	%>
+	</div>
 	</div>
 	<c:choose>
 		<c:when
@@ -54,10 +57,12 @@
 			<div id="download">
 
 				<div id="downloadTitle"></div>
+				<div id="downloadList">
+				
 					<%
 	List referenceList=(List)request.getAttribute("referenceList");
 	if(noticeList !=null){
-		out.println("<ul>");
+		
 		for(int i=0;i<4;i++){
 			BoardDTO board=(BoardDTO)referenceList.get(i);
 			
@@ -67,11 +72,11 @@
 	
 			
 		}
-		out.println("</ul>");
+	
 	}
 	
 	%>
-				
+		</div>		
 </div>
 </c:otherwise>
 </c:choose>

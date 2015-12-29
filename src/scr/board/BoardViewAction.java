@@ -31,7 +31,7 @@ public class BoardViewAction implements CommandAction{
 		}
 		
 		double count=board.getBoardCount(category);
-	//System.out.println("count->>"+count);
+	
 		if(count==0){
 			count=1;
 		}
@@ -39,23 +39,23 @@ public class BoardViewAction implements CommandAction{
 		final int PAGEVIEW=5;
 		
 		int start=(pageNum-1)*VIEW;
-		//System.out.println("start->>"+start);
+		
 		int end=VIEW;
-		//System.out.println("end->>"+end);
+		
 		
 		double temp=Math.ceil(count/VIEW);
-		//System.out.println("temp1->>"+temp);
+		
 		int page=(int)temp;
-		//System.out.println("page->>"+page);
+		
 		double pageNumTemp=pageNum;
 		temp=Math.ceil(pageNumTemp/PAGEVIEW);
 		temp=temp-1;
-		//System.out.println("temp2->>"+temp);
+		
 		
 		int pre=(int)temp*5;
-		//System.out.println("pre->>"+pre);
+		
 		int next=((int)temp+1)*5;
-		//System.out.println("next->>"+next);
+		
 		
 		
 	    List boardList=board.viewBoard(category,start,end);//공지사항 받아온 정보를 List에 넣기 

@@ -5,6 +5,9 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
     
 <%
+request.setCharacterEncoding("utf-8");
+String category=(String)request.getAttribute("category");
+
 out.println("<script>alert('정상적으로 수정되었습니다')</script>");
-out.println("<script>location.href='boardView.do'</script>");
+out.println("<script>location.href='boardView.do?category="+category+"'</script>");
 %>
