@@ -13,10 +13,11 @@
 		<div id="noticeList">
 		
 		<%
+		
 	List noticeList=(List)request.getAttribute("noticeList");
 	if(noticeList !=null){
 		
-		for(int i=0;i<4;i++){
+		for(int i=0;(noticeList.size()>=4 && i<4) || i<noticeList.size();i++){
 			BoardDTO board=(BoardDTO)noticeList.get(i);
 			
 			
@@ -61,9 +62,9 @@
 				
 					<%
 	List referenceList=(List)request.getAttribute("referenceList");
-	if(noticeList !=null){
+	if(referenceList !=null){
 		
-		for(int i=0;i<4;i++){
+		for(int i=0;(referenceList.size()>=4 && i<4) || i<referenceList.size();i++){
 			BoardDTO board=(BoardDTO)referenceList.get(i);
 			
 			

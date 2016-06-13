@@ -41,12 +41,13 @@ public class DepartmentDAO {
 	public List<DepartmentDTO> departmentList(){
 		List<DepartmentDTO> list=new ArrayList<DepartmentDTO>();
 
-
+		
 		try(Connection conn=Conn.getConnection();
+				
 				PreparedStatement pstmt=conn.prepareStatement("select department_id,department_name,office_no,office_tel,employee_id,(select employee_name from employee where employee_id=department.employee_id) \"employee_name\" from department order by department_id;");){
 
 			try( ResultSet rs=pstmt.executeQuery(); ){
-
+				
 				if(rs.next()){
 					AES256Util util=new AES256Util();
 					do{
@@ -66,7 +67,7 @@ public class DepartmentDAO {
 
 
 
-			}catch(Exception ee){}
+			}catch(Exception ee){ee.printStackTrace();}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
